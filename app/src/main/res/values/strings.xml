@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">BitoronBD_Deliveryman</string>
+
+    <string name="and">and</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="airposted_terms_of_condition">Airposted Terms and Conditions</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="webview">WebView</string>
+    <string name="by_useing">By using Airposted, I agree to Airposted\'s</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="enter_your_password">Enter Your Password</string>
+    <string name="drive">drive</string>
+    <string name="enter_your_phone_number">Enter Your Phone Number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="did_not_receive_the_code">Did not receive the code?</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="take_your_photo">Take your photo</string>
+    <string name="next">Next</string>
+    <string name="NID">NID</string>
+    <string name="account_information">Account Information</string>
+
+    <string-array name="id">
+        <item>NID</item>
+        <item>Passport ID</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>
