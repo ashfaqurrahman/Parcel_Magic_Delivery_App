@@ -1,5 +1,7 @@
 package com.airposted.bitoronbd_deliveryman.utils
 
+import `in`.aabhasjindal.otptextview.OTPListener
+import `in`.aabhasjindal.otptextview.OtpTextView
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
@@ -16,13 +18,11 @@ import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.ui.WebViewActivity
@@ -123,6 +123,31 @@ fun hideKeyboard(activity: Activity) {
     imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
+fun otpWatcher(context: Context, input: OtpTextView, button: TextView): String? {
+    button.isEnabled = false
+    var otp1: String? = null
+    input.otpListener = object : OTPListener {
+        override fun onInteractionListener() {
+            button.isEnabled = false
+            button.background = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.before_button_bg
+            )
+            input.resetState()
+        }
+
+        override fun onOTPComplete(otp: String) {
+            otp1 = otp
+            button.background = ContextCompat.getDrawable(
+                    context,
+                    R.drawable.after_button_bg
+            )
+            button.isEnabled = true
+        }
+    }
+    return otp1
+}
+
 fun textWatcher(context: Context, size: Int, input: EditText, button: TextView) {
     button.isEnabled = false
     input.addTextChangedListener(object : TextWatcher {
@@ -149,6 +174,57 @@ fun textWatcher(context: Context, size: Int, input: EditText, button: TextView) 
             }
         }
     })
+}
+
+fun multipleTextWatcher(context: Context, phone: EditText, password: EditText, button: TextView, size0: Int, size1: Int) {
+    var phoneLength = 0
+    var passwordLength = 0
+    phone.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(s: Editable) {
+        }
+
+        override fun beforeTextChanged(
+            s: CharSequence?, start: Int,
+            count: Int, after: Int
+        ) {
+        }
+
+        override fun onTextChanged(
+            s: CharSequence, start: Int,
+            before: Int, count: Int
+        ) {
+            phoneLength = s.length
+            updateSingInButton(context, phoneLength, passwordLength, size0, size1, button)
+        }
+    })
+    password.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(s: Editable) {
+        }
+
+        override fun beforeTextChanged(
+            s: CharSequence?, start: Int,
+            count: Int, after: Int
+        ) {
+        }
+
+        override fun onTextChanged(
+            s: CharSequence, start: Int,
+            before: Int, count: Int
+        ) {
+            passwordLength = s.length
+            updateSingInButton(context, phoneLength, passwordLength, size0, size1, button)
+        }
+    })
+}
+
+private fun updateSingInButton(context: Context, phoneLength: Int, passwordLength: Int, size0: Int, size1: Int, button: TextView) {
+    if (phoneLength == size0 && passwordLength >= size1) {
+        button.background = ContextCompat.getDrawable(context, R.drawable.after_button_bg)
+        button.isEnabled = true
+    } else {
+        button.background = ContextCompat.getDrawable(context, R.drawable.before_button_bg)
+        button.isEnabled = false
+    }
 }
 
 fun locationTextWatcher(size: Int, input: EditText): String {

@@ -64,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="phone"
                         android:textSize="15sp"
+                        android:maxLength="11"
                         android:hint="@string/phone_number"
                         android:imeOptions="actionNext"
                         android:maxLines="1"/>
@@ -106,7 +107,7 @@
                 />
 
             <TextView
-                android:id="@+id/next"
+                android:id="@+id/sign_in"
                 android:layout_below="@+id/forget_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +124,7 @@
 
             <TextView
                 android:id="@+id/create_account"
-                android:layout_below="@+id/next"
+                android:layout_below="@+id/sign_in"
                 android:layout_marginTop="34dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

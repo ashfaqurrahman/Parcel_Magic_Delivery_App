@@ -40,7 +40,6 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_view"
-                    android:layout_below="@+id/text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardPreventCornerOverlap="false"
