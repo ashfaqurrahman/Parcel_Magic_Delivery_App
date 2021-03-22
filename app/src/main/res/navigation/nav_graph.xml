@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_default">
+
+    <fragment
+        android:id="@+id/fragment_my_wallet"
+        android:name="com.airposted.bitoronbd_deliveryman.ui.main.MyWalletFragment"
+        android:label="First Fragment"
+        tools:layout="@layout/fragment_my_wallet" />
+    <fragment
+        android:id="@+id/fragment_my_live_delivery"
+        android:name="com.airposted.bitoronbd_deliveryman.ui.main.MyLiveDeliveryFragment"
+        android:label="Second Fragment"
+        tools:layout="@layout/fragment_my_live_delivery" />
+    <fragment
+        android:id="@+id/fragment_all_parcel_request"
+        android:name="com.airposted.bitoronbd_deliveryman.ui.main.AllParcelRequestFragment"
+        android:label="Third Fragment"
+        tools:layout="@layout/fragment_all_parcel_request" />
+    <fragment
+        android:id="@+id/fragment_default"
+        android:name="com.airposted.bitoronbd_deliveryman.ui.main.DefaultFragment"
+        android:label="Default Fragment"
+        tools:layout="@layout/fragment_default" >
+    </fragment>
+
+</navigation>
