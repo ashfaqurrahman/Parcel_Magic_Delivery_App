@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.main.HomeFragment">
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/drawer_layout"
+            tools:context=".ui.main.MainActivity">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/menu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingEnd="5dp"
+                            android:layout_marginTop="46dp"
+                            android:src="@drawable/ic_menu"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:textStyle="bold"
+                            android:textSize="28sp"
+                            android:textColor="#0f122f"
+                            android:lineSpacingExtra="6sp"
+                            android:text="@string/a_little_extra_income_along_the_journey"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/from_icon"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_alignTop="@+id/from_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_location_icon_solid"/>
+
+                            <ImageView
+                                android:layout_width="2dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/doted_line_blue"
+                                android:layout_marginStart="20dp"
+                                android:layout_below="@+id/from_icon"
+                                android:layout_above="@id/to_icon"/>
+
+                            <RelativeLayout
+                                android:id="@+id/to_icon"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:layout_alignBottom="@+id/to_layout">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:src="@drawable/circle_with_border"/>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/from_layout"
+                                android:layout_toEndOf="@+id/from_icon"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="5dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="10dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/button_bg">
+
+                                <androidx.appcompat.widget.SearchView
+                                    android:id="@+id/search_from"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="text"
+                                    android:layout_toStartOf="@+id/loading_from"
+                                    app:closeIcon="@drawable/ic_close_red"
+                                    app:searchIcon="@null"
+                                    app:iconifiedByDefault="false"
+                                    app:queryHint="Current location"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/poppins_regular"
+                                    app:queryBackground="@null"
+                                    android:textColorHint="@color/black"
+                                    android:textColor="@color/black"/>
+
+                                <com.airbnb.lottie.LottieAnimationView
+                                    android:id="@+id/loading_from"
+                                    android:layout_width="50dp"
+                                    android:layout_alignParentEnd="true"
+                                    app:lottie_rawRes="@raw/loading"
+                                    android:layout_height="match_parent"
+                                    android:visibility="gone"
+                                    app:lottie_loop="true"
+                                    app:lottie_autoPlay="true"/>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/to_layout"
+                                android:layout_below="@+id/from_layout"
+                                android:layout_toEndOf="@+id/to_icon"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="5dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="10dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/button_bg">
+
+                                <androidx.appcompat.widget.SearchView
+                                    android:id="@+id/search_to"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="text"
+                                    android:layout_toStartOf="@+id/loading_to"
+                                    app:closeIcon="@drawable/ic_close_red"
+                                    app:searchIcon="@null"
+                                    app:iconifiedByDefault="false"
+                                    app:queryHint="Where to?"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/poppins_regular"
+                                    app:queryBackground="@null"
+                                    android:textColorHint="@color/black"
+                                    android:textColor="@color/black"/>
+
+                                <com.airbnb.lottie.LottieAnimationView
+                                    android:id="@+id/loading_to"
+                                    android:layout_width="50dp"
+                                    android:layout_alignParentEnd="true"
+                                    app:lottie_rawRes="@raw/loading"
+                                    android:layout_height="match_parent"
+                                    android:visibility="gone"
+                                    app:lottie_loop="true"
+                                    app:lottie_autoPlay="true"/>
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/get_order_request"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textAlignment="center"
+                            android:padding="18dp"
+                            android:text="@string/get_order_request"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp"
+                            android:background="@drawable/before_button_bg"
+                            android:gravity="center_horizontal" />
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_dashboard_bg"/>
+
+            </RelativeLayout>
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/navigationView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:fitsSystemWindows="true"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="0dp"
+                app:itemIconPadding="30dp"
+                app:itemHorizontalPadding="30dp"
+                app:itemIconTint="#355290"
+                app:headerLayout="@layout/header_layout"
+                app:menu="@menu/drawer_menu" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:background="@drawable/gradiant_bg">
+
+                <TextView
+                    android:id="@+id/version_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    tools:text="Version 3.1" />
+            </LinearLayout>
+
+        </androidx.drawerlayout.widget.DrawerLayout>
+
+    </LinearLayout>
+
+</layout>

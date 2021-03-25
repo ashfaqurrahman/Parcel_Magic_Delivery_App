@@ -4,20 +4,59 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/first"
-            android:icon="@drawable/ic_star"
-            android:title="Android" />
+            android:id="@+id/my_wallet"
+            android:icon="@drawable/ic_wallet"
+            android:title="@string/my_wallet" />
 
         <item
-            android:id="@+id/second"
-            android:icon="@drawable/ic_star"
-            android:title="Dollar" />
+            android:id="@+id/my_live_delivery"
+            android:icon="@drawable/ic_delivery_box"
+            android:title="@string/my_live_delivery" />
 
         <item
-            android:id="@+id/third"
-            android:icon="@drawable/ic_star"
-            android:title="Save" />
+            android:id="@+id/preferred_area"
+            android:icon="@drawable/ic_area"
+            android:title="@string/my_delivery_history" />
 
+        <item
+            android:id="@+id/my_delivery_history"
+            android:icon="@drawable/ic_parcel_history_icon"
+            android:title="@string/my_delivery_history" />
+
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_user_icon"
+            android:title="@string/profile" />
+
+        <item
+            android:id="@+id/help"
+            android:icon="@drawable/ic_information"
+            android:title="@string/help" />
+
+    </group>
+
+    <group android:id="@+id/dummy"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/settings"
+            android:title="@string/settings" />
+
+        <item
+            android:id="@+id/terms_condition"
+            android:title="@string/terms_conditions_privacy" />
+
+        <item
+            android:id="@+id/sign_out"
+            android:title="@string/sign_out" />
+
+        <item
+            android:id="@+id/version"
+            android:title="" />
+
+        <item
+            android:id="@+id/version1"
+            android:title="" />
     </group>
 
 </menu>

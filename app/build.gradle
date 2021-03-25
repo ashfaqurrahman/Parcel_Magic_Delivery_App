@@ -63,4 +63,7 @@ dependencies {
 
     //powerSpinner
     implementation "com.github.skydoves:powerspinner:1.1.7"
+
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

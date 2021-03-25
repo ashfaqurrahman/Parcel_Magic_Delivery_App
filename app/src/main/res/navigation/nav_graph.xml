@@ -22,9 +22,9 @@
         tools:layout="@layout/fragment_all_parcel_request" />
     <fragment
         android:id="@+id/fragment_default"
-        android:name="com.airposted.bitoronbd_deliveryman.ui.main.DefaultFragment"
+        android:name="com.airposted.bitoronbd_deliveryman.ui.main.HomeFragment"
         android:label="Default Fragment"
-        tools:layout="@layout/fragment_default" >
+        tools:layout="@layout/fragment_home" >
     </fragment>
 
 </navigation>

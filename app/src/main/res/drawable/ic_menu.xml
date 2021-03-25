@@ -1,21 +1,15 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="18dp"
-    android:height="11dp"
+    android:height="16dp"
     android:viewportWidth="18"
-    android:viewportHeight="11">
+    android:viewportHeight="16">
   <path
-      android:pathData="M2,9m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
-      android:fillColor="#fff"/>
+      android:pathData="M1,0L17,0A1,1 0,0 1,18 1L18,1A1,1 0,0 1,17 2L1,2A1,1 0,0 1,0 1L0,1A1,1 0,0 1,1 0z"
+      android:fillColor="#0f122f"/>
   <path
-      android:pathData="M9,9m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
-      android:fillColor="#fff"/>
+      android:pathData="M1,7L17,7A1,1 0,0 1,18 8L18,8A1,1 0,0 1,17 9L1,9A1,1 0,0 1,0 8L0,8A1,1 0,0 1,1 7z"
+      android:fillColor="#0f122f"/>
   <path
-      android:pathData="M2,2m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
-      android:fillColor="#fff"/>
-  <path
-      android:pathData="M9,2m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
-      android:fillColor="#fff"/>
-  <path
-      android:pathData="M16,2m0,2a2,2 0,1 1,0 -4a2,2 0,1 1,0 4"
-      android:fillColor="#fff"/>
+      android:pathData="M1,14L17,14A1,1 0,0 1,18 15L18,15A1,1 0,0 1,17 16L1,16A1,1 0,0 1,0 15L0,15A1,1 0,0 1,1 14z"
+      android:fillColor="#0f122f"/>
 </vector>
