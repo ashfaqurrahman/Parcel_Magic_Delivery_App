@@ -45,4 +45,8 @@
     <string name="terms_conditions_privacy"><![CDATA[Terms &amp; Conditions / Privacy]]></string>
     <string name="sign_out">Sign out</string>
     <string name="badol_mondal">Badol Mondol</string>
+    <string name="preferred_area">Preferred Area</string>
+    <string name="all_parcel_request">All Parcel Request</string>
+    <string name="receivable_amount">Receivable amount</string>
+    <string name="due_amount">Due Amount</string>
 </resources>

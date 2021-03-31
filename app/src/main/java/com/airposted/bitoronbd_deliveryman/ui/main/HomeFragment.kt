@@ -46,6 +46,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
                 binding.drawerLayout.closeDrawers()
             }
+            R.id.all_parcel_request -> {
+
+                binding.drawerLayout.closeDrawers()
+            }
             R.id.preferred_area -> {
 
                 binding.drawerLayout.closeDrawers()

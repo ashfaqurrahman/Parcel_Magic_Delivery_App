@@ -220,24 +220,26 @@
                 app:itemHorizontalPadding="30dp"
                 app:itemIconTint="#355290"
                 app:headerLayout="@layout/header_layout"
-                app:menu="@menu/drawer_menu" />
+                app:menu="@menu/drawer_menu">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="vertical"
-                android:padding="10dp"
-                android:background="@drawable/gradiant_bg">
-
-                <TextView
-                    android:id="@+id/version_name"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    tools:text="Version 3.1" />
-            </LinearLayout>
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/gradiant_bg">
+
+                    <TextView
+                        android:id="@+id/version_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        tools:text="Version 3.1" />
+                </LinearLayout>
+
+            </com.google.android.material.navigation.NavigationView>
 
         </androidx.drawerlayout.widget.DrawerLayout>
 

@@ -6,15 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.R
+import com.airposted.bitoronbd_deliveryman.databinding.FragmentMyWalletBinding
 
 class MyWalletFragment : Fragment() {
-
+    private lateinit var binding: FragmentMyWalletBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_wallet, container, false)
+    ): View {
+        binding = FragmentMyWalletBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        BindUI()
+    }
+
+    private fun BindUI() {
+        binding.customToolbar.backImage.setOnClickListener {
+
+        }
+
+        binding.customToolbar.toolbarTitle.text = "My Wallet"
+    }
 }
+
+

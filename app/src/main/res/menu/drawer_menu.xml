@@ -14,9 +14,14 @@
             android:title="@string/my_live_delivery" />
 
         <item
+            android:id="@+id/all_parcel_request"
+            android:icon="@drawable/ic_delivery"
+            android:title="@string/all_parcel_request" />
+
+        <item
             android:id="@+id/preferred_area"
             android:icon="@drawable/ic_area"
-            android:title="@string/my_delivery_history" />
+            android:title="@string/preferred_area" />
 
         <item
             android:id="@+id/my_delivery_history"
