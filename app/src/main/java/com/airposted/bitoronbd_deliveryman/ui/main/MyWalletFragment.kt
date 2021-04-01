@@ -25,7 +25,7 @@ class MyWalletFragment : Fragment() {
 
     private fun BindUI() {
         binding.customToolbar.backImage.setOnClickListener {
-
+            requireActivity().onBackPressed()
         }
 
         binding.customToolbar.toolbarTitle.text = "My Wallet"

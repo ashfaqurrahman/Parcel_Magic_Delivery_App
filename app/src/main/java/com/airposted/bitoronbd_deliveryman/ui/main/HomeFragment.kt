@@ -30,8 +30,6 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
         binding.navigationView.setNavigationItemSelectedListener(this)
-        binding.navigationView.menu.findItem(R.id.version).isEnabled = false
-        binding.navigationView.menu.findItem(R.id.version1).isEnabled = false
         binding.versionName.text = "Version " + BuildConfig.VERSION_NAME
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
     }
