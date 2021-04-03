@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        addContentFragment(HomeFragment(), false)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -34,14 +35,14 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentInterface {
             return
         }
         val fragmentManager = supportFragmentManager
-        val currentFragment = fragmentManager.findFragmentById(R.id.nav_host_fragment)
+        val currentFragment = fragmentManager.findFragmentById(R.id.frameLayout)
 
         if (currentFragment != null && fragment.javaClass.isAssignableFrom(currentFragment.javaClass)) {
             return
         }
 
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.nav_host_fragment, fragment, fragment.javaClass.name)
+        fragmentTransaction.add(R.id.frameLayout, fragment, fragment.javaClass.name)
         if (addToBackStack) {
             fragmentTransaction.addToBackStack(fragment.javaClass.name)
         }
