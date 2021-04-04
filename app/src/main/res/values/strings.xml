@@ -32,6 +32,16 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
+    <string-array name="delivery_type">
+        <item>Within 24 hours</item>
+        <item>Within 48 hours</item>
+    </string-array>
+
+    <string-array name="delivery_status">
+        <item>Request accepted</item>
+        <item>Request pending</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="a_little_extra_income_along_the_journey">A little extra income along the journey</string>

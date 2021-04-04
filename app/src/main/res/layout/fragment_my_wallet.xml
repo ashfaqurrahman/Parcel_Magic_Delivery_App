@@ -50,7 +50,7 @@
                     android:textSize="28sp"
                     android:textColor="#1a1662"
                     android:lineSpacingExtra="33sp"
-                    tools:text="৳16000.00"
+                    android:text="৳16000.00"
                     />
 
             </LinearLayout>

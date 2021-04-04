@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.ActivityAuthBinding
 import com.airposted.bitoronbd_deliveryman.ui.main.MainActivity
@@ -33,6 +34,7 @@ class AuthActivity : AppCompatActivity() {
         multipleTextWatcher(this, binding.signInLayout.phone, binding.signInLayout.password, binding.signInLayout.signIn, 11, 6)
 
         binding.signInLayout.signIn.setOnClickListener {
+            PersistentUser.getInstance().setLogin(this)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -59,6 +61,7 @@ class AuthActivity : AppCompatActivity() {
         }
 
         binding.otpLayout.verify.setOnClickListener {
+            PersistentUser.getInstance().setLogin(this)
             hideKeyboard(this)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
