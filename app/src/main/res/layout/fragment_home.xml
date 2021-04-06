@@ -71,7 +71,7 @@
                                 android:layout_width="2dp"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/doted_line_blue"
-                                android:layout_marginStart="20dp"
+                                android:layout_marginStart="21dp"
                                 android:layout_below="@+id/from_icon"
                                 android:layout_above="@id/to_icon"/>
 

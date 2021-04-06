@@ -71,6 +71,11 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
             R.id.terms_condition -> {
                 binding.drawerLayout.closeDrawers()
+                val fragment = WebViewFragment()
+                val bundle = Bundle()
+                bundle.putString("url", "https://airposted.com/page/terms-of-service#:~:text=Airposted%20Referral%20Program%20Terms%20and%20Conditions%2A%20Airposted%20Referral,it%20as%20a%20traveler%20or%20shopper%20or%20buyer.")
+                fragment.arguments = bundle
+                communicatorFragmentInterface?.addContentFragment(fragment, true)
             }
             R.id.sign_out -> {
                 PersistentUser.getInstance().logOut(requireActivity())

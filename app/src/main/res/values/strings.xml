@@ -59,4 +59,13 @@
     <string name="all_parcel_request">All Parcel Request</string>
     <string name="receivable_amount">Receivable amount</string>
     <string name="due_amount">Due Amount</string>
+    <string name="add_preferred_area">Add Preferred area</string>
+    <string name="mohammadpur">Mohammadpur</string>
+    <string name="_25_order_delivered_in_the_area">25 order delivered in the area</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="terms_condition_policy">Terms &amp; Conditions / Privacy</string>
+    <string name="parcel_request">Parcel Request</string>
+    <string name="document">Document</string>
+    <string name="ask_the_sender_for_6_digit_otp_sent_to_his_her_device">Ask the sender for 6 digit\n OTP sent to his/her device</string>
+    <string name="verify">Verify</string>
 </resources>

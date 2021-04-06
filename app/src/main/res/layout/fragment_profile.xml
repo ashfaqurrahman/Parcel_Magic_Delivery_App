@@ -1,14 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="#fcfcff"
+        tools:context=".ui.main.ProfileFragment">
 
-</FrameLayout>
+        <include layout="@layout/custom_toolbar_profile"
+            android:id="@+id/toolbar"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:background="@color/teal_200"/>
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_marginTop="-60dp"
+            android:layout_height="120dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/empty_image"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_edit_profile"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:textStyle="normal"
+            android:textSize="15sp"
+            android:textColor="#1a1662"
+            android:lineSpacingExtra="10sp"
+            android:text="Fahim Rana"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="5dp"
+            android:textStyle="normal"
+            android:textSize="13sp"
+            android:textColor="#b5b7dd"
+            android:lineSpacingExtra="12sp"
+            android:text="Dhaka, Bangladesh"
+            />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/custom_ratingbar_selector"
+            android:layout_marginTop="18dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:weightSum="2"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#E8EBF5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="34dp"
+                    android:paddingBottom="34dp"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="50dp"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#3b5998"
+                        android:gravity="center_horizontal"
+                        android:text="Delivery Completed"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:textStyle="normal"
+                        android:textSize="28sp"
+                        android:textColor="#3b5998"
+                        android:lineSpacingExtra="33sp"
+                        android:text="20"
+                        />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#fce8eb">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="34dp"
+                    android:paddingBottom="34dp"
+                    android:paddingStart="50dp"
+                    android:paddingEnd="50dp"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#ff4141"
+                        android:gravity="center_horizontal"
+                        android:text="Delivery is pending"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:textStyle="normal"
+                        android:textSize="28sp"
+                        android:textColor="#ff4141"
+                        android:lineSpacingExtra="33sp"
+                        android:text="20"
+                        />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

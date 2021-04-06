@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/from"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textStyle="normal"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="16sp"
+                    android:textColor="#1a1662"
+                    android:lineSpacingExtra="45sp"
+                    android:text="Banani"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/from"
+                    android:layout_toStartOf="@+id/to"
+                    android:src="@drawable/ic_airline"/>
+
+                <TextView
+                    android:id="@+id/to"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#1a1662"
+                    android:lineSpacingExtra="45sp"
+                    android:text="Mohammadpur"
+                    />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/view_color" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/docs_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignTop="@+id/sender_name"
+                    android:layout_alignBottom="@+id/sender"
+                    android:src="@drawable/empty_image" />
+
+                <TextView
+                    android:id="@+id/sender_name"
+                    android:layout_toStartOf="@+id/rating_bar"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/docs_icon"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Badol Mondal"
+                    android:textColor="#1a1662"
+                    android:textSize="20sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/sender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sender_name"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/docs_icon"
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="6sp"
+                    android:textColor="#878897"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    tools:text="Sender" />
+
+                <RatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:progressDrawable="@drawable/custom_ratingbar_selector"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/view_color" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingBottom="25dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/delivered_time"
+                    android:layout_alignBottom="@+id/delivered_time"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="7sp"
+                    android:text="Parcel Was delivered"
+                    android:textColor="#111329"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/delivered_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/poppins_bold"
+                    android:lineSpacingExtra="9sp"
+                    android:textColor="#0f122f"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    tools:text="10 Jan 2021" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
+

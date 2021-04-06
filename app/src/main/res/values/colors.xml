@@ -15,4 +15,5 @@
     <color name="text_color">#0c0f33</color>
     <color name="hint_color">#b5b7dd</color>
     <color name="view_color">#e2e5ff</color>
+    <color name="bg">#fcfcff</color>
 </resources>

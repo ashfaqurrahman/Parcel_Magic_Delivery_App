@@ -56,7 +56,7 @@ class AuthActivity : AppCompatActivity() {
             binding.personalInformationLayout.main.visibility = View.GONE
             binding.otpLayout.verify.isEnabled = false
             otp1 = otpWatcher(this, binding.otpLayout.otpView, binding.otpLayout.verify)
-
+            binding.otpLayout.toolbar.toolbarTitle.text = "Verification"
             timer()
         }
 

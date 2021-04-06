@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fcfcff"
+        android:orientation="vertical">
+
+        <include layout="@layout/custom_toolbar"
+            android:id="@+id/toolbar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="22dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:background="#f3f4ff"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textStyle="normal"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="16sp"
+                android:textColor="#1a1662"
+                android:lineSpacingExtra="45sp"
+                android:text="Banani"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/from"
+                android:layout_toStartOf="@+id/to"
+                android:src="@drawable/ic_airline"/>
+
+            <TextView
+                android:id="@+id/to"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_medium"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#1a1662"
+                android:lineSpacingExtra="45sp"
+                android:text="Mohammadpur"
+                />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/parcel_request_list"
+            tools:listitem="@layout/parcel_request_list_item"/>
+
+    </LinearLayout>
+
+</layout>

@@ -5,15 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.airposted.bitoronbd_deliveryman.databinding.FragmentProfileBinding
+import com.airposted.bitoronbd_deliveryman.R
+import com.airposted.bitoronbd_deliveryman.databinding.FragmentParcelRequestBinding
 
-class ProfileFragment : Fragment() {
-    private lateinit var binding: FragmentProfileBinding
+class ParcelRequestFragment : Fragment() {
+    private lateinit var binding: FragmentParcelRequestBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentParcelRequestBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -23,6 +24,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun BindUI() {
+        binding.toolbar.toolbarTitle.text = getString(R.string.parcel_request)
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
