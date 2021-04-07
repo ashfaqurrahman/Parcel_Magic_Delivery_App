@@ -34,6 +34,8 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textStyle="normal"
                 android:textSize="20sp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="#111329"
                 android:lineSpacingExtra="5sp"
                 tools:text="Custom Toolbar"

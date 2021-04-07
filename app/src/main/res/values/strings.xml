@@ -68,4 +68,5 @@
     <string name="document">Document</string>
     <string name="ask_the_sender_for_6_digit_otp_sent_to_his_her_device">Ask the sender for 6 digit\n OTP sent to his/her device</string>
     <string name="verify">Verify</string>
+    <string name="order_from_person_name">Order from Person Name</string>
 </resources>
