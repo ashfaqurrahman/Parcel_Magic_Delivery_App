@@ -49,4 +49,8 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentInterface {
         fragmentTransaction.commit()
         fragmentManager.executePendingTransactions()
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
 }

@@ -84,6 +84,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
                 app:cardBackgroundColor="#E8EBF5">
@@ -93,8 +94,8 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="34dp"
                     android:paddingBottom="34dp"
-                    android:paddingStart="50dp"
-                    android:paddingEnd="50dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:layout_marginTop="6dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
@@ -107,7 +108,7 @@
                         android:textSize="14sp"
                         android:textColor="#3b5998"
                         android:gravity="center_horizontal"
-                        android:text="Delivery Completed"
+                        android:text="Delivery \nCompleted"
                         />
 
                     <TextView
@@ -140,9 +141,10 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="34dp"
                     android:paddingBottom="34dp"
-                    android:paddingStart="50dp"
-                    android:paddingEnd="50dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:layout_marginTop="6dp"
+                    android:layout_marginBottom="5dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -154,7 +156,7 @@
                         android:textSize="14sp"
                         android:textColor="#ff4141"
                         android:gravity="center_horizontal"
-                        android:text="Delivery is pending"
+                        android:text="Delivery is \npending"
                         />
 
                     <TextView
