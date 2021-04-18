@@ -109,7 +109,7 @@
                     android:textColor="#878897"
                     android:textSize="12sp"
                     android:textStyle="normal"
-                    tools:text="Sender" />
+                    android:text="Sender" />
 
                 <RatingBar
                     android:id="@+id/rating_bar"
@@ -156,7 +156,7 @@
                     android:textColor="#0f122f"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    tools:text="10 Jan 2021" />
+                    android:text="10 Jan 2021" />
 
             </RelativeLayout>
 

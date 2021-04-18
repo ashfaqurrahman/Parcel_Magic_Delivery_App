@@ -25,7 +25,7 @@
             android:textStyle="normal"
             android:textSize="35sp"
             android:textColor="#1a1662"
-            tools:text="Please  complete your delivery journey"
+            android:text="Please  complete your delivery journey"
             />
 
         <com.google.android.material.card.MaterialCardView
