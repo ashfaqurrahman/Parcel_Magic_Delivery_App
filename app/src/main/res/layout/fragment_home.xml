@@ -193,7 +193,7 @@
                             android:text="@string/get_order_request"
                             android:textColor="#ffffff"
                             android:textSize="15sp"
-                            android:background="@drawable/before_button_bg"
+                            android:background="@drawable/after_button_bg"
                             android:gravity="center_horizontal" />
 
                     </LinearLayout>

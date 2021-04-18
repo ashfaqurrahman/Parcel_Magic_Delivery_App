@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -62,10 +63,11 @@
                         android:textSize="13sp"
                         android:textColor="#b5b7dd"
                         android:lineSpacingExtra="48sp"
-                        tools:text="Weight  :  "
+                        android:text="Weight  :  "
                         />
 
                     <TextView
+                        android:id="@+id/weight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semi_bold"
@@ -73,7 +75,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/text_color"
                         android:lineSpacingExtra="48sp"
-                        tools:text="03 kg"
+                        android:text="03 kg"
                         />
 
                 </LinearLayout>
@@ -94,10 +96,11 @@
                         android:textSize="13sp"
                         android:textColor="#b5b7dd"
                         android:lineSpacingExtra="48sp"
-                        tools:text="Size  :  "
+                        android:text="Size  :  "
                         />
 
                     <TextView
+                        android:id="@+id/size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semi_bold"
@@ -105,7 +108,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/text_color"
                         android:lineSpacingExtra="48sp"
-                        tools:text="20 cm"
+                        android:text="20 cm"
                         />
 
                 </LinearLayout>
@@ -131,7 +134,7 @@
                     android:textSize="13sp"
                     android:textColor="#b5b7dd"
                     android:lineSpacingExtra="48sp"
-                    tools:text="Delivery Time Remaining  :  "
+                    android:text="Delivery Time Remaining  :  "
                     />
 
                 <TextView
@@ -143,7 +146,7 @@
                     android:textSize="16sp"
                     android:textColor="#1a1662"
                     android:lineSpacingExtra="48sp"
-                    tools:text="23  :  59  :  59"
+                    android:text="23  :  59  :  59"
                     />
 
             </RelativeLayout>

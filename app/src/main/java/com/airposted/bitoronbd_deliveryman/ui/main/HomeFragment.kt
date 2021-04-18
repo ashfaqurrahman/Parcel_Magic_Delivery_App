@@ -3,12 +3,14 @@ package com.airposted.bitoronbd_deliveryman.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.BuildConfig
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
 import com.airposted.bitoronbd_deliveryman.ui.auth.AuthActivity
+import com.airposted.bitoronbd_deliveryman.utils.multipleTextWatcher
 import com.google.android.material.navigation.NavigationView
 
 class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,14 +37,23 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.navigationView.setNavigationItemSelectedListener(this)
         binding.versionName.text = "Version " + BuildConfig.VERSION_NAME
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
+
+        binding.getOrderRequest.setOnClickListener {
+            val fragment = ParcelRequestFragment()
+            val bundle = Bundle()
+            bundle.putString("from", binding.searchFrom.query.toString())
+            bundle.putString("to", binding.searchTo.query.toString())
+            fragment.arguments = bundle
+            communicatorFragmentInterface?.addContentFragment(fragment, true)
+        }
     }
     
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.my_wallet -> {
-                communicatorFragmentInterface?.addContentFragment(MyWalletFragment(), true)
-                binding.drawerLayout.closeDrawers()
-            }
+//            R.id.my_wallet -> {
+//                communicatorFragmentInterface?.addContentFragment(MyWalletFragment(), true)
+//                binding.drawerLayout.closeDrawers()
+//            }
             R.id.my_live_delivery -> {
                 communicatorFragmentInterface?.addContentFragment(MyLiveDeliveryFragment(), true)
                 binding.drawerLayout.closeDrawers()

@@ -13,6 +13,7 @@
             android:id="@+id/toolbar"/>
 
         <ScrollView
+            android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/bottom_layout"
@@ -23,54 +24,64 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/before_button_bg"
-                    android:orientation="vertical">
+                    app:cardCornerRadius="12dp"
+                    app:cardBackgroundColor="@color/white">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="7dp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="normal"
-                        android:textSize="12sp"
-                        android:textColor="#b5b7dd"
-                        android:lineSpacingExtra="49sp"
-                        android:text="Status"
-                        />
-
-                    <com.skydoves.powerspinner.PowerSpinnerView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:hint="Request accepted"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:paddingBottom="7dp"
-                        android:paddingTop="5dp"
-                        android:textColor="@color/text_color"
-                        android:textColorHint="@color/text_color"
-                        android:textSize="14.5sp"
-                        app:spinner_arrow_gravity="end"
-                        app:spinner_arrow_padding="8dp"
-                        app:spinner_arrow_show="true"
-                        app:spinner_arrow_tint="@color/text_color"
-                        app:spinner_arrow_drawable="@drawable/ic_down_arrow"
-                        app:spinner_divider_color="@color/hint_color"
-                        app:spinner_divider_show="true"
-                        app:spinner_divider_size="0.4dp"
-                        app:spinner_item_array="@array/delivery_status"
-                        app:spinner_popup_animation="dropdown"
-                        app:spinner_popup_background="@color/white"
-                        app:spinner_popup_elevation="14dp" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="7dp"
+                            android:fontFamily="sans-serif"
+                            android:textStyle="normal"
+                            android:textSize="12sp"
+                            android:textColor="#b5b7dd"
+                            android:lineSpacingExtra="49sp"
+                            android:text="@string/status"
+                            />
+
+                        <com.skydoves.powerspinner.PowerSpinnerView
+                            android:id="@+id/status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:hint="Request accepted"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:paddingBottom="7dp"
+                            android:paddingTop="5dp"
+                            android:textColor="@color/text_color"
+                            android:textColorHint="@color/text_color"
+                            android:textSize="14.5sp"
+                            app:spinner_arrow_gravity="end"
+                            app:spinner_arrow_padding="8dp"
+                            app:spinner_arrow_show="true"
+                            app:spinner_arrow_tint="@color/text_color"
+                            app:spinner_arrow_drawable="@drawable/ic_down_arrow"
+                            app:spinner_divider_color="@color/hint_color"
+                            app:spinner_divider_show="true"
+                            app:spinner_divider_size="0.4dp"
+                            app:spinner_item_array="@array/delivery_status"
+                            app:spinner_popup_animation="dropdown"
+                            app:spinner_popup_background="@color/white"
+                            app:spinner_popup_elevation="14dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"

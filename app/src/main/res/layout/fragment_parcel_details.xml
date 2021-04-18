@@ -103,7 +103,7 @@
                                 android:textStyle="normal"
                                 android:textSize="13sp"
                                 android:textColor="#b5b7dd"
-                                tools:text="Weight"
+                                android:text="Weight"
                                 />
 
                             <TextView
@@ -133,7 +133,7 @@
                                 android:textStyle="normal"
                                 android:textSize="13sp"
                                 android:textColor="#b5b7dd"
-                                tools:text="Size"
+                                android:text="Size"
                                 />
 
                             <TextView
@@ -162,7 +162,7 @@
                                 android:textStyle="normal"
                                 android:textSize="13sp"
                                 android:textColor="#b5b7dd"
-                                tools:text="Total Distance"
+                                android:text="Total Distance"
                                 />
 
                             <TextView
@@ -259,7 +259,7 @@
                             android:textSize="14sp"
                             android:textColor="#1a1662"
                             android:lineSpacingExtra="13sp"
-                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
+                            android:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 
                         <TextView
@@ -275,7 +275,7 @@
                             android:textSize="14sp"
                             android:textColor="#1a1662"
                             android:lineSpacingExtra="13sp"
-                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
+                            android:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 
                     </RelativeLayout>

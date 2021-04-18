@@ -31,12 +31,30 @@
                 android:justificationMode="inter_word"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="25dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Parcel Delivery Complete"
                 android:textColor="#0f122f"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/done"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/after_button_bg"
+                android:gravity="center"
+                android:paddingStart="35dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="35dp"
+                android:paddingBottom="13dp"
+                android:text="@string/done"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

@@ -5,14 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.airposted.bitoronbd_deliveryman.R
+import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJourneyBinding
 
 class CompleteJourneyFragment : Fragment() {
-
+    private lateinit var binding: FragmentCompleteJourneyBinding
+    private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_complete_journey, container, false)
+    ): View {
+        binding = FragmentCompleteJourneyBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        bindUI()
+    }
+
+    private fun bindUI() {
+        communicatorFragmentInterface = context as CommunicatorFragmentInterface
+        binding.completeYourJourney.setOnClickListener {
+            communicatorFragmentInterface?.addContentFragment(HomeFragment(), false)
+        }
     }
 }

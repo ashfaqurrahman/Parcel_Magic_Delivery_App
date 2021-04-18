@@ -10,6 +10,7 @@ import com.airposted.bitoronbd_deliveryman.databinding.FragmentParcelDetailsBind
 
 class ParcelDetailsFragment : Fragment() {
     private lateinit var binding: FragmentParcelDetailsBinding
+    private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,9 +25,13 @@ class ParcelDetailsFragment : Fragment() {
     }
 
     private fun BindUI() {
+        communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.toolbarTitle.text = getString(R.string.document)
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+        binding.confirmedOrder.setOnClickListener {
+            communicatorFragmentInterface!!.addContentFragment(HomeFragment(), false)
         }
     }
 }

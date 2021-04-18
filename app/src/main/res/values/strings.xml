@@ -40,7 +40,14 @@
 
     <string-array name="delivery_status">
         <item>Request accepted</item>
-        <item>Request pending</item>
+        <item>Collected</item>
+        <item>Delivered</item>
+    </string-array>
+
+    <string-array name="pref_area">
+        <item>Mohammodpur</item>
+        <item>Bonani</item>
+        <item>Uttora</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -51,7 +58,7 @@
     <string name="my_delivery_history">My Delivery history</string>
     <string name="my_wallet">My wallet</string>
     <string name="my_live_delivery">My Live Delivery</string>
-    <string name="settings">String</string>
+    <string name="settings">Settings</string>
     <string name="terms_conditions_privacy"><![CDATA[Terms &amp; Conditions / Privacy]]></string>
     <string name="sign_out">Sign out</string>
     <string name="badol_mondal">Badol Mondol</string>
@@ -69,4 +76,6 @@
     <string name="ask_the_sender_for_6_digit_otp_sent_to_his_her_device">Ask the sender for 6 digit\n OTP sent to his/her device</string>
     <string name="verify">Verify</string>
     <string name="order_from_person_name">Order from Person Name</string>
+    <string name="status">Status</string>
+    <string name="done">Done</string>
 </resources>
