@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="#fcfcff"
-        tools:context=".ui.main.ProfileFragment">
+        tools:context=".view.main.ProfileFragment">
 
         <include layout="@layout/custom_toolbar_profile"
             android:id="@+id/toolbar"/>

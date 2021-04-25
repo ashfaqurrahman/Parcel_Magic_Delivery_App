@@ -18,14 +18,13 @@ import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.ui.WebViewActivity
+import com.airposted.bitoronbd_deliveryman.view.WebViewActivity
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.io.FileInputStream

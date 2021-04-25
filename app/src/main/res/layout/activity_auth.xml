@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.auth.AuthActivity"
-        android:id="@+id/root_layout">
+        android:id="@+id/main">
 
-        <include layout="@layout/sign_in_layout"
-            android:id="@+id/sign_in_layout"/>
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
 
-        <include layout="@layout/mobile_number_layout"
-            android:id="@+id/mobile_number_layout"/>
-
-        <include layout="@layout/otp_layout"
-            android:id="@+id/otp_layout"/>
-
-        <include layout="@layout/personal_information_layout"
-            android:id="@+id/personal_information_layout"/>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

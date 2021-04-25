@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#fcfcff"
-        tools:context=".ui.main.MyWalletFragment">
+        tools:context=".view.main.MyWalletFragment">
 
         <include layout="@layout/custom_toolbar"
             android:id="@+id/custom_toolbar"/>

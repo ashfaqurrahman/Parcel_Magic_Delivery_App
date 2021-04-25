@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#fcfcff"
+        tools:context=".view.auth.RegisterFragment">
+
+        <include layout="@layout/custom_toolbar"
+            android:id="@+id/toolbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="50dp"
+                android:background="#fcfcff">
+
+                <TextView
+                    android:id="@+id/text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="20sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="#111329"
+                    android:lineSpacingExtra="46sp"
+                    android:text="@string/personal_information"
+                    />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    android:layout_margin="15dp"
+                    app:cardBackgroundColor="#ffffff"
+                    app:cardCornerRadius="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textStyle="normal"
+                            android:textSize="15sp"
+                            android:textColor="#b5b7dd"
+                            android:lineSpacingExtra="46sp"
+                            android:text="@string/take_your_photo"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_marginTop="15dp"
+                                android:layout_width="107dp"
+                                android:layout_height="107dp">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/profile_image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/sample_pro_pic"
+                                    app:civ_border_width="2dp"
+                                    android:layout_marginBottom="5dp"
+                                    app:civ_border_color="#ffffff"/>
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/image_upload"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_width="wrap_content"
+                                    android:src="@drawable/profile_plus"
+                                    android:layout_height="wrap_content"/>
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@color/text_color"
+                            android:textColorHint="@color/hint_color"
+                            android:backgroundTint="@color/hint_color"
+                            android:hint="Full Name (Same as NID/License)"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@color/text_color"
+                            android:textColorHint="@color/hint_color"
+                            android:backgroundTint="@color/hint_color"
+                            android:hint="Address"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:weightSum="6"
+                            android:gravity="top"
+                            android:orientation="horizontal">
+
+                            <com.skydoves.powerspinner.PowerSpinnerView
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_bottom"
+                                android:gravity="start"
+                                android:hint="Your ID"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:textColor="@color/text_color"
+                                android:textColorHint="@color/hint_color"
+                                android:textSize="14.5sp"
+                                app:spinner_arrow_gravity="end"
+                                app:spinner_arrow_padding="8dp"
+                                app:spinner_arrow_show="true"
+                                app:spinner_arrow_tint="@color/text_color"
+                                app:spinner_arrow_drawable="@drawable/ic_down_arrow"
+                                app:spinner_divider_color="@color/hint_color"
+                                app:spinner_divider_show="true"
+                                app:spinner_divider_size="0.4dp"
+                                app:spinner_item_array="@array/id"
+                                app:spinner_popup_animation="dropdown"
+                                app:spinner_popup_background="@color/white"
+                                app:spinner_popup_elevation="14dp" />
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="4"
+                                android:layout_marginTop="7dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:textColorHint="@color/hint_color"
+                                android:backgroundTint="@color/hint_color"
+                                android:hint="NID Number*"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:weightSum="2"
+                            android:orientation="horizontal">
+
+                            <com.skydoves.powerspinner.PowerSpinnerView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_bottom"
+                                android:gravity="start"
+                                android:hint="Gender"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:textColor="@color/text_color"
+                                android:textColorHint="@color/hint_color"
+                                android:textSize="14.5sp"
+                                app:spinner_arrow_gravity="end"
+                                app:spinner_arrow_padding="8dp"
+                                app:spinner_arrow_show="true"
+                                app:spinner_arrow_tint="@color/text_color"
+                                app:spinner_arrow_drawable="@drawable/ic_down_arrow"
+                                app:spinner_divider_color="@color/hint_color"
+                                app:spinner_divider_show="true"
+                                app:spinner_divider_size="0.4dp"
+                                app:spinner_item_array="@array/gender"
+                                app:spinner_popup_animation="dropdown"
+                                app:spinner_popup_background="@color/white"
+                                app:spinner_popup_elevation="14dp" />
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="7dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/text_color"
+                                android:textColorHint="@color/hint_color"
+                                android:backgroundTint="@color/hint_color"
+                                android:hint="Date of Birth"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:textColor="#111329"
+                    android:lineSpacingExtra="46sp"
+                    android:text="@string/account_information"
+                    />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardPreventCornerOverlap="false"
+                    android:layout_margin="15dp"
+                    app:cardBackgroundColor="#ffffff"
+                    app:cardCornerRadius="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="20dp"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@color/text_color"
+                            android:textColorHint="@color/hint_color"
+                            android:backgroundTint="@color/hint_color"
+                            android:hint="Full Name (Same as NID/License)"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@color/text_color"
+                            android:textColorHint="@color/hint_color"
+                            android:backgroundTint="@color/hint_color"
+                            android:hint="Address"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginEnd="15sp"
+                    android:textStyle="normal"
+                    android:textSize="13sp"
+                    android:textColor="#111329"
+                    android:lineSpacingExtra="19sp"
+                    android:text="By signing up you are agree to terms &amp; condition"
+                    />
+
+                <TextView
+                    android:id="@+id/sign_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textAlignment="center"
+                    android:padding="18dp"
+                    android:text="Agree &amp; Sign up"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/before_button_bg"
+                    android:gravity="center_horizontal" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

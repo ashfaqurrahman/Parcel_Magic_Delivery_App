@@ -78,4 +78,7 @@
     <string name="order_from_person_name">Order from Person Name</string>
     <string name="status">Status</string>
     <string name="done">Done</string>
+    <string name="verification">OTP Verification</string>
+    <string name="sign_up_title">Sign Up For Delivery Man</string>
+    <string name="sign_in">Sing In</string>
 </resources>
