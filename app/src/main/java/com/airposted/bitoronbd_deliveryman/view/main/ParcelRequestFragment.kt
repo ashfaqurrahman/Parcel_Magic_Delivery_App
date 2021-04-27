@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentParcelRequestBinding
 import com.airposted.bitoronbd_deliveryman.view.auth.adapter.DataAdapter
-import com.airposted.bitoronbd_deliveryman.view.model.DataModel
+import com.airposted.bitoronbd_deliveryman.model.DataModel
 import java.util.*
 
 class ParcelRequestFragment : Fragment() {

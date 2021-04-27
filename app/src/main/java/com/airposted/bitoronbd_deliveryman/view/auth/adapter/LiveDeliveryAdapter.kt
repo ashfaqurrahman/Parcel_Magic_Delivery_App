@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.view.main.CommunicatorFragmentInterface
 import com.airposted.bitoronbd_deliveryman.view.main.LiveParcelDetailsFragment
-import com.airposted.bitoronbd_deliveryman.view.model.DataModel
+import com.airposted.bitoronbd_deliveryman.model.DataModel
 import java.util.*
 
 class LiveDeliveryAdapter(var context: Context, data: List<DataModel>) :

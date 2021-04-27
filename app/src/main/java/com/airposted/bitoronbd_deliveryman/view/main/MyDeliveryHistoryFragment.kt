@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentMyDeliveryHistoryBinding
 import com.airposted.bitoronbd_deliveryman.view.auth.adapter.HistoryAdapter
-import com.airposted.bitoronbd_deliveryman.view.model.DataModel
+import com.airposted.bitoronbd_deliveryman.model.DataModel
 import java.util.ArrayList
 
 class MyDeliveryHistoryFragment : Fragment() {

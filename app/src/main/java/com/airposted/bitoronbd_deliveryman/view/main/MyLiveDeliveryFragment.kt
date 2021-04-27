@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentMyLiveDeliveryBinding
 import com.airposted.bitoronbd_deliveryman.view.auth.adapter.LiveDeliveryAdapter
-import com.airposted.bitoronbd_deliveryman.view.model.DataModel
+import com.airposted.bitoronbd_deliveryman.model.DataModel
 import java.util.ArrayList
 
 class MyLiveDeliveryFragment : Fragment() {
