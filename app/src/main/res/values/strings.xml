@@ -81,4 +81,5 @@
     <string name="verification">OTP Verification</string>
     <string name="sign_up_title">Sign Up For Delivery Man</string>
     <string name="sign_in">Sing In</string>
+    <string name="enter">Enter verification code sent to \n+880%1$s</string>
 </resources>

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitoronBD_Deliveryman">
-        <activity android:name=".view.auth.AuthActivity"></activity>
+        <activity android:name=".view.auth.AuthActivity" />
         <activity android:name=".view.WebViewActivity" />
         <activity android:name=".view.SplashActivity"
             android:theme="@style/Theme.BitoronBD_Deliveryman.Launcher">
