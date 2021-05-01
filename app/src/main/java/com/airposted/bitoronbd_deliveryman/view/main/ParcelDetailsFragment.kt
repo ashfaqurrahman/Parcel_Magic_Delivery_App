@@ -21,10 +21,10 @@ class ParcelDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        BindUI()
+        bindUI()
     }
 
-    private fun BindUI() {
+    private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.toolbarTitle.text = getString(R.string.document)
         binding.toolbar.backImage.setOnClickListener {

@@ -24,17 +24,27 @@ class AuthViewModel(
 //        email: String,
 //        password: String
 //    ) = withContext(Dispatchers.IO) { repository.userLogin(email, password) }*/
-//
-//    suspend fun userSignup(
-//        name: String,
-//        phone: String
-//    ) = withContext(Dispatchers.IO) { repository.userSignup(name, phone) }
-//
-//    suspend fun userSignupWithPhoto(
-//        name: RequestBody,
-//        phone: RequestBody,
-//        photo: MultipartBody.Part,
-//        photo_name: RequestBody
-//    ) = withContext(Dispatchers.IO) { repository.userSignupWithPhoto(name, phone, photo, photo_name) }
+
+    suspend fun userSignUp(
+        name: String,
+        phone: String,
+        password: String,
+        driveLicence: String,
+        dob: String,
+        gender: String,
+        address: String
+    ) = withContext(Dispatchers.IO) { repository.userSignUp(name, phone, password, driveLicence, dob, gender, address) }
+
+    suspend fun userSignUpWithPhoto(
+        name: RequestBody,
+        phone: RequestBody,
+        password: RequestBody,
+        drivingLicence: RequestBody,
+        dob: RequestBody,
+        gender: RequestBody,
+        address: RequestBody,
+        photo: MultipartBody.Part,
+        photo_name: RequestBody
+    ) = withContext(Dispatchers.IO) { repository.userSignUpWithPhoto(name, phone, password, drivingLicence, dob, gender, address, photo, photo_name) }
 
 }

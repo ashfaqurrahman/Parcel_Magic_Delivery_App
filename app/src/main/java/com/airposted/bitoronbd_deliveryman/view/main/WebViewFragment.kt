@@ -10,6 +10,7 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentWebViewBinding
+import com.airposted.bitoronbd_deliveryman.utils.AppHelper
 
 class WebViewFragment : Fragment() {
     private lateinit var binding: FragmentWebViewBinding
@@ -44,7 +45,7 @@ class WebViewFragment : Fragment() {
                 super.onProgressChanged(view1, newProgress)
             }
         }
-        val url = requireArguments().getString("url")
+        val url = requireArguments().getString(AppHelper.DETAILS_KEY)
         binding.contactWebView.settings.javaScriptEnabled = true
         binding.contactWebView.isVerticalScrollBarEnabled = false
         binding.contactWebView.loadUrl(url!!)

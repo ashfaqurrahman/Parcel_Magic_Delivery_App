@@ -33,6 +33,11 @@ class WelcomeFragment : Fragment() {
             val fragment = OTPFragment()
             val bundle = Bundle()
             bundle.putString("phone", requireArguments().getString("phone"))
+            bundle.putString("token", requireArguments().getString("token"))
+            bundle.putInt("id", requireArguments().getInt("id"))
+            bundle.putString("image", requireArguments().getString("image"))
+            bundle.putString("name", requireArguments().getString("name"))
+            bundle.putBoolean("isAuth", true)
             fragment.arguments = bundle
             communicatorFragmentInterface?.addContentFragment(fragment, true)
         }

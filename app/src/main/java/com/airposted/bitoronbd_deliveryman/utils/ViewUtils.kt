@@ -353,18 +353,3 @@ fun reduceImageSize(file: File): File? {
         null
     }
 }
-
-/*fun loadFragmentWithoutBack(activity: Activity, fragment: Fragment) { // load fragment
-    val fragmentManager = (activity as FragmentActivity).supportFragmentManager
-    val transaction = fragmentManager.beginTransaction()
-    transaction.replace(R.id.frame_container, fragment)
-    transaction.commit()
-}
-
-fun loadFragmentWithBack(activity: Activity, fragment: Fragment) { // load fragment
-    val fragmentManager = (activity as FragmentActivity).supportFragmentManager
-    val transaction = fragmentManager.beginTransaction()
-    transaction.replace(R.id.frame_container, fragment)
-    transaction.addToBackStack(null)
-    transaction.commit()
-}*/

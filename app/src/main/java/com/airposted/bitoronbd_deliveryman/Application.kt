@@ -6,6 +6,7 @@ import com.airposted.bitoronbd_deliveryman.data.network.NetworkConnectionInterce
 import com.airposted.bitoronbd_deliveryman.data.network.preferences.PreferenceProvider
 import com.airposted.bitoronbd_deliveryman.data.repositories.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthViewModelFactory
+import com.airposted.bitoronbd_deliveryman.view.main.HomeViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -23,7 +24,9 @@ class Application : Application(), KodeinAware {
         bind() from singleton { MyApi(instance()) }
         bind() from singleton { PreferenceProvider(instance()) }
         bind() from singleton { UserRepository(instance()) }
+        bind() from singleton { HomeRepository(instance(), MyApi(instance()))}
         bind() from provider { AuthViewModelFactory(instance()) }
+        bind() from provider { HomeViewModelFactory(instance()) }
 
 
     }

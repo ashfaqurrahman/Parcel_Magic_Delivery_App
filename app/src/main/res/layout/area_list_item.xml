@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="area"
+            type="com.airposted.bitoronbd_deliveryman.model.DataX" />
+
+        <variable
+            name="itemClickListener"
+            type="com.airposted.bitoronbd_deliveryman.view.main.CustomClickListener" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/area_item"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@{area.area_name}"
+            android:textColor="@color/text_color"
+            android:padding="15dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EFEEEE"/>
+
+    </LinearLayout>
+
+</layout>

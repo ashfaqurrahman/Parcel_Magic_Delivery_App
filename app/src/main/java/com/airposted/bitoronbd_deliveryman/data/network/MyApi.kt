@@ -19,19 +19,34 @@ interface MyApi {
 
     @FormUrlEncoded
     @POST("register_personal")
-    suspend fun userSignup(
-        @Field("username") name: String,
-        @Field("phone") email: String
+    suspend fun userSignUp(
+        @Field("name") name: String,
+        @Field("phone") phone: String,
+        @Field("password") password: String,
+        @Field("drive_lisence") driveLicence: String,
+        @Field("dob") dob: String,
+        @Field("gender") gender: String,
+        @Field("address") address: String
     ) : Response<AuthResponse>
 
     @Multipart
     @POST("register_personal")
-    suspend fun userSignupWithPhoto(
-        @Part("username") name: RequestBody,
-        @Part("phone") email: RequestBody,
+    suspend fun userSignUpWithPhoto(
+        @Part("name") name: RequestBody,
+        @Part("phone") phone: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("drive_lisence") drivingLicence: RequestBody,
+        @Part("dob") dob: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("address") address: RequestBody,
         @Part file: MultipartBody.Part,
         @Part("image") requestBody: RequestBody
     ) : Response<AuthResponse>
+
+    @GET("delivery/area")
+    suspend fun getAllAreaList(
+        @Header("Authorization") header: String
+    ) : Response<AreaListDataModel>
 
     @FormUrlEncoded
     @POST("personal/userupdate")

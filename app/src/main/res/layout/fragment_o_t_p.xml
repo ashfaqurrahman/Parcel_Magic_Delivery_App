@@ -86,8 +86,9 @@
                         android:id="@+id/resend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:clickable="false"
-                        android:text=" Resend SMS"
+                        android:text="Resend SMS"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />

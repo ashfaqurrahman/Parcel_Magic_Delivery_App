@@ -21,10 +21,10 @@
     <string name="next">Next</string>
     <string name="NID">NID</string>
     <string name="account_information">Account Information</string>
-    <string name="resend_code">\" Resend Code\"</string>
+    <string name="resend_code">Resend Code</string>
 
     <string-array name="id">
-        <item>NID</item>
+        <item>National ID</item>
         <item>Passport ID</item>
     </string-array>
 
@@ -81,5 +81,5 @@
     <string name="verification">OTP Verification</string>
     <string name="sign_up_title">Sign Up For Delivery Man</string>
     <string name="sign_in">Sing In</string>
-    <string name="enter">Enter verification code sent to \n+880%1$s</string>
+    <string name="enter">Enter verification code sent to \n</string>
 </resources>

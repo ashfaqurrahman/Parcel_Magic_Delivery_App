@@ -6,7 +6,7 @@ class User (
     @SerializedName("id")
     val id: Int,
     @SerializedName("username")
-    val name: String,
+    val username: String,
     @SerializedName("phone")
     val phone: String,
     @SerializedName("active")
