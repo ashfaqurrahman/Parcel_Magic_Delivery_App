@@ -5,9 +5,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.MalformedJsonException
 import android.view.*
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -20,7 +23,6 @@ import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.BuildConfig
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
-import com.airposted.bitoronbd_deliveryman.model.AreaListDataModel
 import com.airposted.bitoronbd_deliveryman.model.DataX
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
@@ -38,6 +40,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     private lateinit var viewModel: HomeViewModel
     private lateinit var invoice: List<DataX>
     private var currentLocationClick = false
+    private lateinit var dialogs: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,12 +90,12 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
         binding.from.setOnClickListener {
             currentLocationClick = true
-            searchArea(binding.from)
+            searchArea()
         }
 
         binding.to.setOnClickListener {
             currentLocationClick = false
-            searchArea(binding.to)
+            searchArea()
         }
 
         binding.getOrderRequest.setOnClickListener {
@@ -108,8 +111,8 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         }
     }
 
-    private fun searchArea(area: TextView) {
-        val dialogs = Dialog(requireActivity())
+    private fun searchArea() {
+        dialogs = Dialog(requireActivity())
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialogs.setContentView(R.layout.search_area_dialog)
         dialogs.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -121,15 +124,69 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         val back = dialogs.findViewById<ImageView>(R.id.backImage)
         val areaRecycler = dialogs.findViewById<RecyclerView>(R.id.area_recycler)
         val noArea = dialogs.findViewById<TextView>(R.id.no_area)
+        val search_item = dialogs.findViewById<EditText>(R.id.search_item)
         back.setOnClickListener {
             dialogs.dismiss()
         }
 
+        search_item.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?, start: Int,
+                count: Int, after: Int
+            ) {
+
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+
+                areaRecycler.layoutManager = GridLayoutManager(
+                    requireActivity(),
+                    1
+                )
+                areaRecycler.itemAnimator = DefaultItemAnimator()
+                if (s.toString().isNotEmpty()) {
+                    val listNew: ArrayList<DataX> = ArrayList()
+                    for (l in invoice.indices) {
+                        val serviceName: String = invoice[l].area_name
+                        if (serviceName.toLowerCase().contains(s.toString().toLowerCase())) {
+                            listNew.add(invoice[l])
+                            areaRecycler.visibility = View.VISIBLE
+                            noArea.visibility = View.GONE
+                        }
+                    }
+                    if (listNew.isNullOrEmpty()) {
+                        areaRecycler.visibility = View.GONE
+                        noArea.visibility = View.VISIBLE
+                    } else {
+                        val myRecyclerViewAdapter = AreaListRecyclerViewAdapter(
+                            listNew,
+                            this@HomeFragment
+                        )
+                        areaRecycler.adapter = myRecyclerViewAdapter
+                    }
+                } else {
+                    areaRecycler.visibility = View.VISIBLE
+                    noArea.visibility = View.GONE
+                    val myRecyclerViewAdapter = AreaListRecyclerViewAdapter(
+                        invoice,
+                        this@HomeFragment
+                    )
+                    areaRecycler.adapter = myRecyclerViewAdapter
+                }
+            }
+        })
+
         if (invoice.isNotEmpty()) {
             areaRecycler.visibility = View.VISIBLE
             noArea.visibility = View.GONE
-            val customClickListener = CustomClickListener
-            val myRecyclerViewAdapter = AreaListRecyclerViewAdapter(invoice)
+            val myRecyclerViewAdapter = AreaListRecyclerViewAdapter(invoice, this)
             areaRecycler.layoutManager = GridLayoutManager(requireActivity(), 1)
             areaRecycler.itemAnimator = DefaultItemAnimator()
             areaRecycler.adapter = myRecyclerViewAdapter
@@ -209,6 +266,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     }
 
     override fun onItemClick(area: DataX) {
+        dialogs.dismiss()
         if (currentLocationClick) {
             binding.from.text = area.area_name
         }

@@ -7,10 +7,6 @@
         <variable
             name="area"
             type="com.airposted.bitoronbd_deliveryman.model.DataX" />
-
-        <variable
-            name="itemClickListener"
-            type="com.airposted.bitoronbd_deliveryman.view.main.CustomClickListener" />
     </data>
 
     <LinearLayout
