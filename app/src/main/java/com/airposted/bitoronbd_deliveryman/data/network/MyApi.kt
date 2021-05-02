@@ -2,12 +2,17 @@ package com.airposted.bitoronbd_deliveryman.data.network
 
 import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.model.*
-import okhttp3.*
+import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
+
 
 interface MyApi {
 
@@ -49,14 +54,62 @@ interface MyApi {
     ) : Response<AreaListDataModel>
 
     @FormUrlEncoded
-    @POST("personal/userupdate")
+    @POST("delivery/prefered_area_list_add")
+    suspend fun addMyArea(
+        @Header("Authorization") header: String,
+        @Field("area_id") areaId: Int
+    ) : Response<AddMyAreaModel>
+
+    @POST("delivery/prefered_area_list_view")
+    suspend fun viewMyArea(
+        @Header("Authorization") header: String
+    ) : Response<ViewMyAreaModel>
+
+    @FormUrlEncoded
+    @POST("delivery/prefered_area_list_delete")
+    suspend fun deleteMyArea(
+        @Header("Authorization") header: String,
+        @Field("prefered_area_id") id: Int
+    ) : Response<AddMyAreaModel>
+
+    @FormUrlEncoded
+    @POST("delivery/prefered_area_search_order_list")
+    suspend fun getOrderList(
+        @Header("Authorization") header: String,
+        @Field("to") to: Int,
+        @Field("from") from: Int
+    ) : Response<OrderListModel>
+
+    @GET("delivery/orderdetails/{id}")
+    suspend fun getOrderDetails(
+        @Header("Authorization") header: String,
+        @Path("id") id: String
+    ): Response<OrderDetailsModel>
+
+    @POST("delivery/profile")
+    suspend fun myProfile(
+        @Header("Authorization") header: String
+    ) : Response<ProfileModel>
+
+
+    @FormUrlEncoded
+    @POST("delivery/userupdate")
     suspend fun userNameUpdate(
         @Header("Authorization") header: String,
         @Field("username") name: String
     ) : Response<AuthResponse>
 
+
+    @FormUrlEncoded
+    @POST("delivery/orderstatuschange")
+    suspend fun changeStatus(
+        @Header("Authorization") header: String,
+        @Field("invoice_no") invoice: String,
+        @Field("current_status") status: Int
+    ) : Response<StatusChangeModel>
+
     @Multipart
-    @POST("personal/userupdate")
+    @POST("delivery/userupdate")
     suspend fun userImageUpdate(
         @Header("Authorization") header: String,
         @Part file: MultipartBody.Part,

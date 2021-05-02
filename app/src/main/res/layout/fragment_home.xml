@@ -106,11 +106,13 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/button_bg">
 
-                                <TextView
+                                <EditText
                                     android:id="@+id/from"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Current Location"
+                                    android:focusable="false"
+                                    android:background="@null"
+                                    android:hint="Pick Up Location"
                                     android:textSize="16sp"
                                     android:padding="10dp"/>
 
@@ -132,11 +134,13 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/button_bg">
 
-                                <TextView
+                                <EditText
                                     android:id="@+id/to"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Where to?"
+                                    android:focusable="false"
+                                    android:background="@null"
+                                    android:hint="Destination"
                                     android:textSize="16sp"
                                     android:padding="10dp"/>
 

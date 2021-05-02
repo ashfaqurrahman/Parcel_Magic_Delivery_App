@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="orderList"
+            type="com.airposted.bitoronbd_deliveryman.model.OrderListModelData" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/parent"
         android:layout_width="match_parent"
@@ -43,7 +50,7 @@
                     android:textStyle="normal"
                     android:textSize="20sp"
                     android:textColor="#1a1662"
-                    android:text="Document"
+                    android:text="@{String.valueOf(orderList.order_type)}"
                     />
 
                 <LinearLayout
@@ -134,10 +141,11 @@
                     android:textSize="13sp"
                     android:textColor="#b5b7dd"
                     android:lineSpacingExtra="48sp"
-                    android:text="Delivery Time Remaining  :  "
+                    android:text="Delivery Time :  "
                     />
 
                 <TextView
+                    android:id="@+id/delivery_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -146,7 +154,7 @@
                     android:textSize="16sp"
                     android:textColor="#1a1662"
                     android:lineSpacingExtra="48sp"
-                    android:text="23  :  59  :  59"
+                    android:text="@{orderList.delivery_date}"
                     />
 
             </RelativeLayout>

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg"
@@ -23,6 +24,7 @@
             app:cardBackgroundColor="@color/white">
 
             <TextView
+                android:id="@+id/add_area_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="15dp"
@@ -39,320 +41,21 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_rea_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop= "20dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:weightSum="2"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/my_area_list_item" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="@color/white">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="2dp"
-                        android:rotation="90"
-                        android:src="@drawable/ic_more"/>
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/mohammodpur_area"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/ic_preferred_area"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textStyle="normal"
-                        android:textSize="16sp"
-                        android:textColor="#11123e"
-                        android:lineSpacingExtra="8sp"
-                        android:text="@string/mohammadpur"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="#b5b7dd"
-                        android:gravity="center_horizontal"
-                        android:text="@string/_25_order_delivered_in_the_area"
-                        />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="@color/white">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="2dp"
-                        android:rotation="90"
-                        android:src="@drawable/ic_more"/>
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/ic_preferred_area"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:paddingEnd="10dp"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textStyle="normal"
-                        android:textSize="16sp"
-                        android:textColor="#11123e"
-                        android:lineSpacingExtra="8sp"
-                        android:text="@string/mohammadpur"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="#b5b7dd"
-                        android:gravity="center_horizontal"
-                        android:text="@string/_25_order_delivered_in_the_area"
-                        />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/my_no_area"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop= "10dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:weightSum="2"
-            android:orientation="horizontal">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="@color/white">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="2dp"
-                        android:rotation="90"
-                        android:src="@drawable/ic_more"/>
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/ic_preferred_area"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textStyle="normal"
-                        android:textSize="16sp"
-                        android:textColor="#11123e"
-                        android:lineSpacingExtra="8sp"
-                        android:text="@string/mohammadpur"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="#b5b7dd"
-                        android:gravity="center_horizontal"
-                        android:text="@string/_25_order_delivered_in_the_area"
-                        />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="@color/white">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="2dp"
-                        android:rotation="90"
-                        android:src="@drawable/ic_more"/>
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/ic_preferred_area"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textStyle="normal"
-                        android:textSize="16sp"
-                        android:textColor="#11123e"
-                        android:lineSpacingExtra="8sp"
-                        android:text="@string/mohammadpur"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="#b5b7dd"
-                        android:gravity="center_horizontal"
-                        android:text="@string/_25_order_delivered_in_the_area"
-                        />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:text="No area available"
+            android:visibility="gone"
+            android:gravity="center"/>
 
     </LinearLayout>
 

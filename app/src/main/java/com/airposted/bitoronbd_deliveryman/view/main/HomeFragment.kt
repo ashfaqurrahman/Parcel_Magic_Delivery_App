@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.MalformedJsonException
 import android.view.*
 import android.widget.EditText
@@ -23,7 +22,7 @@ import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.BuildConfig
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
-import com.airposted.bitoronbd_deliveryman.model.DataX
+import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
 import com.google.android.material.navigation.NavigationView
@@ -32,15 +31,19 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware, CustomClickListener {
+class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware, AreaClickListener {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
+    private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
     var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var invoice: List<DataX>
-    private var currentLocationClick = false
+    private lateinit var invoice: List<AreaListDataModelData>
     private lateinit var dialogs: Dialog
+    private var currentLocationClick = false
+    private var fromId = 0
+    private var toID = 0
+    private var from = ""
+    private var to = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +61,6 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     }
 
     private fun bindUI() {
-        Log.e("AAAA", PersistentUser.getInstance().getAccessToken(requireActivity()))
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
@@ -99,14 +101,25 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         }
 
         binding.getOrderRequest.setOnClickListener {
-            if (binding.from.text.toString().isNotEmpty() && binding.from.text.toString()
-                    .isNotEmpty()
-            ) {
-                val fragment = ParcelRequestFragment()
-                val bundle = Bundle()
-                bundle.putString("from", "")
-                fragment.arguments = bundle
-                communicatorFragmentInterface?.addContentFragment(fragment, true)
+            if (fromId != 0) {
+                if (toID != 0) {
+                    binding.from.setText("")
+                    binding.to.setText("")
+                    val fragment = ParcelRequestFragment()
+                    val bundle = Bundle()
+                    bundle.putInt("fromId", fromId)
+                    bundle.putInt("toId", toID)
+                    bundle.putString("from", from)
+                    bundle.putString("to", to)
+                    fragment.arguments = bundle
+                    communicatorFragmentInterface?.addContentFragment(fragment, true)
+                }
+                else {
+                    binding.rootLayout.snackbar("Please set a destination location")
+                }
+            }
+            else {
+                binding.rootLayout.snackbar("Please set a pick up location.")
             }
         }
     }
@@ -152,7 +165,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 )
                 areaRecycler.itemAnimator = DefaultItemAnimator()
                 if (s.toString().isNotEmpty()) {
-                    val listNew: ArrayList<DataX> = ArrayList()
+                    val listNew: ArrayList<AreaListDataModelData> = ArrayList()
                     for (l in invoice.indices) {
                         val serviceName: String = invoice[l].area_name
                         if (serviceName.toLowerCase().contains(s.toString().toLowerCase())) {
@@ -265,13 +278,17 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         return true
     }
 
-    override fun onItemClick(area: DataX) {
+    override fun onItemClick(area: AreaListDataModelData) {
         dialogs.dismiss()
         if (currentLocationClick) {
-            binding.from.text = area.area_name
+            binding.from.setText(area.area_name)
+            fromId = area.id
+            from = area.area_name
         }
         else {
-            binding.to.text = area.area_name
+            binding.to.setText(area.area_name)
+            toID = area.id
+            to = area.area_name
         }
     }
 }

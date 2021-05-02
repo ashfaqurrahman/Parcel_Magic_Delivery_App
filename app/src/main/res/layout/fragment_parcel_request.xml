@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fcfcff"
@@ -64,6 +65,15 @@
             android:layout_height="match_parent"
             android:id="@+id/parcel_request_list"
             tools:listitem="@layout/parcel_request_list_item"/>
+
+        <TextView
+            android:id="@+id/no_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:text="No order available"
+            android:visibility="gone"
+            android:gravity="center"/>
 
     </LinearLayout>
 

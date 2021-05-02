@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fcfcff"
@@ -46,10 +47,11 @@
                             android:textSize="14sp"
                             android:textColor="#b5b7dd"
                             android:lineSpacingExtra="47sp"
-                            android:text="Delivery Time Remaining"
+                            android:text="Delivery Time"
                             />
 
                         <TextView
+                            android:id="@+id/delivery_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semi_bold"
@@ -113,7 +115,7 @@
                                 android:textStyle="normal"
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
-                                android:text="03 kg"
+                                tools:text="03 kg"
                                 />
 
                         </LinearLayout>
@@ -143,7 +145,7 @@
                                 android:textStyle="normal"
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
-                                android:text="20 cm"
+                                tools:text="20 cm"
                                 />
 
                         </LinearLayout>
@@ -172,7 +174,7 @@
                                 android:textStyle="normal"
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
-                                android:text="7.5 km"
+                                tools:text="7.5 km"
                                 />
 
                         </LinearLayout>
@@ -259,7 +261,7 @@
                             android:textSize="14sp"
                             android:textColor="#1a1662"
                             android:lineSpacingExtra="13sp"
-                            android:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
+                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 
                         <TextView
@@ -275,7 +277,7 @@
                             android:textSize="14sp"
                             android:textColor="#1a1662"
                             android:lineSpacingExtra="13sp"
-                            android:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
+                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 
                     </RelativeLayout>

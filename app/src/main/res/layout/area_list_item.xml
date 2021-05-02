@@ -6,7 +6,7 @@
 
         <variable
             name="area"
-            type="com.airposted.bitoronbd_deliveryman.model.DataX" />
+            type="com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData" />
     </data>
 
     <LinearLayout

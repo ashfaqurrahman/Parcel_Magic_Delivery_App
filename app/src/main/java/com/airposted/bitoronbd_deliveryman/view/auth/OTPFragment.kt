@@ -73,16 +73,16 @@ class OTPFragment : Fragment(), KodeinAware {
         binding.otpTopText.text = getString(R.string.enter) + phone
         communicatorFragmentInterface = context as AuthCommunicatorFragmentInterface
 
-//        timer()
-//        sendVerificationCode(phone!!)
+        timer()
+        sendVerificationCode(phone!!)
 
         otp1 = otpWatcher(requireContext(), binding.otpView, binding.verify)
 
         binding.verify.setOnClickListener {
-//            setProgressDialog(requireContext())
-//            val code = otp1
-//            val credential = PhoneAuthProvider.getCredential(verificationId!!, code!!)
-//            signInWithCredential(credential)
+            setProgressDialog(requireContext())
+            val code = otp1
+            val credential = PhoneAuthProvider.getCredential(verificationId!!, code!!)
+            signInWithCredential(credential)
 
             if (isAuth) {
                 dismissDialog()
