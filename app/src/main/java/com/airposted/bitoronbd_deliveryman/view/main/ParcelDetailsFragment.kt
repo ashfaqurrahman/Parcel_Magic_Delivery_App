@@ -41,7 +41,7 @@ class ParcelDetailsFragment : Fragment(), KodeinAware {
 
     private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
-        binding.toolbar.toolbarTitle.text = getString(R.string.document)
+        binding.toolbar.toolbarTitle.text = requireArguments().getString("order_item_name")
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -57,13 +57,14 @@ class ParcelDetailsFragment : Fragment(), KodeinAware {
                 try {
                     val response = viewModel.changeStatus(invoice, 3)
                     if (response.success) {
+                        dismissDialog()
                         requireActivity().supportFragmentManager.popBackStack(ParcelRequestFragment::class.java.name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                         communicatorFragmentInterface!!.addContentFragment(MyLiveDeliveryFragment(), true)
                     }
                     else {
                         binding.rootLayout.snackbar(response.msg)
+                        dismissDialog()
                     }
-                    dismissDialog()
                 } catch (e: MalformedJsonException) {
                     dismissDialog()
                     binding.rootLayout.snackbar(e.message!!)

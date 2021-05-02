@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialogParent"
     style="@style/df_dialog_layout">
 
@@ -48,6 +49,18 @@
                 app:otp_box_background="@drawable/button_bg"
                 app:otp_text_size="18dp"/>
 
+            <CheckBox
+                android:id="@+id/check"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                tools:text="Text"
+                android:drawablePadding="10dp"
+                android:textSize="14sp"
+                android:textColor="@color/text_color"/>
+
             <TextView
                 android:id="@+id/verify"
                 android:layout_width="match_parent"
@@ -58,7 +71,7 @@
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="35dp"
                 android:layout_weight="1"
-                android:background="@drawable/after_button_bg"
+                android:background="@drawable/before_button_bg"
                 android:gravity="center"
                 android:paddingStart="35dp"
                 android:paddingTop="13dp"

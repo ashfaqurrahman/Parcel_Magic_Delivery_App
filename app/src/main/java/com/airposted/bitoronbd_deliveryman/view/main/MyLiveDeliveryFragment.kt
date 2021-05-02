@@ -1,5 +1,7 @@
 package com.airposted.bitoronbd_deliveryman.view.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.MalformedJsonException
 import androidx.fragment.app.Fragment
@@ -43,6 +45,7 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
+            binding.deliveryType.dismiss()
         }
         binding.toolbar.toolbarTitle.text = "My Live Delivery"
 
@@ -97,9 +100,18 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         bundle.putString("sender_phone", currentOrder.recp_phone)
         bundle.putDouble("distance", currentOrder.distance)
         bundle.putInt("current_status", currentOrder.current_status)
+        bundle.putInt("coc", currentOrder.coc)
+        bundle.putInt("cod", currentOrder.cod)
+        bundle.putDouble("price", 120.50)
         bundle.putString("invoice", currentOrder.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)
+    }
+
+    override fun onCallClick(phone: String) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$phone")
+        startActivity(intent)
     }
 
 }

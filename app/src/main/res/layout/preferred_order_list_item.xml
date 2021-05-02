@@ -6,11 +6,12 @@
     <data>
 
         <variable
-            name="currentOrderList"
-            type="com.airposted.bitoronbd_deliveryman.model.OrderListModelData" />
+            name="preferredOrderList"
+            type="com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModelData" />
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -50,7 +51,7 @@
                     android:textStyle="normal"
                     android:textSize="20sp"
                     android:textColor="#1a1662"
-                    android:text="@{currentOrderList.order_item_name}"
+                    android:text="@{String.valueOf(preferredOrderList.order_type)}"
                     />
 
                 <LinearLayout
@@ -122,139 +123,42 @@
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/before_button_bg"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="7dp"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="normal"
-                    android:textSize="12sp"
-                    android:textColor="#b5b7dd"
-                    android:lineSpacingExtra="49sp"
-                    android:text="Status"
-                    />
-
-                <com.skydoves.powerspinner.PowerSpinnerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:hint="Request accepted"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/text_color"
-                    android:textColorHint="@color/text_color"
-                    android:textSize="14.5sp"
-                    app:spinner_arrow_gravity="end"
-                    app:spinner_arrow_padding="8dp"
-                    app:spinner_arrow_show="true"
-                    app:spinner_arrow_tint="@color/text_color"
-                    app:spinner_arrow_drawable="@drawable/ic_down_arrow"
-                    app:spinner_divider_color="@color/hint_color"
-                    app:spinner_divider_show="true"
-                    app:spinner_divider_size="0.4dp"
-                    app:spinner_item_array="@array/delivery_status"
-                    app:spinner_popup_animation="dropdown"
-                    app:spinner_popup_background="@color/white"
-                    app:spinner_popup_elevation="14dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/poppins_regular"
-                android:lineSpacingExtra="48sp"
-                android:text="Sender"
-                android:textColor="#b5b7dd"
-                android:textSize="13sp"
-                android:textStyle="normal" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/delivery_man_image"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentStart="true"
-                    android:src="@drawable/empty_image" />
+                android:layout_marginTop="20dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:paddingStart="11dp"
+                android:paddingEnd="11dp"
+                android:background="@drawable/before_button_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@+id/delivery_man_image"
-                    android:fontFamily="@font/poppins_medium"
-                    android:lineSpacingExtra="8sp"
-                    android:text="@{currentOrderList.recp_name}"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textStyle="normal"
+                    android:textSize="13sp"
+                    android:textColor="#b5b7dd"
+                    android:lineSpacingExtra="48sp"
+                    android:text="Delivery Time :  "
+                    />
+
+                <TextView
+                    android:id="@+id/delivery_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
                     android:textColor="#1a1662"
-                    android:textSize="15sp"
-                    android:textStyle="normal" />
-
-                <ImageView
-                    android:id="@+id/calling"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_call" />
+                    android:lineSpacingExtra="48sp"
+                    android:text="@{preferredOrderList.delivery_date}"
+                    />
 
             </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/view_color" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:lineSpacingExtra="48sp"
-                    android:textColor="#b5b7dd"
-                    android:textSize="13sp"
-                    android:textStyle="normal"
-                    android:text="Pick up time : 10 am" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/poppins_regular"
-                    android:lineSpacingExtra="48sp"
-                    android:textColor="#b5b7dd"
-                    android:textSize="13sp"
-                    android:textStyle="normal"
-                    android:text="delivery time : 12 pm" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/view_color" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

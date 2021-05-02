@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg"
@@ -215,6 +216,7 @@
                                 android:text="Date of delivery"
                                 />
                             <TextView
+                                android:id="@+id/delivery_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -247,6 +249,7 @@
                                 android:text="Distance"
                                 />
                             <TextView
+                                android:id="@+id/destence"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -307,6 +310,7 @@
                                 android:text="Name"
                                 />
                             <TextView
+                                android:id="@+id/receiver_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -337,6 +341,7 @@
                                 android:text="Phone Number"
                                 />
                             <TextView
+                                android:id="@+id/receiver_phone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -385,6 +390,7 @@
                                 android:text="Name"
                                 />
                             <TextView
+                                android:id="@+id/sender_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -415,6 +421,7 @@
                                 android:text="Phone Number"
                                 />
                             <TextView
+                                android:id="@+id/sender_phone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -562,6 +569,7 @@
                     android:src="@drawable/empty_image" />
 
                 <TextView
+                    android:id="@+id/receiver_name_calling"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -575,6 +583,7 @@
                     android:textStyle="normal" />
 
                 <ImageView
+                    android:id="@+id/calling"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_alignParentEnd="true"

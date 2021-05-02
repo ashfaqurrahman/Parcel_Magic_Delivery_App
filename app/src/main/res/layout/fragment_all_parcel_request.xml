@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fcfcff"
@@ -43,6 +44,7 @@
                     />
 
                 <com.skydoves.powerspinner.PowerSpinnerView
+                    android:id="@+id/preferred_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
@@ -72,10 +74,20 @@
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/all_parcel_request_list"
             tools:listitem="@layout/parcel_request_list_item"/>
+
+        <TextView
+            android:id="@+id/no_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:text="No order available"
+            android:visibility="gone"
+            android:gravity="center"/>
 
     </LinearLayout>
 

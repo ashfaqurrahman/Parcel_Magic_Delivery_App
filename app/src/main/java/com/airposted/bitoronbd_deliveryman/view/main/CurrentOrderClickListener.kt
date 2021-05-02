@@ -4,4 +4,5 @@ import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
 
 interface CurrentOrderClickListener {
     fun onItemClick(currentOrder: OrderListModelData)
+    fun onCallClick(phone: String)
 }

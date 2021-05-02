@@ -96,6 +96,11 @@ interface MyApi {
         @Header("Authorization") header: String
     ) : Response<OrderListModel>
 
+    @POST("delivery/preferedorderlist")
+    suspend fun getPreferredOrderList(
+        @Header("Authorization") header: String
+    ) : Response<PreferredAreaOrderListModel>
+
     @POST("delivery/profile")
     suspend fun myProfile(
         @Header("Authorization") header: String

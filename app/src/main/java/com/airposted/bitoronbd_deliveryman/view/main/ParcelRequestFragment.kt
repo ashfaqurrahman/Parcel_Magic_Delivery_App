@@ -93,6 +93,7 @@ class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener {
         bundle.putString("delivery_date", order.delivery_date)
         bundle.putString("pick_address", order.pick_address)
         bundle.putString("recp_address", order.recp_address)
+        bundle.putString("order_item_name", order.order_item_name)
         bundle.putString("invoice", order.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)

@@ -6,13 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.BR
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.databinding.MyDeliveryHistoryListItemBinding
 import com.airposted.bitoronbd_deliveryman.databinding.MyLiveDeliveryListItemBinding
 import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
 
 class CurrentOrderListRecyclerViewAdapter(
     private val currentOrderListModelData: List<OrderListModelData>,
-    private val listener: CurrentOrderClickListener
+    private val viewDetailsListener: CurrentOrderClickListener
 ) : RecyclerView.Adapter<CurrentOrderListRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +27,8 @@ class CurrentOrderListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataModel = currentOrderListModelData[position]
         holder.bind(dataModel)
-        holder.binding.viewOrder.setOnClickListener { listener.onItemClick(dataModel) }
+        holder.binding.viewOrder.setOnClickListener { viewDetailsListener.onItemClick(dataModel) }
+        holder.binding.calling.setOnClickListener { viewDetailsListener.onCallClick(dataModel.recp_phone) }
     }
 
     override fun getItemCount(): Int {

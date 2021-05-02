@@ -24,6 +24,7 @@
             app:cardCornerRadius="12dp">
 
             <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/delivery_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -49,6 +50,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_live_delivery_list"
+            android:layout_marginTop="10dp"
             tools:listitem="@layout/my_live_delivery_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

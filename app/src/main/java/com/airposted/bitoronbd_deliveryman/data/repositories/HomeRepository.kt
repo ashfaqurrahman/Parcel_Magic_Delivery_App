@@ -102,4 +102,14 @@ class HomeRepository(
             )
         }
     }
+
+    suspend fun getPreferredOrderList(): PreferredAreaOrderListModel {
+        return apiRequest {
+            api.getPreferredOrderList(
+                PersistentUser.getInstance().getAccessToken(
+                    appContext
+                )
+            )
+        }
+    }
 }

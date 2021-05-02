@@ -21,17 +21,14 @@ class HomeViewModel(
 
     suspend fun getOrderList(to: Int, from: Int) = withContext(Dispatchers.IO) { repository.getOrderList(to, from) }
 
-    suspend fun getOrderDetails(
-        id: String
-    ) = withContext(Dispatchers.IO) { repository.getOrderDetails(id) }
+    suspend fun getOrderDetails(id: String) = withContext(Dispatchers.IO) { repository.getOrderDetails(id) }
 
-    suspend fun changeStatus(
-        invoice: String,
-        status: Int
-    ) = withContext(Dispatchers.IO) { repository.changeStatus(invoice, status) }
+    suspend fun changeStatus(invoice: String, status: Int) = withContext(Dispatchers.IO) { repository.changeStatus(invoice, status) }
 
     suspend fun myOrderHistory() = withContext(Dispatchers.IO) { repository.myOrderHistory() }
 
     suspend fun getCurrentOrderList() = withContext(Dispatchers.IO) { repository.getCurrentOrderList() }
+
+    suspend fun getPreferredOrderList() = withContext(Dispatchers.IO) { repository.getPreferredOrderList() }
 
 }
