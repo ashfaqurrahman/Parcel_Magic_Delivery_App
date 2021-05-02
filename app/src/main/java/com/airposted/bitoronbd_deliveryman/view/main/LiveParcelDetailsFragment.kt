@@ -26,15 +26,27 @@ class LiveParcelDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        BindUI()
+        bindUI()
     }
 
-    private fun BindUI() {
+    private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
         binding.toolbar.toolbarTitle.text = getString(R.string.order_from_person_name)
+
+        when(requireArguments().getInt("current_status")) {
+            3 -> {
+                binding.status.selectItemByIndex(0)
+            }
+            4 -> {
+                binding.status.selectItemByIndex(1)
+            }
+            5 -> {
+                binding.status.selectItemByIndex(2)
+            }
+        }
 
         binding.status.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newText ->
             when(newIndex) {

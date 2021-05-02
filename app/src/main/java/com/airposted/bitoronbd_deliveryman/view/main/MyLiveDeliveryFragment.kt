@@ -49,7 +49,7 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
-                val response = viewModel.getOrderList(requireArguments().getInt("toId"), requireArguments().getInt("fromId"))
+                val response = viewModel.getCurrentOrderList()
                 showOrderList(response)
             } catch (e: MalformedJsonException) {
                 dismissDialog()
@@ -76,12 +76,13 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
             binding.myLiveDeliveryList.layoutManager = GridLayoutManager(requireActivity(), 1)
             binding.myLiveDeliveryList.itemAnimator = DefaultItemAnimator()
             binding.myLiveDeliveryList.adapter = myRecyclerViewAdapter
+            dismissDialog()
         }
         else {
             binding.myLiveDeliveryList.visibility = View.GONE
             binding.noOrder.visibility = View.VISIBLE
+            dismissDialog()
         }
-        dismissDialog()
     }
 
     override fun onItemClick(currentOrder: OrderListModelData) {
