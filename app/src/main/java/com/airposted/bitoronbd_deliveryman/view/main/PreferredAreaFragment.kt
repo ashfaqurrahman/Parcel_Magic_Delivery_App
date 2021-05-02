@@ -256,6 +256,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
         else {
             binding.myReaRecycler.visibility = View.GONE
             binding.myNoArea.visibility = View.VISIBLE
+            dismissDialog()
         }
     }
 
