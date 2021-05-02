@@ -45,6 +45,12 @@ class ParcelDetailsFragment : Fragment(), KodeinAware {
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
+
+        binding.deliveryTime.text = requireArguments().getString("delivery_date")
+        binding.from.text = requireArguments().getString("pick_address")
+        binding.to.text = requireArguments().getString("recp_address")
+        invoice = requireArguments().getString("invoice")!!
+
         binding.confirmedOrder.setOnClickListener {
             setProgressDialog(requireActivity())
             lifecycleScope.launch {
@@ -73,31 +79,6 @@ class ParcelDetailsFragment : Fragment(), KodeinAware {
                 }
 
             }
-        }
-
-        setProgressDialog(requireActivity())
-        lifecycleScope.launch {
-            try {
-                val response = viewModel.getOrderDetails(requireArguments().getInt("id").toString())
-                binding.deliveryTime.text = response.data[0].delivery_date
-                binding.from.text = response.data[0].pick_address
-                binding.to.text = response.data[0].recp_address
-                invoice = response.data[0].invoice_no
-                dismissDialog()
-            } catch (e: MalformedJsonException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            } catch (e: ApiException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            } catch (e: NoInternetException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            }
-
         }
     }
 }

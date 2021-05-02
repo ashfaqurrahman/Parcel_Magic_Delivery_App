@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,6 +18,15 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/my_delivery_history_list_item"
             android:id="@+id/my_order_history_list"/>
+
+        <TextView
+            android:id="@+id/no_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:text="No order available"
+            android:visibility="gone"
+            android:gravity="center"/>
 
     </LinearLayout>
 

@@ -1,32 +1,104 @@
 package com.airposted.bitoronbd_deliveryman.view.main
 
 import android.os.Bundle
+import android.util.MalformedJsonException
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentMyLiveDeliveryBinding
+import com.airposted.bitoronbd_deliveryman.model.OrderListModel
+import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
+import com.airposted.bitoronbd_deliveryman.utils.*
+import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
-class MyLiveDeliveryFragment : Fragment() {
+class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListener {
+    override val kodein by kodein()
+    private val factory: HomeViewModelFactory by instance()
+    private lateinit var viewModel: HomeViewModel
     private lateinit var binding:FragmentMyLiveDeliveryBinding
+    var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMyLiveDeliveryBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        BindUI()
+        bindUI()
     }
 
-    private fun BindUI() {
+    private fun bindUI() {
+        communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
         binding.toolbar.toolbarTitle.text = "My Live Delivery"
+
+        setProgressDialog(requireActivity())
+        lifecycleScope.launch {
+            try {
+                val response = viewModel.getOrderList(requireArguments().getInt("toId"), requireArguments().getInt("fromId"))
+                showOrderList(response)
+            } catch (e: MalformedJsonException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            }
+
+        }
+    }
+
+    private fun showOrderList(response: OrderListModel) {
+        if (response.data.isNotEmpty()) {
+            binding.myLiveDeliveryList.visibility = View.VISIBLE
+            binding.noOrder.visibility = View.GONE
+            val myRecyclerViewAdapter = CurrentOrderListRecyclerViewAdapter(response.data, this)
+            binding.myLiveDeliveryList.layoutManager = GridLayoutManager(requireActivity(), 1)
+            binding.myLiveDeliveryList.itemAnimator = DefaultItemAnimator()
+            binding.myLiveDeliveryList.adapter = myRecyclerViewAdapter
+        }
+        else {
+            binding.myLiveDeliveryList.visibility = View.GONE
+            binding.noOrder.visibility = View.VISIBLE
+        }
+        dismissDialog()
+    }
+
+    override fun onItemClick(currentOrder: OrderListModelData) {
+        val fragment = LiveParcelDetailsFragment()
+        val bundle = Bundle()
+        bundle.putString("delivery_date", currentOrder.delivery_date)
+        bundle.putString("pick_address", currentOrder.pick_address)
+        bundle.putString("recp_address", currentOrder.recp_address)
+        bundle.putString("recp_name", currentOrder.recp_name)
+        bundle.putString("recp_phone", currentOrder.recp_phone)
+        bundle.putString("sender_name", currentOrder.recp_name)
+        bundle.putString("sender_phone", currentOrder.recp_phone)
+        bundle.putDouble("distance", currentOrder.distance)
+        bundle.putInt("current_status", currentOrder.current_status)
+        bundle.putString("invoice", currentOrder.invoice_no)
+        fragment.arguments = bundle
+        communicatorFragmentInterface?.addContentFragment(fragment, true)
     }
 
 }

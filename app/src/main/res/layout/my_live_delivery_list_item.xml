@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="currentOrderList"
+            type="com.airposted.bitoronbd_deliveryman.model.OrderListModelData" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +49,7 @@
                     android:textStyle="normal"
                     android:textSize="20sp"
                     android:textColor="#1a1662"
-                    android:text="Document"
+                    android:text="@{currentOrderList.order_item_name}"
                     />
 
                 <LinearLayout
@@ -117,6 +124,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/before_button_bg"
                 android:orientation="vertical">
@@ -193,7 +201,7 @@
                     android:layout_toEndOf="@+id/delivery_man_image"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="8sp"
-                    android:text="Badol Mondal"
+                    android:text="@{currentOrderList.recp_name}"
                     android:textColor="#1a1662"
                     android:textSize="15sp"
                     android:textStyle="normal" />

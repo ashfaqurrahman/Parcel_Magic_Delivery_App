@@ -25,7 +25,9 @@ import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
 import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -82,6 +84,16 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
 
         }
+
+        val hView: View = binding.navigationView.getHeaderView(0)
+        val pic = hView.findViewById<CircleImageView>(R.id.profile_image)
+        val name = hView.findViewById<TextView>(R.id.user_name)
+        Glide.with(requireActivity()).load(
+            PersistentUser.getInstance().getUserImage(requireActivity())
+        ).placeholder(R.mipmap.ic_launcher).error(
+            R.drawable.sample_pro_pic
+        ).into(pic)
+        name.text = PersistentUser.getInstance().getFullName(requireActivity())
 
         binding.menu.setOnClickListener {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
@@ -230,7 +242,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 )
                 binding.drawerLayout.closeDrawers()
             }
-            R.id.all_parcel_request -> {
+            R.id.preferred_area_order_list -> {
                 communicatorFragmentInterface?.addContentFragment(
                     AllParcelRequestFragment(),
                     true

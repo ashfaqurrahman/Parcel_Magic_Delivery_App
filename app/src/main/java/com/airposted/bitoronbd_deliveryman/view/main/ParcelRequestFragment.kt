@@ -37,10 +37,10 @@ class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        BindUI()
+        bindUI()
     }
 
-    private fun BindUI() {
+    private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.toolbarTitle.text = getString(R.string.parcel_request)
         binding.toolbar.backImage.setOnClickListener {
@@ -90,7 +90,10 @@ class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener {
     override fun onItemClick(order: OrderListModelData) {
         val fragment = ParcelDetailsFragment()
         val bundle = Bundle()
-        bundle.putInt("id", order.id)
+        bundle.putString("delivery_date", order.delivery_date)
+        bundle.putString("pick_address", order.pick_address)
+        bundle.putString("recp_address", order.recp_address)
+        bundle.putString("invoice", order.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)
     }

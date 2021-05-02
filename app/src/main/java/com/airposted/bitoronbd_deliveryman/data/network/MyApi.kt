@@ -73,7 +73,7 @@ interface MyApi {
     ) : Response<AddMyAreaModel>
 
     @FormUrlEncoded
-    @POST("delivery/prefered_area_search_order_list")
+    @POST("delivery/search_order_list")
     suspend fun getOrderList(
         @Header("Authorization") header: String,
         @Field("to") to: Int,
@@ -85,6 +85,16 @@ interface MyApi {
         @Header("Authorization") header: String,
         @Path("id") id: String
     ): Response<OrderDetailsModel>
+
+    @POST("delivery/order_history")
+    suspend fun myOrderHistory(
+        @Header("Authorization") header: String
+    ) : Response<OrderListModel>
+
+    @POST("delivery/deliverycurrentorderlist")
+    suspend fun getCurrentOrderList(
+        @Header("Authorization") header: String
+    ) : Response<OrderListModel>
 
     @POST("delivery/profile")
     suspend fun myProfile(

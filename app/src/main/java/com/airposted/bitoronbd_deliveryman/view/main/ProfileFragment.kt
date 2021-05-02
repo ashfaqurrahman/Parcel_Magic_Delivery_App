@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.aapbd.appbajarlib.storage.PersistentUser
+import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentProfileBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -40,6 +42,11 @@ class ProfileFragment : Fragment(), KodeinAware {
             requireActivity().onBackPressed()
         }
 
+        Glide.with(requireActivity()).load(
+            PersistentUser.getInstance().getUserImage(requireActivity())
+        ).placeholder(R.mipmap.ic_launcher).error(
+            R.drawable.sample_pro_pic
+        ).into(binding.image)
         binding.name.text = PersistentUser.getInstance().getFullName(requireActivity())
 
 //        setProgressDialog(requireActivity())

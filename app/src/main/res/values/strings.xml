@@ -84,4 +84,5 @@
     <string name="enter">Enter verification code sent to \n</string>
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
+    <string name="preferred_area_order_list">Preferred Area Order List</string>
 </resources>
