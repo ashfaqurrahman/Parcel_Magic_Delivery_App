@@ -101,7 +101,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                     val check = otpDialog.findViewById<CheckBox>(R.id.check)
                     if (requireArguments().getInt("coc") == 1) {
                         check.text =
-                            "Collected " + requireArguments().getDouble("price") + "Tk from sender"
+                            "Collected " + requireArguments().getInt("price") + "Tk from sender"
                         check.visibility = View.VISIBLE
                     }
                     val verify = otpDialog.findViewById<TextView>(R.id.verify)
@@ -214,7 +214,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                     val check = otpDialog.findViewById<CheckBox>(R.id.check)
                     if (requireArguments().getInt("cod") == 1) {
                         check.text =
-                            "Collected " + requireArguments().getDouble("price") + "Tk from receiver"
+                            "Collected " + requireArguments().getInt("price") + " Tk from receiver"
                         check.visibility = View.VISIBLE
                     }
                     val verify = otpDialog.findViewById<TextView>(R.id.verify)

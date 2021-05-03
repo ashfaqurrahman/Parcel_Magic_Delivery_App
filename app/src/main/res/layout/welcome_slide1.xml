@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg_gradient_start_end">
+
+    <ImageView
+        android:id="@+id/intro_one_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_intro_one_bg" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/intro_one_bg"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="80dp"
+        android:src="@drawable/ic_intro_one_car" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/intro_one_bg"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:textSize="25sp"
+            android:textStyle="normal"
+            android:textColor="#ffffff"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:gravity="center"
+            android:text="Earn money by riding your own bike/cycle"
+            />
+
+        <TextView
+            android:id="@+id/desc1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:text="Register as our delivery agent &amp; deliver parcel around the city. Earn money and ensure a hassle-free delivery to our customers."
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

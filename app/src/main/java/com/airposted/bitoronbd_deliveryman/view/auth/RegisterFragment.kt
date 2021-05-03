@@ -61,9 +61,8 @@ class RegisterFragment : Fragment() {
 
         binding.signUp.setOnClickListener {
             hideKeyboard(requireActivity())
-            val password = binding.password.text.toString()
-            val confirmedPassword = binding.confirmedPassword.text.toString()
-            if (password.isNotEmpty() && confirmedPassword.isNotEmpty() && password == confirmedPassword) {
+            val name = binding.name.text.toString()
+            if (name.isNotEmpty()) {
                 val fragment = OTPFragment()
                 val bundle = Bundle()
                 bundle.putString("imageUri", mCropImageUri?.path)
@@ -78,7 +77,6 @@ class RegisterFragment : Fragment() {
                     bundle.putString("gender", "1")
                 }
                 bundle.putString("dob", binding.name.text.toString())
-                bundle.putString("password", binding.password.text.toString())
                 bundle.putBoolean("isAuth", false)
                 fragment.arguments = bundle
                 communicatorFragmentInterface?.addContentFragment(fragment, true)

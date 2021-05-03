@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aapbd.appbajarlib.storage.PersistData
 import com.aapbd.appbajarlib.storage.PersistentUser
+import com.airposted.bitoronbd_deliveryman.utils.AppHelper
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
 import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
 
@@ -17,11 +19,16 @@ class SplashActivity : AppCompatActivity() {
 
         context = this
 
-        if (PersistentUser.getInstance().isLogged(context)) {
-            startActivity(Intent(context, MainActivity::class.java))
-            finish()
+        if (PersistData.getBooleanData(context, AppHelper.OPEN_SCREEN_LOAD)) {
+            if (PersistentUser.getInstance().isLogged(context)) {
+                startActivity(Intent(context, MainActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(context, AuthActivity::class.java))
+                finish()
+            }
         } else {
-            startActivity(Intent(context, AuthActivity::class.java))
+            startActivity(Intent(context, IntroActivity::class.java))
             finish()
         }
     }

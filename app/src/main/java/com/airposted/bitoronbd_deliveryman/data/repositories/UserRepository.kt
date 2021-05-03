@@ -38,7 +38,6 @@ class UserRepository(
     suspend fun userSignUpWithPhoto(
         name: RequestBody,
         phone: RequestBody,
-        password: RequestBody,
         drivingLicence: RequestBody,
         dob: RequestBody,
         gender: RequestBody,
@@ -46,7 +45,7 @@ class UserRepository(
         photo: MultipartBody.Part,
         photo_name: RequestBody
     ) : AuthResponse {
-        return apiRequest{ api.userSignUpWithPhoto(name, phone, password, drivingLicence, dob, gender, address, photo, photo_name)}
+        return apiRequest{ api.userSignUpWithPhoto(name, phone, drivingLicence, dob, gender, address, photo, photo_name)}
     }
 
     /*suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
