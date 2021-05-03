@@ -56,7 +56,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:textStyle="normal"
-                            android:textSize="28sp"
+                            android:textSize="24sp"
                             android:textColor="#1a1662"
                             android:lineSpacingExtra="33sp"
                             android:text="23  :  59  :  59"
@@ -115,7 +115,7 @@
                                 android:textStyle="normal"
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
-                                tools:text="03 kg"
+                                android:text="03 kg"
                                 />
 
                         </LinearLayout>
@@ -145,7 +145,7 @@
                                 android:textStyle="normal"
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
-                                tools:text="20 cm"
+                                android:text="20 cm"
                                 />
 
                         </LinearLayout>
@@ -174,7 +174,7 @@
                                 android:textStyle="normal"
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
-                                tools:text="7.5 km"
+                                android:text="7.5 km"
                                 />
 
                         </LinearLayout>

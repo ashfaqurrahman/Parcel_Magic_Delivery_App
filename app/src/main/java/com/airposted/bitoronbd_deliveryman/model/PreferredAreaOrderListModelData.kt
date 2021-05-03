@@ -16,6 +16,7 @@ data class PreferredAreaOrderListModelData(
     val id: Int,
     val invoice_no: String,
     val item_des: String,
+    val order_item_name: String,
     val item_price: Int,
     val item_qty: Int,
     val item_type: Int,

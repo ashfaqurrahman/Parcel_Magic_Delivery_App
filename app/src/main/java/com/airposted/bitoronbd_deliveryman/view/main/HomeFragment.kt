@@ -265,6 +265,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 binding.drawerLayout.closeDrawers()
             }
             R.id.help -> {
+                communicatorFragmentInterface?.addContentFragment(HelpFragment(), true)
                 binding.drawerLayout.closeDrawers()
             }
             R.id.settings -> {
@@ -272,11 +273,11 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
             R.id.terms_condition -> {
                 binding.drawerLayout.closeDrawers()
-                val fragment = WebViewFragment()
-                val bundle = Bundle()
-                bundle.putString(AppHelper.DETAILS_KEY, AppHelper.TERMS)
-                fragment.arguments = bundle
-                communicatorFragmentInterface?.addContentFragment(fragment, true)
+//                val fragment = WebViewFragment()
+//                val bundle = Bundle()
+//                bundle.putString(AppHelper.DETAILS_KEY, AppHelper.TERMS)
+//                fragment.arguments = bundle
+                communicatorFragmentInterface?.addContentFragment(TermsConditionsFragment(), true)
             }
             R.id.sign_out -> {
                 PersistentUser.getInstance().logOut(requireActivity())

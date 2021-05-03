@@ -74,7 +74,7 @@ class MyDeliveryHistoryFragment : Fragment(), KodeinAware {
             binding.myOrderHistoryList.visibility = View.VISIBLE
             binding.noOrder.visibility = View.GONE
             val myRecyclerViewAdapter = OrderHistoryRecyclerViewAdapter(response.data)
-            binding.myOrderHistoryList.layoutManager = GridLayoutManager(requireActivity(), 2)
+            binding.myOrderHistoryList.layoutManager = GridLayoutManager(requireActivity(), 1)
             binding.myOrderHistoryList.itemAnimator = DefaultItemAnimator()
             binding.myOrderHistoryList.adapter = myRecyclerViewAdapter
             dismissDialog()

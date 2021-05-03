@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="15dp"
         android:background="@color/white"
         app:cardCornerRadius="5dp">
@@ -41,7 +42,7 @@
                     android:textSize="16sp"
                     android:textColor="#1a1662"
                     android:lineSpacingExtra="45sp"
-                    android:text="Banani"
+                    android:text="@{orderHistoryList.pick_zone}"
                     />
 
                 <ImageView
@@ -57,6 +58,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:textAlignment="textEnd"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/poppins_medium"
@@ -64,7 +66,7 @@
                     android:textSize="16sp"
                     android:textColor="#1a1662"
                     android:lineSpacingExtra="45sp"
-                    android:text="Mohammadpur"
+                    android:text="@{orderHistoryList.recp_zone}"
                     />
 
             </RelativeLayout>
@@ -98,7 +100,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_toEndOf="@+id/docs_icon"
                     android:fontFamily="@font/poppins_semi_bold"
-                    android:text="Badol Mondal"
+                    android:text="@{orderHistoryList.username}"
                     android:textColor="#1a1662"
                     android:textSize="20sp"
                     android:textStyle="normal" />
@@ -122,6 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_height="30dp"
+                    android:rating="4.0"
                     android:layout_alignParentEnd="true"
                     android:progressDrawable="@drawable/custom_ratingbar_selector"/>
 
@@ -147,7 +150,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center_vertical"
                     android:lineSpacingExtra="7sp"
-                    android:text="Parcel Was delivered"
+                    android:text="Delivered Date:"
                     android:textColor="#111329"
                     android:textSize="14sp"
                     android:textStyle="normal" />
@@ -160,9 +163,9 @@
                     android:fontFamily="@font/poppins_bold"
                     android:lineSpacingExtra="9sp"
                     android:textColor="#0f122f"
-                    android:textSize="22sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:text="10 Jan 2021" />
+                    android:text="@{orderHistoryList.delivery_date}"/>
 
             </RelativeLayout>
 

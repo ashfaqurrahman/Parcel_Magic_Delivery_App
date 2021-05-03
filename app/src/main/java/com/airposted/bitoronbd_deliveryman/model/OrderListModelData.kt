@@ -8,6 +8,8 @@ data class OrderListModelData(
     val cod: Int,
     val collection_date: Any,
     val created_at: String,
+    val username: String,
+    val phone: String,
     val current_status: Int,
     val delivery_charge: Int,
     val delivery_date: String,

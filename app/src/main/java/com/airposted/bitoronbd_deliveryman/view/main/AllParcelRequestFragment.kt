@@ -93,7 +93,7 @@ class AllParcelRequestFragment : Fragment(), KodeinAware, PreferredOrderClickLis
         bundle.putString("delivery_date", preferredOrder.delivery_date)
         bundle.putString("pick_address", preferredOrder.pick_address)
         bundle.putString("recp_address", preferredOrder.recp_address)
-        bundle.putString("order_item_name", preferredOrder.order_type.toString())
+        bundle.putString("order_item_name", preferredOrder.order_item_name)
         bundle.putString("invoice", preferredOrder.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)

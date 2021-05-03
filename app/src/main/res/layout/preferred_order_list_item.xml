@@ -51,7 +51,7 @@
                     android:textStyle="normal"
                     android:textSize="20sp"
                     android:textColor="#1a1662"
-                    android:text="@{String.valueOf(preferredOrderList.order_type)}"
+                    android:text="@{preferredOrderList.order_item_name}"
                     />
 
                 <LinearLayout

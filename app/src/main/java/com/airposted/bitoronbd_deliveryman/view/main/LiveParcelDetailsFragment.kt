@@ -74,7 +74,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
             startActivity(intent)
         }
 
-        binding.rootLayout.snackbar(requireArguments().getString("invoice")!!)
+//        binding.rootLayout.snackbar(requireArguments().getString("invoice")!!)
 
         when(requireArguments().getInt("current_status")) {
             3 -> {
