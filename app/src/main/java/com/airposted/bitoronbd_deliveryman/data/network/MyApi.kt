@@ -105,12 +105,11 @@ interface MyApi {
 
 
     @FormUrlEncoded
-    @POST("delivery/userupdate")
+    @POST("delivery/delivery_user_update")
     suspend fun userNameUpdate(
         @Header("Authorization") header: String,
-        @Field("username") name: String
-    ) : Response<AuthResponse>
-
+        @Field("username") username: String
+    ) : Response<ProfileModel>
 
     @FormUrlEncoded
     @POST("delivery/orderstatuschange")
@@ -121,12 +120,12 @@ interface MyApi {
     ) : Response<StatusChangeModel>
 
     @Multipart
-    @POST("delivery/userupdate")
+    @POST("delivery/delivery_user_update")
     suspend fun userImageUpdate(
         @Header("Authorization") header: String,
         @Part file: MultipartBody.Part,
         @Part("image") requestBody: RequestBody
-    ) : Response<AuthResponse>
+    ) : Response<ProfileModel>
 
     companion object{
         operator fun invoke(

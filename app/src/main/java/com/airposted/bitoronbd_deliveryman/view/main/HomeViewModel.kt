@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.airposted.bitoronbd_deliveryman.data.repositories.HomeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class HomeViewModel(
     private val repository: HomeRepository
@@ -30,5 +32,13 @@ class HomeViewModel(
     suspend fun getCurrentOrderList() = withContext(Dispatchers.IO) { repository.getCurrentOrderList() }
 
     suspend fun getPreferredOrderList() = withContext(Dispatchers.IO) { repository.getPreferredOrderList() }
+
+    suspend fun userImageUpdate(
+        header: String,
+        photo: MultipartBody.Part,
+        photo_name: RequestBody
+    ) = withContext(Dispatchers.IO) { repository.userImageUpdate(header, photo, photo_name) }
+
+    suspend fun userNameUpdate(username: String) = withContext(Dispatchers.IO) { repository.userNameUpdate(username) }
 
 }

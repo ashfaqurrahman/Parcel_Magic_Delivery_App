@@ -268,9 +268,9 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 communicatorFragmentInterface?.addContentFragment(HelpFragment(), true)
                 binding.drawerLayout.closeDrawers()
             }
-            R.id.settings -> {
-                binding.drawerLayout.closeDrawers()
-            }
+//            R.id.settings -> {
+//                binding.drawerLayout.closeDrawers()
+//            }
             R.id.terms_condition -> {
                 binding.drawerLayout.closeDrawers()
 //                val fragment = WebViewFragment()
