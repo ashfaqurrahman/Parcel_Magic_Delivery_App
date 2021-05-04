@@ -23,7 +23,7 @@ data class OrderListModelData(
     val item_qty: Any,
     val item_type: Int,
     val item_weight: Int,
-    val logistics_charge: Int,
+    val logistics_charge: Double,
     val order_date: String,
     val order_item_name: String,
     val order_type: Int,

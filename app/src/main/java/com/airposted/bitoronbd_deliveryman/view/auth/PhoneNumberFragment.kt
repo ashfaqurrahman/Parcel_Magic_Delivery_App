@@ -62,7 +62,6 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
                     authResponse = viewModel.checkNumber("+880$phone")
                     if (authResponse?.data != null) {
                         dismissDialog()
-//                        binding.main.snackbar("Authorised User")
                         val fragment = WelcomeFragment()
                         val bundle = Bundle()
                         bundle.putString("phone", authResponse!!.user?.phone)
@@ -75,7 +74,6 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
                         communicatorFragmentInterface?.addContentFragment(fragment, true)
                     } else {
                         dismissDialog()
-//                        binding.main.snackbar("Unauthorised User")
                         val fragment = RegisterFragment()
                         val bundle = Bundle()
                         bundle.putString("phone", "+880$phone")

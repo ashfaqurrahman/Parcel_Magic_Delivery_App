@@ -359,4 +359,9 @@ class OTPFragment : Fragment(), KodeinAware {
         }
         timer?.start()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.cancel()
+    }
 }
