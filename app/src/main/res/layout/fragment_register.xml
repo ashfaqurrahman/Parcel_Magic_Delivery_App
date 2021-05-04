@@ -316,11 +316,10 @@
                     android:padding="18dp"
                     android:text="Agree &amp; Sign up"
                     android:textColor="#ffffff"
-                    android:enabled="false"
                     android:textSize="15sp"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
-                    android:background="@drawable/before_button_bg"
+                    android:background="@drawable/after_button_bg"
                     android:gravity="center_horizontal" />
 
             </LinearLayout>

@@ -51,15 +51,14 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
             binding.next.background = getDrawable(requireContext(), R.drawable.after_button_bg)
             binding.next.isEnabled = true
         }
-        textWatcher(requireContext(), 9, binding.phone, binding.next)
+        textWatcher(requireContext(), 8, binding.phone, binding.next)
         binding.next.setOnClickListener {
             hideKeyboard(requireActivity())
             setProgressDialog(requireContext())
             PreferenceProvider(requireContext()).saveSharedPreferences("phone", binding.phone.text.toString().trim())
-            phone = zeroRemove(binding.phone.text.toString().trim())
             lifecycleScope.launch {
                 try {
-                    authResponse = viewModel.checkNumber("+880$phone")
+                    authResponse = viewModel.checkNumber("+8801$phone")
                     if (authResponse?.data != null) {
                         dismissDialog()
                         val fragment = WelcomeFragment()

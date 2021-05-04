@@ -27,6 +27,7 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private var communicatorFragmentInterface: AuthCommunicatorFragmentInterface? = null
     private var gender: String? = null
+    private var id: String? = null
     private var mCropImageUri: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +58,9 @@ class RegisterFragment : Fragment() {
             gender = newText
         }
 
-        multipleTextWatcher(requireContext(), binding.password, binding.confirmedPassword, binding.signUp, 6, 6)
+        binding.id.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newText ->
+            id = newText
+        }
 
         binding.signUp.setOnClickListener {
             hideKeyboard(requireActivity())
@@ -69,11 +72,15 @@ class RegisterFragment : Fragment() {
                 bundle.putString("phone", requireArguments().getString("phone"))
                 bundle.putString("name", binding.name.text.toString())
                 bundle.putString("address", binding.address.text.toString())
-                bundle.putString("nid", binding.id.text.toString())
-                bundle.putString("drive_lisence", binding.id.text.toString())
+                if (id == "National ID") {
+                    bundle.putString("nid", binding.id.text.toString())
+                }
+                else {
+                    bundle.putString("drive_lisence", binding.id.text.toString())
+                }
                 if (gender == "Male") {
                     bundle.putString("gender", "0")
-                } else if (gender == "Female") {
+                } else {
                     bundle.putString("gender", "1")
                 }
                 bundle.putString("dob", binding.name.text.toString())
@@ -82,7 +89,7 @@ class RegisterFragment : Fragment() {
                 communicatorFragmentInterface?.addContentFragment(fragment, true)
             }
             else {
-                binding.main.snackbar("Invalid Password!")
+                binding.main.snackbar("Username should not empty")
             }
         }
     }
