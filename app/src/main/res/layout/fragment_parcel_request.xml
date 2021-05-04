@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:maxLines="1"
+                android:textAlignment="textEnd"
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins_medium"
                 android:textStyle="normal"

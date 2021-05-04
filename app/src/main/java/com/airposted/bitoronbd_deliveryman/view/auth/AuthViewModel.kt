@@ -38,13 +38,12 @@ class AuthViewModel(
     suspend fun userSignUpWithPhoto(
         name: RequestBody,
         phone: RequestBody,
-        password: RequestBody,
         drivingLicence: RequestBody,
         dob: RequestBody,
         gender: RequestBody,
         address: RequestBody,
         photo: MultipartBody.Part,
         photo_name: RequestBody
-    ) = withContext(Dispatchers.IO) { repository.userSignUpWithPhoto(name, phone, password, drivingLicence, dob, gender, address, photo, photo_name) }
+    ) = withContext(Dispatchers.IO) { repository.userSignUpWithPhoto(name, phone, drivingLicence, dob, gender, address, photo, photo_name) }
 
 }

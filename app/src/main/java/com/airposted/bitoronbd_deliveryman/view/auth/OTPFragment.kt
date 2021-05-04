@@ -206,10 +206,6 @@ class OTPFragment : Fragment(), KodeinAware {
                                         MediaType.parse("text/plain"),
                                         requireArguments().getString("name").toString()
                                     )
-                                    val password = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("password").toString()
-                                    )
                                     val drivingLicence = RequestBody.create(
                                         MediaType.parse("text/plain"),
                                         requireArguments().getString("drive_lisence").toString()
@@ -229,7 +225,6 @@ class OTPFragment : Fragment(), KodeinAware {
                                     signUpResponse = viewModel.userSignUpWithPhoto(
                                         name,
                                         phone,
-                                        password,
                                         drivingLicence,
                                         dob,
                                         gender,
@@ -282,7 +277,6 @@ class OTPFragment : Fragment(), KodeinAware {
                                     signUpResponse = viewModel.userSignUpWithPhoto(
                                         name,
                                         phone,
-                                        password,
                                         drivingLicence,
                                         dob,
                                         gender,

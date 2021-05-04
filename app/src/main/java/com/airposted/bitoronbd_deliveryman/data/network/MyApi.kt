@@ -39,7 +39,6 @@ interface MyApi {
     suspend fun userSignUpWithPhoto(
         @Part("name") name: RequestBody,
         @Part("phone") phone: RequestBody,
-        @Part("password") password: RequestBody,
         @Part("drive_lisence") drivingLicence: RequestBody,
         @Part("dob") dob: RequestBody,
         @Part("gender") gender: RequestBody,
