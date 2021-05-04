@@ -5,14 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.aapbd.appbajarlib.storage.PersistentUser
-import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.data.network.preferences.PreferenceProvider
 import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentPhoneNumberBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
@@ -20,7 +14,6 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class PhoneNumberFragment : Fragment(), KodeinAware {
     override val kodein by kodein()

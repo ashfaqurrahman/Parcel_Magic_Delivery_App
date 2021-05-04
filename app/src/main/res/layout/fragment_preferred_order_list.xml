@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="#fcfcff"
         android:orientation="vertical"
-        tools:context=".view.main.AllParcelRequestFragment">
+        tools:context=".view.main.PreferredOrderListFragment">
 
         <include layout="@layout/custom_toolbar"
             android:id="@+id/toolbar"/>
@@ -84,7 +84,7 @@
             android:id="@+id/no_order"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="No order available"
             android:visibility="gone"
             android:gravity="center"/>

@@ -244,7 +244,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
             R.id.preferred_area_order_list -> {
                 communicatorFragmentInterface?.addContentFragment(
-                    AllParcelRequestFragment(),
+                    PreferredOrderListFragment(),
                     true
                 )
                 binding.drawerLayout.closeDrawers()
@@ -268,23 +268,33 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 communicatorFragmentInterface?.addContentFragment(HelpFragment(), true)
                 binding.drawerLayout.closeDrawers()
             }
-//            R.id.settings -> {
-//                binding.drawerLayout.closeDrawers()
-//            }
             R.id.terms_condition -> {
                 binding.drawerLayout.closeDrawers()
-//                val fragment = WebViewFragment()
-//                val bundle = Bundle()
-//                bundle.putString(AppHelper.DETAILS_KEY, AppHelper.TERMS)
-//                fragment.arguments = bundle
                 communicatorFragmentInterface?.addContentFragment(TermsConditionsFragment(), true)
             }
             R.id.sign_out -> {
-                PersistentUser.getInstance().logOut(requireActivity())
                 binding.drawerLayout.closeDrawers()
-                val intent = Intent(requireActivity(), AuthActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                startActivity(intent)
+                dialogs = Dialog(requireActivity())
+                dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogs.setContentView(R.layout.sign_out_dialog)
+                dialogs.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogs.window?.setLayout(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,  //w
+                    ViewGroup.LayoutParams.MATCH_PARENT //h
+                )
+                val cancel = dialogs.findViewById<TextView>(R.id.cancel)
+                val ok = dialogs.findViewById<TextView>(R.id.ok)
+                cancel.setOnClickListener {
+                    dialogs.dismiss()
+                }
+                ok.setOnClickListener {
+                    PersistentUser.getInstance().logOut(context)
+                    val intent = Intent(requireContext(), AuthActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                }
+                dialogs.setCancelable(false)
+                dialogs.show()
             }
         }
 

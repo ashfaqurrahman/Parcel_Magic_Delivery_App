@@ -85,15 +85,15 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/sample_pro_pic"
                                     app:civ_border_width="2dp"
-                                    android:layout_marginBottom="5dp"
                                     app:civ_border_color="#ffffff"/>
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/image_upload"
                                     android:layout_alignParentBottom="true"
+                                    android:layout_alignParentEnd="true"
                                     android:layout_centerHorizontal="true"
                                     android:layout_width="wrap_content"
-                                    android:src="@drawable/profile_plus"
+                                    android:src="@drawable/ic_edit_profile"
                                     android:layout_height="wrap_content"/>
                             </RelativeLayout>
 

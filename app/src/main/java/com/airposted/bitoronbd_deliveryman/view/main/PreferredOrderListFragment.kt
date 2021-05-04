@@ -11,8 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.databinding.FragmentAllParcelRequestBinding
-import com.airposted.bitoronbd_deliveryman.model.OrderListModel
+import com.airposted.bitoronbd_deliveryman.databinding.FragmentPreferredOrderListBinding
 import com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModel
 import com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
@@ -21,17 +20,17 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class AllParcelRequestFragment : Fragment(), KodeinAware, PreferredOrderClickListener {
+class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickListener {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
-    private lateinit var binding: FragmentAllParcelRequestBinding
+    private lateinit var binding: FragmentPreferredOrderListBinding
     var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAllParcelRequestBinding.inflate(inflater, container, false)
+        binding = FragmentPreferredOrderListBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         return binding.root
     }
