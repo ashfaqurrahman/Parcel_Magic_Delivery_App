@@ -46,16 +46,11 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
 
     private fun bindUI() {
         communicatorFragmentInterface = context as AuthCommunicatorFragmentInterface
-        if (PreferenceProvider(requireContext()).getSharedPreferences("phone") != null) {
-            binding.phone.setText(PreferenceProvider(requireContext()).getSharedPreferences("phone"))
-            binding.next.background = getDrawable(requireContext(), R.drawable.after_button_bg)
-            binding.next.isEnabled = true
-        }
         textWatcher(requireContext(), 8, binding.phone, binding.next)
         binding.next.setOnClickListener {
             hideKeyboard(requireActivity())
             setProgressDialog(requireContext())
-            PreferenceProvider(requireContext()).saveSharedPreferences("phone", binding.phone.text.toString().trim())
+            phone = binding.phone.text.toString().trim()
             lifecycleScope.launch {
                 try {
                     authResponse = viewModel.checkNumber("+8801$phone")
@@ -75,7 +70,7 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
                         dismissDialog()
                         val fragment = RegisterFragment()
                         val bundle = Bundle()
-                        bundle.putString("phone", "+880$phone")
+                        bundle.putString("phone", "+8801$phone")
                         fragment.arguments = bundle
                         communicatorFragmentInterface?.addContentFragment(fragment, true)
                     }

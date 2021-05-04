@@ -25,7 +25,7 @@
 
     <string-array name="id">
         <item>National ID</item>
-        <item>Passport ID</item>
+        <item>Driving Lic.</item>
     </string-array>
 
     <string-array name="gender">
