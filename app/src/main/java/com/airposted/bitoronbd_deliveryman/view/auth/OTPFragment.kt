@@ -50,6 +50,8 @@ class OTPFragment : Fragment(), KodeinAware {
     private var verificationId: String? = null
     private var isAuth = false
     private var authResponse: AuthResponse? = null
+    private var nid: RequestBody? = null
+    private var drivingLicence: RequestBody? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -102,8 +104,6 @@ class OTPFragment : Fragment(), KodeinAware {
         binding.verify.setOnClickListener {
             setProgressDialog(requireContext())
             val code = otp1
-            Log.e("bbbb", code!!)
-            Log.e("aaaaa", verificationId!!)
             val credential = PhoneAuthProvider.getCredential(verificationId!!, code!!)
             signInWithCredential(credential)
         }
@@ -179,9 +179,10 @@ class OTPFragment : Fragment(), KodeinAware {
                         hideKeyboard(requireActivity())
                         lifecycleScope.launch {
                             try {
-                                val signUpResponse: AuthResponse?
+                                var signUpResponse: AuthResponse?
+                                var part: MultipartBody.Part? = null
+                                var photoName: RequestBody? = null
                                 val value = requireArguments().getString("imageUri")
-                                Timber.e(value.toString())
                                 val file = File(value!!)
                                 val compressedImage = reduceImageSize(file)
                                 if (compressedImage != null) {
@@ -189,136 +190,156 @@ class OTPFragment : Fragment(), KodeinAware {
                                         MediaType.parse("image/*"),
                                         compressedImage
                                     )
-                                    val part = MultipartBody.Part.createFormData(
+                                    part = MultipartBody.Part.createFormData(
                                         "image",
                                         compressedImage.name,
                                         fileReqBody
                                     )
-                                    val photoName = RequestBody.create(
+                                    photoName = RequestBody.create(
                                         MediaType.parse("text/plain"),
                                         "image-type"
-                                    )
-                                    val name = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("name").toString()
-                                    )
-                                    val phone = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("name").toString()
-                                    )
-                                    val drivingLicence = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("drive_lisence").toString()
-                                    )
-                                    val dob = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("dob").toString()
-                                    )
-                                    val gender = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("gender").toString()
-                                    )
-                                    val address = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("address").toString()
-                                    )
-                                    signUpResponse = viewModel.userSignUpWithPhoto(
-                                        name,
-                                        phone,
-                                        drivingLicence,
-                                        dob,
-                                        gender,
-                                        address,
-                                        part,
-                                        photoName
                                     )
                                 } else {
                                     val fileReqBody = RequestBody.create(
                                         MediaType.parse("image/*"),
                                         file
                                     )
-                                    val part = MultipartBody.Part.createFormData(
+                                    part = MultipartBody.Part.createFormData(
                                         "image",
                                         file.name,
                                         fileReqBody
                                     )
-                                    val photoName = RequestBody.create(
+                                    photoName = RequestBody.create(
                                         MediaType.parse("text/plain"),
                                         "image-type"
                                     )
-                                    val name = RequestBody.create(
+
+                                }
+
+                                val name = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    requireArguments().getString("name")!!
+                                )
+                                val phone = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    requireArguments().getString("phone")!!
+                                )
+                                val dob = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    requireArguments().getString("dob")!!
+                                )
+                                val gender = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    requireArguments().getInt("gender").toString()
+                                )
+                                val address = RequestBody.create(
+                                    MediaType.parse("text/plain"),
+                                    requireArguments().getString("address")!!
+                                )
+                                if (requireArguments().getString("nid") != null){
+                                    nid = RequestBody.create(
                                         MediaType.parse("text/plain"),
-                                        requireArguments().getString("name").toString()
+                                        requireArguments().getString("nid")!!
                                     )
-                                    val phone = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("name").toString()
-                                    )
-                                    val password = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("password").toString()
-                                    )
-                                    val drivingLicence = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("drive_lisence").toString()
-                                    )
-                                    val dob = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("dob").toString()
-                                    )
-                                    val gender = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("gender").toString()
-                                    )
-                                    val address = RequestBody.create(
-                                        MediaType.parse("text/plain"),
-                                        requireArguments().getString("address").toString()
-                                    )
-                                    signUpResponse = viewModel.userSignUpWithPhoto(
+
+                                    signUpResponse = viewModel.userSignUpWithNid(
                                         name,
                                         phone,
-                                        drivingLicence,
+                                        nid!!,
                                         dob,
                                         gender,
                                         address,
                                         part,
                                         photoName
                                     )
+
+                                    if (signUpResponse.success) {
+                                        dismissDialog()
+                                        binding.main.snackbar(signUpResponse.msg)
+                                        PersistentUser.getInstance().setLogin(requireContext())
+                                        PersistentUser.getInstance().setAccessToken(
+                                            requireContext(),
+                                            "Bearer " + signUpResponse.data?.token
+                                        )
+                                        PersistentUser.getInstance().setUserID(
+                                            requireContext(),
+                                            signUpResponse.user?.id.toString()
+                                        )
+                                        PersistentUser.getInstance().setFullname(
+                                            requireContext(),
+                                            signUpResponse.user?.username
+                                        )
+                                        PersistentUser.getInstance().setPhonenumber(
+                                            requireContext(),
+                                            signUpResponse.user?.phone
+                                        )
+                                        PersistentUser.getInstance().setUserImage(
+                                            requireContext(),
+                                            signUpResponse.user?.image
+                                        )
+
+                                        val intent = Intent(requireContext(), MainActivity::class.java)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                        startActivity(intent)
+                                        requireActivity().finish()
+
+                                    } else {
+                                        dismissDialog()
+                                        binding.main.snackbar(signUpResponse.msg)
+                                    }
                                 }
 
-                                if (signUpResponse.success) {
-                                    dismissDialog()
-                                    binding.main.snackbar(signUpResponse.msg)
-                                    PersistentUser.getInstance().setLogin(requireContext())
-                                    PersistentUser.getInstance().setAccessToken(
-                                        requireContext(),
-                                        "Bearer " + signUpResponse.data?.token
-                                    )
-                                    PersistentUser.getInstance().setUserID(
-                                        requireContext(),
-                                        signUpResponse.user?.id.toString()
-                                    )
-                                    PersistentUser.getInstance().setFullname(
-                                        requireContext(),
-                                        signUpResponse.user?.username
-                                    )
-                                    PersistentUser.getInstance().setPhonenumber(
-                                        requireContext(),
-                                        signUpResponse.user?.phone
-                                    )
-                                    PersistentUser.getInstance().setUserImage(
-                                        requireContext(),
-                                        signUpResponse.user?.image
+                                if (requireArguments().getString("drive_lisence") != null){
+                                    drivingLicence = RequestBody.create(
+                                        MediaType.parse("text/plain"),
+                                        requireArguments().getString("drive_lisence")!!
                                     )
 
-                                    val intent = Intent(requireContext(), MainActivity::class.java)
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                    startActivity(intent)
-                                    requireActivity().finish()
+                                    signUpResponse = viewModel.userSignUpWithDriveLicense(
+                                        name,
+                                        phone,
+                                        drivingLicence!!,
+                                        dob,
+                                        gender,
+                                        address,
+                                        part,
+                                        photoName
+                                    )
 
-                                } else {
-                                    dismissDialog()
-                                    binding.main.snackbar(signUpResponse.msg)
+                                    if (signUpResponse.success) {
+                                        dismissDialog()
+                                        binding.main.snackbar(signUpResponse.msg)
+                                        PersistentUser.getInstance().setLogin(requireContext())
+                                        PersistentUser.getInstance().setAccessToken(
+                                            requireContext(),
+                                            "Bearer " + signUpResponse.data?.token
+                                        )
+                                        PersistentUser.getInstance().setUserID(
+                                            requireContext(),
+                                            signUpResponse.user?.id.toString()
+                                        )
+                                        PersistentUser.getInstance().setFullname(
+                                            requireContext(),
+                                            signUpResponse.user?.username
+                                        )
+                                        PersistentUser.getInstance().setPhonenumber(
+                                            requireContext(),
+                                            signUpResponse.user?.phone
+                                        )
+                                        PersistentUser.getInstance().setUserImage(
+                                            requireContext(),
+                                            signUpResponse.user?.image
+                                        )
+
+                                        val intent = Intent(requireContext(), MainActivity::class.java)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                        startActivity(intent)
+                                        requireActivity().finish()
+
+                                    } else {
+                                        dismissDialog()
+                                        binding.main.snackbar(signUpResponse.msg)
+                                    }
                                 }
 
                             } catch (e: ApiException) {

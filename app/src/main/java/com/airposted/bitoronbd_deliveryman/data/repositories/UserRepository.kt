@@ -23,19 +23,20 @@ class UserRepository(
         return apiRequest { api.userLogin(email, password) }
     }*/
 
-    suspend fun userSignUp(
-        name: String,
-        phone: String,
-        password: String,
-        driveLicence: String,
-        dob: String,
-        gender: String,
-        address: String
+    suspend fun userSignUpWithNid(
+        name: RequestBody,
+        phone: RequestBody,
+        nid: RequestBody,
+        dob: RequestBody,
+        gender: RequestBody,
+        address: RequestBody,
+        photo: MultipartBody.Part,
+        photo_name: RequestBody
     ) : AuthResponse {
-        return apiRequest{ api.userSignUp(name, phone, password, driveLicence, dob, gender, address)}
+        return apiRequest{ api.userSignUpWithNid(name, phone, nid, dob, gender, address, photo,  photo_name)}
     }
 
-    suspend fun userSignUpWithPhoto(
+    suspend fun userSignUpWithDriveLicense(
         name: RequestBody,
         phone: RequestBody,
         drivingLicence: RequestBody,
@@ -45,7 +46,7 @@ class UserRepository(
         photo: MultipartBody.Part,
         photo_name: RequestBody
     ) : AuthResponse {
-        return apiRequest{ api.userSignUpWithPhoto(name, phone, drivingLicence, dob, gender, address, photo, photo_name)}
+        return apiRequest{ api.userSignUpWithDriveLicense(name, phone, drivingLicence, dob, gender, address, photo, photo_name)}
     }
 
     /*suspend fun saveUser(user: User) = db.getUserDao().upsert(user)

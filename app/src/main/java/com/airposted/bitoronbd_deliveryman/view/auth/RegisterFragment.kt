@@ -65,31 +65,35 @@ class RegisterFragment : Fragment() {
         binding.signUp.setOnClickListener {
             hideKeyboard(requireActivity())
             val name = binding.name.text.toString()
-            if (name.isNotEmpty()) {
-                val fragment = OTPFragment()
-                val bundle = Bundle()
-                bundle.putString("imageUri", mCropImageUri?.path)
-                bundle.putString("phone", requireArguments().getString("phone"))
-                bundle.putString("name", binding.name.text.toString())
-                bundle.putString("address", binding.address.text.toString())
-                if (id == "National ID") {
-                    bundle.putString("nid", binding.id.text.toString())
+            if (mCropImageUri != null) {
+                if (name.isNotEmpty()) {
+                    val fragment = OTPFragment()
+                    val bundle = Bundle()
+                    bundle.putString("imageUri", mCropImageUri?.path)
+                    bundle.putString("phone", requireArguments().getString("phone"))
+                    bundle.putString("name", binding.name.text.toString())
+                    bundle.putString("address", binding.address.text.toString())
+                    if (id == "National ID") {
+                        bundle.putString("nid", binding.id.text.toString())
+                    }
+                    else {
+                        bundle.putString("drive_lisence", binding.id.text.toString())
+                    }
+                    if (gender == "Male") {
+                        bundle.putInt("gender", 0)
+                    } else {
+                        bundle.putInt("gender", 1)
+                    }
+                    bundle.putString("dob", binding.name.text.toString())
+                    bundle.putBoolean("isAuth", false)
+                    fragment.arguments = bundle
+                    communicatorFragmentInterface?.addContentFragment(fragment, true)
                 }
                 else {
-                    bundle.putString("drive_lisence", binding.id.text.toString())
+                    binding.main.snackbar("Username should not empty")
                 }
-                if (gender == "Male") {
-                    bundle.putString("gender", "0")
-                } else {
-                    bundle.putString("gender", "1")
-                }
-                bundle.putString("dob", binding.name.text.toString())
-                bundle.putBoolean("isAuth", false)
-                fragment.arguments = bundle
-                communicatorFragmentInterface?.addContentFragment(fragment, true)
-            }
-            else {
-                binding.main.snackbar("Username should not empty")
+            } else {
+                binding.main.snackbar("User photo is required")
             }
         }
     }

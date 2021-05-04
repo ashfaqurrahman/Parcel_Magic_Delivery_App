@@ -9,8 +9,6 @@ class User (
     val username: String,
     @SerializedName("phone")
     val phone: String,
-    @SerializedName("active")
-    val active: Int,
     @SerializedName("image")
     val image: String
 )

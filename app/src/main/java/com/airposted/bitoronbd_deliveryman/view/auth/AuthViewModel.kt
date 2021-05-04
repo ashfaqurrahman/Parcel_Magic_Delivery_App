@@ -25,17 +25,18 @@ class AuthViewModel(
 //        password: String
 //    ) = withContext(Dispatchers.IO) { repository.userLogin(email, password) }*/
 
-    suspend fun userSignUp(
-        name: String,
-        phone: String,
-        password: String,
-        driveLicence: String,
-        dob: String,
-        gender: String,
-        address: String
-    ) = withContext(Dispatchers.IO) { repository.userSignUp(name, phone, password, driveLicence, dob, gender, address) }
+    suspend fun userSignUpWithNid(
+        name: RequestBody,
+        phone: RequestBody,
+        nid: RequestBody,
+        dob: RequestBody,
+        gender: RequestBody,
+        address: RequestBody,
+        photo: MultipartBody.Part,
+        photo_name: RequestBody
+    ) = withContext(Dispatchers.IO) { repository.userSignUpWithNid(name, phone, nid, dob, gender, address, photo, photo_name) }
 
-    suspend fun userSignUpWithPhoto(
+    suspend fun userSignUpWithDriveLicense(
         name: RequestBody,
         phone: RequestBody,
         drivingLicence: RequestBody,
@@ -44,6 +45,6 @@ class AuthViewModel(
         address: RequestBody,
         photo: MultipartBody.Part,
         photo_name: RequestBody
-    ) = withContext(Dispatchers.IO) { repository.userSignUpWithPhoto(name, phone, drivingLicence, dob, gender, address, photo, photo_name) }
+    ) = withContext(Dispatchers.IO) { repository.userSignUpWithDriveLicense(name, phone, drivingLicence, dob, gender, address, photo, photo_name) }
 
 }

@@ -2,17 +2,14 @@ package com.airposted.bitoronbd_deliveryman.data.network
 
 import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.model.*
-import com.google.gson.JsonObject
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
-
 
 interface MyApi {
 
@@ -22,22 +19,23 @@ interface MyApi {
         @Field("phone") email: String
     ) : Response<AuthResponse>
 
-    @FormUrlEncoded
-    @POST("register_personal")
-    suspend fun userSignUp(
-        @Field("name") name: String,
-        @Field("phone") phone: String,
-        @Field("password") password: String,
-        @Field("drive_lisence") driveLicence: String,
-        @Field("dob") dob: String,
-        @Field("gender") gender: String,
-        @Field("address") address: String
+    @Multipart
+    @POST("register_delivery")
+    suspend fun userSignUpWithNid(
+        @Part("username") name: RequestBody,
+        @Part("phone") phone: RequestBody,
+        @Part("nid") nid: RequestBody,
+        @Part("dob") dob: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part file: MultipartBody.Part,
+        @Part("image") requestBody: RequestBody
     ) : Response<AuthResponse>
 
     @Multipart
-    @POST("register_personal")
-    suspend fun userSignUpWithPhoto(
-        @Part("name") name: RequestBody,
+    @POST("register_delivery")
+    suspend fun userSignUpWithDriveLicense(
+        @Part("username") name: RequestBody,
         @Part("phone") phone: RequestBody,
         @Part("drive_lisence") drivingLicence: RequestBody,
         @Part("dob") dob: RequestBody,
