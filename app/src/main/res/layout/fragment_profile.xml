@@ -27,12 +27,13 @@
             android:layout_height="120dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image"
+                android:id="@+id/profile_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:src="@drawable/empty_image"/>
 
             <ImageView
+                android:id="@+id/imageUpload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -43,17 +44,59 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_medium"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                tools:text="Badol Mondal"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:visibility="visible"/>
+
+            <EditText
+                android:id="@+id/edit_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/your_name"
+                android:textColor="@color/text_color"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:textColorHint="#808080"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="-10dp"
+                android:layout_marginStart="-4dp"/>
+
+            <ImageView
+                android:id="@+id/edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_edit" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_marginTop="5dp"
             android:textStyle="normal"
-            android:textSize="15sp"
-            android:textColor="#1a1662"
-            android:lineSpacingExtra="10sp"
-            android:text="Fahim Rana"
+            android:textSize="13sp"
+            android:textColor="#b5b7dd"
+            android:lineSpacingExtra="12sp"
+            android:text="Dhaka, Bangladesh"
             />
 
         <TextView

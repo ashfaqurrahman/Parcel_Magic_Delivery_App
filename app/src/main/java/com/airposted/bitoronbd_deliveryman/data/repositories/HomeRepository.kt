@@ -5,6 +5,8 @@ import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.data.network.MyApi
 import com.airposted.bitoronbd_deliveryman.data.network.SafeApiRequest
 import com.airposted.bitoronbd_deliveryman.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class HomeRepository(
     context: Context,
@@ -109,6 +111,22 @@ class HomeRepository(
                 PersistentUser.getInstance().getAccessToken(
                     appContext
                 )
+            )
+        }
+    }
+
+    suspend fun userImageUpdate(
+        header: String,
+        photo: MultipartBody.Part,
+        photo_name: RequestBody
+    ) : ProfileModel {
+        return apiRequest { api.userImageUpdate(header, photo, photo_name)}
+    }
+
+    suspend fun userNameUpdate(username: String): ProfileModel {
+        return apiRequest {
+            api.userNameUpdate(
+                PersistentUser.getInstance().getAccessToken(appContext), username
             )
         }
     }
