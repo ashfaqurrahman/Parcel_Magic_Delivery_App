@@ -180,10 +180,10 @@ class OTPFragment : Fragment(), KodeinAware {
                         lifecycleScope.launch {
                             try {
                                 var signUpResponse: AuthResponse?
-                                var part: MultipartBody.Part? = null
-                                var photoName: RequestBody? = null
-                                val value = requireArguments().getString("imageUri")
-                                val file = File(value!!)
+                                val part: MultipartBody.Part?
+                                val photoName: RequestBody?
+                                val path = requireArguments().getString("imageUri")
+                                val file = File(path!!)
                                 val compressedImage = reduceImageSize(file)
                                 if (compressedImage != null) {
                                     val fileReqBody = RequestBody.create(

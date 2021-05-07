@@ -75,8 +75,7 @@ class RegisterFragment : Fragment() {
                     bundle.putString("address", binding.address.text.toString())
                     if (id == "National ID") {
                         bundle.putString("nid", binding.id.text.toString())
-                    }
-                    else {
+                    } else {
                         bundle.putString("drive_lisence", binding.id.text.toString())
                     }
                     if (gender == "Male") {
@@ -88,8 +87,7 @@ class RegisterFragment : Fragment() {
                     bundle.putBoolean("isAuth", false)
                     fragment.arguments = bundle
                     communicatorFragmentInterface?.addContentFragment(fragment, true)
-                }
-                else {
+                } else {
                     binding.main.snackbar("Username should not empty")
                 }
             } else {
