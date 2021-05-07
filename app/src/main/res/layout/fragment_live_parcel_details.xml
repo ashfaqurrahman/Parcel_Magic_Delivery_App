@@ -483,8 +483,6 @@
                             android:layout_width="2dp"
                             android:layout_height="wrap_content"
                             android:src="@drawable/doted_line_blue"
-                            android:layout_marginTop="-5dp"
-                            android:layout_marginBottom="-5dp"
                             android:layout_marginStart="21dp"
                             android:layout_below="@+id/from_icon"
                             android:layout_above="@id/to_icon"/>
@@ -518,7 +516,7 @@
                             android:textSize="14sp"
                             android:textColor="#1a1662"
                             android:lineSpacingExtra="13sp"
-                            android:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
+                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 
                         <TextView
@@ -534,7 +532,7 @@
                             android:textSize="14sp"
                             android:textColor="#1a1662"
                             android:lineSpacingExtra="13sp"
-                            android:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
+                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 
                     </RelativeLayout>

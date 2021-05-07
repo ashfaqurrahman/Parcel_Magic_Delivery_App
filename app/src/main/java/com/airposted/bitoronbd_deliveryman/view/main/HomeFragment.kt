@@ -236,37 +236,37 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 //                binding.drawerLayout.closeDrawers()
 //            }
             R.id.my_live_delivery -> {
+                binding.drawerLayout.closeDrawers()
                 communicatorFragmentInterface?.addContentFragment(
                     MyLiveDeliveryFragment(),
                     true
                 )
-                binding.drawerLayout.closeDrawers()
             }
             R.id.preferred_area_order_list -> {
+                binding.drawerLayout.closeDrawers()
                 communicatorFragmentInterface?.addContentFragment(
                     PreferredOrderListFragment(),
                     true
                 )
-                binding.drawerLayout.closeDrawers()
             }
             R.id.preferred_area -> {
-                communicatorFragmentInterface?.addContentFragment(PreferredAreaFragment(), true)
                 binding.drawerLayout.closeDrawers()
+                communicatorFragmentInterface?.addContentFragment(PreferredAreaFragment(), true)
             }
             R.id.my_delivery_history -> {
+                binding.drawerLayout.closeDrawers()
                 communicatorFragmentInterface?.addContentFragment(
                     MyDeliveryHistoryFragment(),
                     true
                 )
-                binding.drawerLayout.closeDrawers()
             }
             R.id.profile -> {
-                communicatorFragmentInterface?.addContentFragment(ProfileFragment(), true)
                 binding.drawerLayout.closeDrawers()
+                communicatorFragmentInterface?.addContentFragment(ProfileFragment(), true)
             }
             R.id.help -> {
-                communicatorFragmentInterface?.addContentFragment(HelpFragment(), true)
                 binding.drawerLayout.closeDrawers()
+                communicatorFragmentInterface?.addContentFragment(HelpFragment(), true)
             }
             R.id.terms_condition -> {
                 binding.drawerLayout.closeDrawers()

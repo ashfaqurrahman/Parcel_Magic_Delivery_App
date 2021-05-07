@@ -65,7 +65,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
         binding.senderName.text = requireArguments().getString("sender_name")
         binding.senderPhone.text = requireArguments().getString("sender_phone")
         binding.destence.text = requireArguments().getString("distance")
-        binding.receiverNameCalling.text = requireArguments().getString("current_status")
+        binding.receiverNameCalling.text = requireArguments().getString("sender_name")
 
         binding.calling.setOnClickListener {
             val number = requireArguments().getString("recp_phone")
