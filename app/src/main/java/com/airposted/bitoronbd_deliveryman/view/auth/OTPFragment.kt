@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.aapbd.appbajarlib.storage.PersistentUser
@@ -260,10 +261,10 @@ class OTPFragment : Fragment(), KodeinAware {
                                         photoName
                                     )
 
-                                    if (signUpResponse.success) {
+                                    if (signUpResponse.data != null) {
                                         dismissDialog()
                                         binding.main.snackbar(signUpResponse.msg)
-                                        PersistentUser.getInstance().setLogin(requireContext())
+                                        /*PersistentUser.getInstance().setLogin(requireContext())
                                         PersistentUser.getInstance().setAccessToken(
                                             requireContext(),
                                             "Bearer " + signUpResponse.data?.token
@@ -283,7 +284,7 @@ class OTPFragment : Fragment(), KodeinAware {
                                         PersistentUser.getInstance().setUserImage(
                                             requireContext(),
                                             signUpResponse.user?.image
-                                        )
+                                        )*/
                                         createAccountSuccessDialog()
                                     } else {
                                         dismissDialog()
@@ -308,9 +309,9 @@ class OTPFragment : Fragment(), KodeinAware {
                                         photoName
                                     )
 
-                                    if (signUpResponse.success) {
+                                    if (signUpResponse.data != null) {
                                         dismissDialog()
-                                        binding.main.snackbar(signUpResponse.msg)
+                                        /*binding.main.snackbar(signUpResponse.msg)
                                         PersistentUser.getInstance().setLogin(requireContext())
                                         PersistentUser.getInstance().setAccessToken(
                                             requireContext(),
@@ -331,7 +332,7 @@ class OTPFragment : Fragment(), KodeinAware {
                                         PersistentUser.getInstance().setUserImage(
                                             requireContext(),
                                             signUpResponse.user?.image
-                                        )
+                                        )*/
                                         createAccountSuccessDialog()
                                     } else {
                                         dismissDialog()
@@ -368,6 +369,8 @@ class OTPFragment : Fragment(), KodeinAware {
         )
         val done = dialogs.findViewById<TextView>(R.id.done)
         done.setOnClickListener {
+            dialogs.dismiss()
+            requireActivity().supportFragmentManager.popBackStack(PhoneNumberFragment::class.java.name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             communicatorFragmentInterface?.addContentFragment(PhoneNumberFragment(), false)
         }
         dialogs.setCancelable(false)

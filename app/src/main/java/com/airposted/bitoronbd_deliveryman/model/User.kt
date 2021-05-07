@@ -10,5 +10,7 @@ class User (
     @SerializedName("phone")
     val phone: String,
     @SerializedName("image")
-    val image: String
+    val image: String,
+    @SerializedName("verified")
+    val verified: Int?
 )

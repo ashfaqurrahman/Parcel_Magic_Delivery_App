@@ -1,12 +1,19 @@
 package com.airposted.bitoronbd_deliveryman.view.auth
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentPhoneNumberBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
@@ -47,18 +54,35 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
             lifecycleScope.launch {
                 try {
                     authResponse = viewModel.checkNumber("+8801$phone")
-                    if (authResponse?.data != null) {
-                        dismissDialog()
-                        val fragment = WelcomeFragment()
-                        val bundle = Bundle()
-                        bundle.putString("phone", authResponse!!.user?.phone)
-                        bundle.putString("token", authResponse!!.data?.token)
-                        bundle.putInt("id", authResponse!!.user!!.id)
-                        bundle.putString("image", authResponse!!.user!!.image)
-                        bundle.putString("name", authResponse!!.user!!.username)
-                        bundle.putBoolean("isAuth", true)
-                        fragment.arguments = bundle
-                        communicatorFragmentInterface?.addContentFragment(fragment, true)
+                    if (authResponse?.user != null) {
+                        if (authResponse?.user!!.verified != null) {
+                            when(authResponse?.user?.verified) {
+                                0 -> {
+                                    dismissDialog()
+                                    createAccountSuccessDialog()
+                                }
+                                1 -> {
+                                    dismissDialog()
+                                    val fragment = WelcomeFragment()
+                                    val bundle = Bundle()
+                                    bundle.putString("phone", authResponse!!.user?.phone)
+                                    bundle.putString("token", authResponse!!.data?.token)
+                                    bundle.putInt("id", authResponse!!.user!!.id)
+                                    bundle.putString("image", authResponse!!.user!!.image)
+                                    bundle.putString("name", authResponse!!.user!!.username)
+                                    bundle.putBoolean("isAuth", true)
+                                    fragment.arguments = bundle
+                                    communicatorFragmentInterface?.addContentFragment(fragment, true)
+                                }
+                            }
+                        } else {
+                            dismissDialog()
+                            val fragment = RegisterFragment()
+                            val bundle = Bundle()
+                            bundle.putString("phone", "+8801$phone")
+                            fragment.arguments = bundle
+                            communicatorFragmentInterface?.addContentFragment(fragment, true)
+                        }
                     } else {
                         dismissDialog()
                         val fragment = RegisterFragment()
@@ -79,5 +103,22 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
             }
 
         }
+    }
+
+    private fun createAccountSuccessDialog() {
+        val dialogs = Dialog(requireActivity())
+        dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogs.setContentView(R.layout.create_account_dialog)
+        dialogs.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogs.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,  //w
+            ViewGroup.LayoutParams.MATCH_PARENT //h
+        )
+        val done = dialogs.findViewById<TextView>(R.id.done)
+        done.setOnClickListener {
+            dialogs.dismiss()
+        }
+        dialogs.setCancelable(false)
+        dialogs.show()
     }
 }

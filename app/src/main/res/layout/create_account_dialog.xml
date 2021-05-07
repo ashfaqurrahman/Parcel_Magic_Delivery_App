@@ -32,7 +32,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Successfully Create Account"
+                android:text="Registration Successful"
                 android:textColor="#0f122f"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -45,6 +45,7 @@
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/poppins_regular"
+                android:textAlignment="center"
                 android:text="Please wait, Until verify your account."
                 android:textColor="#0f122f"
                 android:textSize="15sp" />
