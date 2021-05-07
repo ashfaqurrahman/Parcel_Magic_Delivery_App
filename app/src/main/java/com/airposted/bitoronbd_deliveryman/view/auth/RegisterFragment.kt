@@ -74,14 +74,14 @@ class RegisterFragment : Fragment() {
                     bundle.putString("name", binding.name.text.toString())
                     bundle.putString("address", binding.address.text.toString())
                     if (id == "National ID") {
-                        bundle.putString("nid", binding.id.text.toString())
+                        bundle.putString("nid", binding.idNumber.text.toString())
                     } else {
-                        bundle.putString("drive_lisence", binding.id.text.toString())
+                        bundle.putString("drive_lisence", binding.idNumber.text.toString())
                     }
                     if (gender == "Male") {
-                        bundle.putInt("gender", 0)
-                    } else {
                         bundle.putInt("gender", 1)
+                    } else {
+                        bundle.putInt("gender", 0)
                     }
                     bundle.putString("dob", binding.name.text.toString())
                     bundle.putBoolean("isAuth", false)

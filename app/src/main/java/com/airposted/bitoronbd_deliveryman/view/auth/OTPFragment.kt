@@ -1,7 +1,10 @@
 package com.airposted.bitoronbd_deliveryman.view.auth
 
 import `in`.aabhasjindal.otptextview.OTPListener
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -9,6 +12,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -20,6 +25,7 @@ import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentOTPBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
+import com.airposted.bitoronbd_deliveryman.view.main.ProfileFragment
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
@@ -51,6 +57,7 @@ class OTPFragment : Fragment(), KodeinAware {
     private var isAuth = false
     private var authResponse: AuthResponse? = null
     private var nid: RequestBody? = null
+    private var gander: RequestBody? = null
     private var drivingLicence: RequestBody? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -277,12 +284,7 @@ class OTPFragment : Fragment(), KodeinAware {
                                             requireContext(),
                                             signUpResponse.user?.image
                                         )
-
-                                        val intent = Intent(requireContext(), MainActivity::class.java)
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                        startActivity(intent)
-                                        requireActivity().finish()
-
+                                        createAccountSuccessDialog()
                                     } else {
                                         dismissDialog()
                                         binding.main.snackbar(signUpResponse.msg)
@@ -330,12 +332,7 @@ class OTPFragment : Fragment(), KodeinAware {
                                             requireContext(),
                                             signUpResponse.user?.image
                                         )
-
-                                        val intent = Intent(requireContext(), MainActivity::class.java)
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                        startActivity(intent)
-                                        requireActivity().finish()
-
+                                        createAccountSuccessDialog()
                                     } else {
                                         dismissDialog()
                                         binding.main.snackbar(signUpResponse.msg)
@@ -358,6 +355,23 @@ class OTPFragment : Fragment(), KodeinAware {
                     binding.main.snackbar(task.exception!!.message!!)
                 }
             }
+    }
+
+    private fun createAccountSuccessDialog() {
+        val dialogs = Dialog(requireActivity())
+        dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogs.setContentView(R.layout.create_account_dialog)
+        dialogs.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogs.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,  //w
+            ViewGroup.LayoutParams.MATCH_PARENT //h
+        )
+        val done = dialogs.findViewById<TextView>(R.id.done)
+        done.setOnClickListener {
+            communicatorFragmentInterface?.addContentFragment(PhoneNumberFragment(), false)
+        }
+        dialogs.setCancelable(false)
+        dialogs.show()
     }
 
     private fun timer() {
