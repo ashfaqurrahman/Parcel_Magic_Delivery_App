@@ -333,12 +333,14 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                 val fragment = CompleteJourneyWithDigitalPaymentFragment()
                 val bundle = Bundle()
                 bundle.putInt("price", requireArguments().getInt("price"))
-                communicatorFragmentInterface!!.addContentFragment(fragment, true)
+                fragment.arguments = bundle
+                communicatorFragmentInterface!!.addContentFragment(fragment, false)
             } else {
                 val fragment = CompleteJourneyFragment()
                 val bundle = Bundle()
                 bundle.putInt("price", requireArguments().getInt("price"))
-                communicatorFragmentInterface!!.addContentFragment(fragment, true)
+                fragment.arguments = bundle
+                communicatorFragmentInterface!!.addContentFragment(fragment, false)
             }
         }
         otpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
