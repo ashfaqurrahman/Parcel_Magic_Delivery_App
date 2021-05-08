@@ -329,7 +329,17 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
         otpDialog.setContentView(R.layout.delivery_complete_dialog)
         otpDialog.findViewById<TextView>(R.id.done).setOnClickListener {
             otpDialog.dismiss()
-            communicatorFragmentInterface!!.addContentFragment(CompleteJourneyFragment(), true)
+            if (requireArguments().getInt("coc") == 0 && requireArguments().getInt("cod") == 0) {
+                val fragment = CompleteJourneyWithDigitalPaymentFragment()
+                val bundle = Bundle()
+                bundle.putInt("price", requireArguments().getInt("price"))
+                communicatorFragmentInterface!!.addContentFragment(fragment, true)
+            } else {
+                val fragment = CompleteJourneyFragment()
+                val bundle = Bundle()
+                bundle.putInt("price", requireArguments().getInt("price"))
+                communicatorFragmentInterface!!.addContentFragment(fragment, true)
+            }
         }
         otpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         otpDialog.window?.setLayout(

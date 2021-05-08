@@ -104,6 +104,9 @@ class ParcelDetailsFragment : Fragment(), KodeinAware {
 
                 }
             }
+
+            dialogs.setCancelable(true)
+            dialogs.show()
         }
     }
 }

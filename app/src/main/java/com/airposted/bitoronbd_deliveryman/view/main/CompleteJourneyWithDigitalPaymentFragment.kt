@@ -5,16 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJourneyBinding
+import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJurneyWithDigitalPaymentBinding
 
-class CompleteJourneyFragment : Fragment() {
-    private lateinit var binding: FragmentCompleteJourneyBinding
+class CompleteJourneyWithDigitalPaymentFragment : Fragment() {
+
+    private lateinit var binding: FragmentCompleteJurneyWithDigitalPaymentBinding
     private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCompleteJourneyBinding.inflate(inflater, container, false)
+        binding = FragmentCompleteJurneyWithDigitalPaymentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
