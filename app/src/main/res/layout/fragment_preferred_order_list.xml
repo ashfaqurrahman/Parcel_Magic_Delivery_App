@@ -43,31 +43,12 @@
                     android:text="@string/preferred_area"
                     />
 
-                <com.skydoves.powerspinner.PowerSpinnerView
-                    android:id="@+id/preferred_area"
+                <Spinner
+                    android:id="@+id/spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:hint="Mohammodpur"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/text_color"
-                    android:textColorHint="@color/text_color"
-                    android:textSize="14.5sp"
-                    app:spinner_arrow_gravity="end"
-                    app:spinner_arrow_padding="8dp"
-                    app:spinner_arrow_show="true"
-                    app:spinner_arrow_tint="@color/text_color"
-                    app:spinner_arrow_drawable="@drawable/ic_down_arrow"
-                    app:spinner_divider_color="@color/hint_color"
-                    app:spinner_divider_show="true"
-                    app:spinner_divider_size="0.4dp"
-                    app:spinner_item_array="@array/pref_area"
-                    app:spinner_popup_animation="dropdown"
-                    app:spinner_popup_background="@color/white"
-                    app:spinner_popup_elevation="14dp" />
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"/>
 
             </LinearLayout>
 

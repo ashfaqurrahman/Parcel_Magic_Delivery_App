@@ -2,23 +2,27 @@ package com.airposted.bitoronbd_deliveryman.view.main
 
 import android.os.Bundle
 import android.util.MalformedJsonException
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentPreferredOrderListBinding
-import com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModel
-import com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModelData
+import com.airposted.bitoronbd_deliveryman.model.*
 import com.airposted.bitoronbd_deliveryman.utils.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+
 
 class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickListener {
     override val kodein by kodein()
@@ -26,6 +30,7 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentPreferredOrderListBinding
     var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
+    private lateinit var areaList: List<ViewMyAreaModelData>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,9 +49,51 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
-            binding.preferredArea.dismiss()
         }
         binding.toolbar.toolbarTitle.text = getString(R.string.preferred_area_order_list)
+
+        setProgressDialog(requireActivity())
+        lifecycleScope.launch {
+            try {
+                dismissDialog()
+                val myAreaResponse = viewModel.viewMyArea()
+                areaList = myAreaResponse.data
+                val array = Array<String?>(areaList.size) { null }
+                for (i in areaList.indices) {
+                    array[i] = areaList[i].area_name
+                }
+                val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, array)
+                binding.spinner.adapter = arrayAdapter
+                binding.spinner.onItemSelectedListener = object : OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: View,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Toast.makeText(
+                            requireContext(),
+                            parent.selectedItem.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                }
+            } catch (e: MalformedJsonException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            }
+        }
 
         setProgressDialog(requireActivity())
         lifecycleScope.launch {

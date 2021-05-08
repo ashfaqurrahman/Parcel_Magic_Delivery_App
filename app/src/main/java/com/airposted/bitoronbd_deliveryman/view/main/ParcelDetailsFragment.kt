@@ -57,7 +57,6 @@ class ParcelDetailsFragment : Fragment(), KodeinAware {
         invoice = requireArguments().getString("invoice")!!
 
         binding.confirmedOrder.setOnClickListener {
-
             val dialogs = Dialog(requireActivity())
             dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialogs.setContentView(R.layout.order_accept_dialog)
