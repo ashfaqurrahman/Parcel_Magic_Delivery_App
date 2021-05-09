@@ -3,6 +3,7 @@ package com.airposted.bitoronbd_deliveryman.view.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.util.MalformedJsonException
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,11 +22,12 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListener {
+class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListener, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding:FragmentMyLiveDeliveryBinding
+    private lateinit var orderList: List<OrderListModelData>
     var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +55,8 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         lifecycleScope.launch {
             try {
                 val response = viewModel.getCurrentOrderList()
-                showOrderList(response)
+                orderList = response.data
+                showOrderList(orderList)
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
@@ -69,13 +72,32 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
             }
 
         }
+
+        binding.deliveryType.setOnSpinnerItemSelectedListener <String> { oldIndex, oldItem, newIndex, newItem ->
+            setProgressDialog(requireActivity())
+            val newOrderList: ArrayList<OrderListModelData> = ArrayList()
+            for (i in orderList.indices) {
+                if (orderList[i].order_type == newIndex) {
+                    newOrderList.add(orderList[i])
+                }
+            }
+            if (newIndex == 0) {
+                showOrderList(orderList)
+            }
+            if (newIndex == 1) {
+                showOrderList(newOrderList)
+            }
+            if (newIndex == 2) {
+                showOrderList(newOrderList)
+            }
+        }
     }
 
-    private fun showOrderList(response: OrderListModel) {
-        if (response.data.isNotEmpty()) {
+    private fun showOrderList(list: List<OrderListModelData>) {
+        if (list.isNotEmpty()) {
             binding.myLiveDeliveryList.visibility = View.VISIBLE
             binding.noOrder.visibility = View.GONE
-            val myRecyclerViewAdapter = CurrentOrderListRecyclerViewAdapter(response.data, this)
+            val myRecyclerViewAdapter = CurrentOrderListRecyclerViewAdapter(list, this)
             binding.myLiveDeliveryList.layoutManager = GridLayoutManager(requireActivity(), 1)
             binding.myLiveDeliveryList.itemAnimator = DefaultItemAnimator()
             binding.myLiveDeliveryList.adapter = myRecyclerViewAdapter
@@ -112,6 +134,11 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         val intent = Intent(Intent.ACTION_DIAL)
         intent.data = Uri.parse("tel:$phone")
         startActivity(intent)
+    }
+
+    override fun onBackPressed(): Boolean {
+        binding.deliveryType.dismiss()
+        return false
     }
 
 }

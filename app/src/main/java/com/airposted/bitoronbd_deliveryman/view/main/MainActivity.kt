@@ -37,6 +37,10 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentInterface {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        val fragment =
+            this.supportFragmentManager.findFragmentById(R.id.frameLayout)
+        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+            super.onBackPressed()
+        }
     }
 }

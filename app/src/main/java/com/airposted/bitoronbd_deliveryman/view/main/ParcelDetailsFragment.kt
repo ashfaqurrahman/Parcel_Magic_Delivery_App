@@ -23,7 +23,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class ParcelDetailsFragment : Fragment(), KodeinAware {
+class ParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
@@ -107,5 +107,9 @@ class ParcelDetailsFragment : Fragment(), KodeinAware {
             dialogs.setCancelable(true)
             dialogs.show()
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

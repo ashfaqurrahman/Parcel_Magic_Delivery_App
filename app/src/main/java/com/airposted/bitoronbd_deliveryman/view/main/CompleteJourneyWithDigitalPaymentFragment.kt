@@ -9,7 +9,7 @@ import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJourneyBinding
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJurneyWithDigitalPaymentBinding
 
-class CompleteJourneyWithDigitalPaymentFragment : Fragment() {
+class CompleteJourneyWithDigitalPaymentFragment : Fragment(), IOnBackPressed {
 
     private lateinit var binding: FragmentCompleteJurneyWithDigitalPaymentBinding
     private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
@@ -34,5 +34,9 @@ class CompleteJourneyWithDigitalPaymentFragment : Fragment() {
         binding.completeYourJourney.setOnClickListener {
             communicatorFragmentInterface?.addContentFragment(HomeFragment(), false)
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

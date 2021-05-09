@@ -19,7 +19,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class MyDeliveryHistoryFragment : Fragment(), KodeinAware {
+class MyDeliveryHistoryFragment : Fragment(), KodeinAware, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
@@ -83,5 +83,9 @@ class MyDeliveryHistoryFragment : Fragment(), KodeinAware {
             binding.myOrderHistoryList.visibility = View.GONE
             binding.noOrder.visibility = View.VISIBLE
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

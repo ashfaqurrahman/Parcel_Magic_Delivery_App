@@ -31,7 +31,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyAreaClickListener {
+class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyAreaClickListener, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
@@ -308,5 +308,9 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
 
         dialogs.setCancelable(false)
         dialogs.show()
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

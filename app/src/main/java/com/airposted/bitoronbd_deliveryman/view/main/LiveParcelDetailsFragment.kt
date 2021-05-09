@@ -17,7 +17,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.airposted.bitoronbd_deliveryman.R
@@ -29,7 +28,7 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 
-class LiveParcelDetailsFragment : Fragment(), KodeinAware {
+class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
@@ -101,7 +100,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                     val check = otpDialog.findViewById<CheckBox>(R.id.check)
                     if (requireArguments().getInt("coc") == 1) {
                         check.text =
-                            "Collected " + requireArguments().getInt("price") + "Tk from sender"
+                            "Collected " + requireArguments().getInt("price") + " Tk from sender"
                         check.visibility = View.VISIBLE
                     }
                     val verify = otpDialog.findViewById<TextView>(R.id.verify)
@@ -129,35 +128,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                     verify.setOnClickListener {
                         if (requireArguments().getInt("coc") == 1) {
                             if (check.isChecked) {
-                                otpDialog.dismiss()
-                                setProgressDialog(requireActivity())
-                                lifecycleScope.launch {
-                                    try {
-                                        val response = viewModel.changeStatus(
-                                            requireArguments().getString("invoice")!!,
-                                            4
-                                        )
-                                        if (response.success) {
-                                            otpDialog.dismiss()
-                                            binding.rootLayout.snackbar(response.msg)
-                                        } else {
-                                            binding.rootLayout.snackbar(response.msg)
-                                        }
-                                        dismissDialog()
-                                    } catch (e: MalformedJsonException) {
-                                        dismissDialog()
-                                        binding.rootLayout.snackbar(e.message!!)
-                                        e.printStackTrace()
-                                    } catch (e: ApiException) {
-                                        dismissDialog()
-                                        binding.rootLayout.snackbar(e.message!!)
-                                        e.printStackTrace()
-                                    } catch (e: NoInternetException) {
-                                        dismissDialog()
-                                        binding.rootLayout.snackbar(e.message!!)
-                                        e.printStackTrace()
-                                    }
-                                }
+                                changeStatus(3, otpDialog)
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -166,36 +137,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                                 ).show()
                             }
                         } else {
-                            otpDialog.dismiss()
-                            setProgressDialog(requireActivity())
-                            lifecycleScope.launch {
-                                try {
-                                    val response = viewModel.changeStatus(
-                                        requireArguments().getString("invoice")!!,
-                                        4
-                                    )
-                                    if (response.success) {
-                                        deliveryComplete()
-                                        otpDialog.dismiss()
-                                        binding.rootLayout.snackbar(response.msg)
-                                    } else {
-                                        binding.rootLayout.snackbar(response.msg)
-                                    }
-                                    dismissDialog()
-                                } catch (e: MalformedJsonException) {
-                                    dismissDialog()
-                                    binding.rootLayout.snackbar(e.message!!)
-                                    e.printStackTrace()
-                                } catch (e: ApiException) {
-                                    dismissDialog()
-                                    binding.rootLayout.snackbar(e.message!!)
-                                    e.printStackTrace()
-                                } catch (e: NoInternetException) {
-                                    dismissDialog()
-                                    binding.rootLayout.snackbar(e.message!!)
-                                    e.printStackTrace()
-                                }
-                            }
+                            changeStatus(4, otpDialog)
                         }
                     }
                     otpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -242,36 +184,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                     verify.setOnClickListener {
                         if (requireArguments().getInt("cod") == 1) {
                             if (check.isChecked) {
-                                otpDialog.dismiss()
-                                setProgressDialog(requireActivity())
-                                lifecycleScope.launch {
-                                    try {
-                                        val response = viewModel.changeStatus(
-                                            requireArguments().getString("invoice")!!,
-                                            5
-                                        )
-                                        if (response.success) {
-                                            deliveryComplete()
-                                            otpDialog.dismiss()
-                                            binding.rootLayout.snackbar(response.msg)
-                                        } else {
-                                            binding.rootLayout.snackbar(response.msg)
-                                        }
-                                        dismissDialog()
-                                    } catch (e: MalformedJsonException) {
-                                        dismissDialog()
-                                        binding.rootLayout.snackbar(e.message!!)
-                                        e.printStackTrace()
-                                    } catch (e: ApiException) {
-                                        dismissDialog()
-                                        binding.rootLayout.snackbar(e.message!!)
-                                        e.printStackTrace()
-                                    } catch (e: NoInternetException) {
-                                        dismissDialog()
-                                        binding.rootLayout.snackbar(e.message!!)
-                                        e.printStackTrace()
-                                    }
-                                }
+                                changeStatus(5, otpDialog)
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -280,36 +193,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                                 ).show()
                             }
                         } else {
-                            otpDialog.dismiss()
-                            setProgressDialog(requireActivity())
-                            lifecycleScope.launch {
-                                try {
-                                    val response = viewModel.changeStatus(
-                                        requireArguments().getString("invoice")!!,
-                                        5
-                                    )
-                                    if (response.success) {
-                                        deliveryComplete()
-                                        otpDialog.dismiss()
-                                        binding.rootLayout.snackbar(response.msg)
-                                    } else {
-                                        binding.rootLayout.snackbar(response.msg)
-                                    }
-                                    dismissDialog()
-                                } catch (e: MalformedJsonException) {
-                                    dismissDialog()
-                                    binding.rootLayout.snackbar(e.message!!)
-                                    e.printStackTrace()
-                                } catch (e: ApiException) {
-                                    dismissDialog()
-                                    binding.rootLayout.snackbar(e.message!!)
-                                    e.printStackTrace()
-                                } catch (e: NoInternetException) {
-                                    dismissDialog()
-                                    binding.rootLayout.snackbar(e.message!!)
-                                    e.printStackTrace()
-                                }
-                            }
+                            changeStatus(5, otpDialog)
                         }
                     }
                     otpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -320,6 +204,41 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
                     otpDialog.setCancelable(false)
                     otpDialog.show()
                 }
+            }
+        }
+    }
+
+    private fun changeStatus(i: Int, otpDialog: Dialog) {
+        otpDialog.dismiss()
+        setProgressDialog(requireActivity())
+        lifecycleScope.launch {
+            try {
+                val response = viewModel.changeStatus(
+                    requireArguments().getString("invoice")!!,
+                    i
+                )
+                if (response.success) {
+                    if (i == 5) {
+                        deliveryComplete()
+                    }
+                    otpDialog.dismiss()
+                    binding.rootLayout.snackbar(response.msg)
+                } else {
+                    binding.rootLayout.snackbar(response.msg)
+                }
+                dismissDialog()
+            } catch (e: MalformedJsonException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             }
         }
     }
@@ -350,5 +269,9 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware {
         )
         otpDialog.setCancelable(false)
         otpDialog.show()
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

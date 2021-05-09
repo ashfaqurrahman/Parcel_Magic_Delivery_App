@@ -24,7 +24,7 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 
-class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickListener {
+class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickListener, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
@@ -143,6 +143,10 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
         bundle.putString("invoice", preferredOrder.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 
 }

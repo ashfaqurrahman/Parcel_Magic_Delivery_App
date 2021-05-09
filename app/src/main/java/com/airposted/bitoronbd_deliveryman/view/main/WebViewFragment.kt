@@ -12,7 +12,7 @@ import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentWebViewBinding
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
 
-class WebViewFragment : Fragment() {
+class WebViewFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentWebViewBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,10 +24,10 @@ class WebViewFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        BindUI()
+        bindUI()
     }
 
-    private fun BindUI() {
+    private fun bindUI() {
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -50,5 +50,9 @@ class WebViewFragment : Fragment() {
         binding.contactWebView.isVerticalScrollBarEnabled = false
         binding.contactWebView.loadUrl(url!!)
         binding.progressBar.progress = 0
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

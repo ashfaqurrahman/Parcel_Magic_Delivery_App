@@ -33,13 +33,14 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware, AreaClickListener {
+class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware,
+    AreaClickListener, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
     var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
-    private lateinit var invoice: List<AreaListDataModelData>
+    private lateinit var areaList: List<AreaListDataModelData>
     private lateinit var dialogs: Dialog
     private var currentLocationClick = false
     private var fromId = 0
@@ -67,7 +68,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         lifecycleScope.launch {
             try {
                 val response = viewModel.getAllAreaList()
-                invoice = response.data!!
+                areaList = response.data!!
                 dismissDialog()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
@@ -125,12 +126,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     bundle.putString("to", to)
                     fragment.arguments = bundle
                     communicatorFragmentInterface?.addContentFragment(fragment, true)
-                }
-                else {
+                } else {
                     binding.rootLayout.snackbar("Please set a destination location")
                 }
-            }
-            else {
+            } else {
                 binding.rootLayout.snackbar("Please set a pick up location.")
             }
         }
@@ -178,10 +177,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 areaRecycler.itemAnimator = DefaultItemAnimator()
                 if (s.toString().isNotEmpty()) {
                     val listNew: ArrayList<AreaListDataModelData> = ArrayList()
-                    for (l in invoice.indices) {
-                        val serviceName: String = invoice[l].area_name
+                    for (l in areaList.indices) {
+                        val serviceName: String = areaList[l].area_name
                         if (serviceName.toLowerCase().contains(s.toString().toLowerCase())) {
-                            listNew.add(invoice[l])
+                            listNew.add(areaList[l])
                             areaRecycler.visibility = View.VISIBLE
                             noArea.visibility = View.GONE
                         }
@@ -200,7 +199,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     areaRecycler.visibility = View.VISIBLE
                     noArea.visibility = View.GONE
                     val myRecyclerViewAdapter = AreaListRecyclerViewAdapter(
-                        invoice,
+                        areaList,
                         this@HomeFragment
                     )
                     areaRecycler.adapter = myRecyclerViewAdapter
@@ -208,15 +207,14 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             }
         })
 
-        if (invoice.isNotEmpty()) {
+        if (areaList.isNotEmpty()) {
             areaRecycler.visibility = View.VISIBLE
             noArea.visibility = View.GONE
-            val myRecyclerViewAdapter = AreaListRecyclerViewAdapter(invoice, this)
+            val myRecyclerViewAdapter = AreaListRecyclerViewAdapter(areaList, this)
             areaRecycler.layoutManager = GridLayoutManager(requireActivity(), 1)
             areaRecycler.itemAnimator = DefaultItemAnimator()
             areaRecycler.adapter = myRecyclerViewAdapter
-        }
-        else {
+        } else {
             areaRecycler.visibility = View.GONE
             noArea.visibility = View.VISIBLE
         }
@@ -307,11 +305,14 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             binding.from.setText(area.area_name)
             fromId = area.id
             from = area.area_name
-        }
-        else {
+        } else {
             binding.to.setText(area.area_name)
             toID = area.id
             to = area.area_name
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

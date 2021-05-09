@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.R
 
-class SettingFragment : Fragment() {
+class SettingFragment : Fragment(), IOnBackPressed {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -15,5 +15,9 @@ class SettingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_setting, container, false)
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

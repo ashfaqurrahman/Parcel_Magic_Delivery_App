@@ -34,6 +34,7 @@
     </string-array>
 
     <string-array name="delivery_type">
+        <item>All Orders</item>
         <item>Within 24 hours</item>
         <item>Within 48 hours</item>
     </string-array>

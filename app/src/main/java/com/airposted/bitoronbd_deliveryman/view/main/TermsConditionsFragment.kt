@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentTermsConditionsBinding
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
 
-class TermsConditionsFragment : Fragment() {
+class TermsConditionsFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentTermsConditionsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,5 +36,9 @@ class TermsConditionsFragment : Fragment() {
         } else {
             binding.content.text = Html.fromHtml(value)
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

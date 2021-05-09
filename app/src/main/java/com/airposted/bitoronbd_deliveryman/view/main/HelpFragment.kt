@@ -11,7 +11,7 @@ import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentHelpBinding
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
 
-class HelpFragment : Fragment() {
+class HelpFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentHelpBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,5 +37,9 @@ class HelpFragment : Fragment() {
         } else {
             binding.content.text = Html.fromHtml(value)
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

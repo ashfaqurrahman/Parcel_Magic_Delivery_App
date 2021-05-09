@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:hint="Within 24 hours"
+                android:hint="All Orders"
                 android:padding="15dp"
                 android:textColor="@color/text_color"
                 android:textColorHint="@color/text_color"

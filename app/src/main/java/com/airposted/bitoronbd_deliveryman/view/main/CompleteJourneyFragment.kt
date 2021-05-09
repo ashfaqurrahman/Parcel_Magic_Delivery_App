@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJourneyBinding
 
-class CompleteJourneyFragment : Fragment() {
+class CompleteJourneyFragment : Fragment(),IOnBackPressed {
     private lateinit var binding: FragmentCompleteJourneyBinding
     private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
@@ -31,5 +31,9 @@ class CompleteJourneyFragment : Fragment() {
         binding.completeYourJourney.setOnClickListener {
             communicatorFragmentInterface?.addContentFragment(HomeFragment(), false)
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }

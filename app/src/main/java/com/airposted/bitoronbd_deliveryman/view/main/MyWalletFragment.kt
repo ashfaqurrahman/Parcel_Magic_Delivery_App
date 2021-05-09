@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentMyWalletBinding
 
-class MyWalletFragment : Fragment() {
+class MyWalletFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentMyWalletBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +28,10 @@ class MyWalletFragment : Fragment() {
         }
 
         binding.customToolbar.toolbarTitle.text = "My Wallet"
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }
 

@@ -34,7 +34,7 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.File
 
-class ProfileFragment : Fragment(), KodeinAware {
+class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
@@ -226,5 +226,9 @@ class ProfileFragment : Fragment(), KodeinAware {
                 binding.rootLayout.snackbar(error.toString())
             }
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 }
