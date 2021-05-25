@@ -34,6 +34,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentLiveParcelDetailsBinding
     private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
+    var otp1 = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -117,7 +118,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                         }
 
                         override fun onOTPComplete(otp: String) {
-                            var otp1 = otp
+                            otp1 = otp
                             verify.background = ContextCompat.getDrawable(
                                 requireActivity(),
                                 R.drawable.after_button_bg
@@ -128,7 +129,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                     verify.setOnClickListener {
                         if (requireArguments().getInt("coc") == 1) {
                             if (check.isChecked) {
-                                changeStatus(3, otpDialog)
+                                changeStatus(otp1.toInt(), 4, otpDialog)
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -137,7 +138,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                                 ).show()
                             }
                         } else {
-                            changeStatus(4, otpDialog)
+                            changeStatus(otp1.toInt(), 4, otpDialog)
                         }
                     }
                     otpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -173,7 +174,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                         }
 
                         override fun onOTPComplete(otp: String) {
-                            var otp1 = otp
+                            otp1 = otp
                             verify.background = ContextCompat.getDrawable(
                                 requireActivity(),
                                 R.drawable.after_button_bg
@@ -184,7 +185,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                     verify.setOnClickListener {
                         if (requireArguments().getInt("cod") == 1) {
                             if (check.isChecked) {
-                                changeStatus(5, otpDialog)
+                                changeStatus(otp1.toInt(), 5, otpDialog)
                             } else {
                                 Toast.makeText(
                                     requireContext(),
@@ -193,7 +194,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                                 ).show()
                             }
                         } else {
-                            changeStatus(5, otpDialog)
+                            changeStatus(otp1.toInt(), 5, otpDialog)
                         }
                     }
                     otpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -208,17 +209,18 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
         }
     }
 
-    private fun changeStatus(i: Int, otpDialog: Dialog) {
+    private fun changeStatus(otp: Int, status: Int, otpDialog: Dialog) {
         otpDialog.dismiss()
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
                 val response = viewModel.changeStatus(
                     requireArguments().getString("invoice")!!,
-                    i
+                    status,
+                    otp
                 )
                 if (response.success) {
-                    if (i == 5) {
+                    if (status == 5) {
                         deliveryComplete()
                     }
                     otpDialog.dismiss()

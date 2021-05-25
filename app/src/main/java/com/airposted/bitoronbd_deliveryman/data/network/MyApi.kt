@@ -116,7 +116,8 @@ interface MyApi {
     suspend fun changeStatus(
         @Header("Authorization") header: String,
         @Field("invoice_no") invoice: String,
-        @Field("current_status") status: Int
+        @Field("current_status") status: Int,
+        @Field("otp") otp: Int
     ) : Response<StatusChangeModel>
 
     @Multipart

@@ -77,10 +77,10 @@ class HomeRepository(
         }
     }
 
-    suspend fun changeStatus(invoice: String, status: Int): StatusChangeModel {
+    suspend fun changeStatus(invoice: String, status: Int, otp: Int): StatusChangeModel {
         return apiRequest {
             api.changeStatus(
-                PersistentUser.getInstance().getAccessToken(appContext), invoice, status
+                PersistentUser.getInstance().getAccessToken(appContext), invoice, status, otp
             )
         }
     }

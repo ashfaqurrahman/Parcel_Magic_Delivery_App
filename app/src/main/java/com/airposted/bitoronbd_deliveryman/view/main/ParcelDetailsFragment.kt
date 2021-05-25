@@ -77,7 +77,7 @@ class ParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                 setProgressDialog(requireActivity())
                 lifecycleScope.launch {
                     try {
-                        val response = viewModel.changeStatus(invoice, 3)
+                        val response = viewModel.changeStatus(invoice, 3, 0)
                         if (response.success) {
                             dismissDialog()
                             requireActivity().supportFragmentManager.popBackStack(ParcelRequestFragment::class.java.name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
