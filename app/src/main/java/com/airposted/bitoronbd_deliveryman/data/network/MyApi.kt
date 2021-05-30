@@ -77,6 +77,13 @@ interface MyApi {
         @Field("from") from: Int
     ) : Response<OrderListModel>
 
+    @FormUrlEncoded
+    @POST("delivery/single_search_order_list")
+    suspend fun getOrderListByArea(
+        @Header("Authorization") header: String,
+        @Field("to") to: Int
+    ) : Response<OrderListModel>
+
     @GET("delivery/orderdetails/{id}")
     suspend fun getOrderDetails(
         @Header("Authorization") header: String,

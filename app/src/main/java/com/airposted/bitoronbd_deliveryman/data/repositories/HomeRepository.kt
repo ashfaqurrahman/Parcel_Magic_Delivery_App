@@ -69,6 +69,14 @@ class HomeRepository(
         }
     }
 
+    suspend fun getOrderListByArea(to: Int): OrderListModel {
+        return apiRequest {
+            api.getOrderListByArea(
+                PersistentUser.getInstance().getAccessToken(appContext), to
+            )
+        }
+    }
+
     suspend fun getOrderDetails(id: String): OrderDetailsModel {
         return apiRequest {
             api.getOrderDetails(

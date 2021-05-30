@@ -260,7 +260,16 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
         }
     }
 
-    override fun onItemClick(area: ViewMyAreaModelData) {
+    override fun onItemClickListener(area: ViewMyAreaModelData) {
+        val fragment = ParcelRequestFragment()
+        val bundle = Bundle()
+        bundle.putString("context", "preferred")
+        bundle.putInt("areaId", area.area_id)
+        fragment.arguments = bundle
+        communicatorFragmentInterface!!.addContentFragment(fragment, true)
+    }
+
+    override fun onItemDeleteListener(area: ViewMyAreaModelData) {
         val dialogs = Dialog(requireActivity())
         dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialogs.setContentView(R.layout.delete_dialog)

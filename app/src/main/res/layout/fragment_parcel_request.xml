@@ -13,6 +13,7 @@
             android:id="@+id/toolbar"/>
 
         <RelativeLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:paddingTop="20dp"
             android:paddingBottom="22dp"

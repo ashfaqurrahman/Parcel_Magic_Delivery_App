@@ -23,6 +23,8 @@ class HomeViewModel(
 
     suspend fun getOrderList(to: Int, from: Int) = withContext(Dispatchers.IO) { repository.getOrderList(to, from) }
 
+    suspend fun getOrderListByArea(to: Int) = withContext(Dispatchers.IO) { repository.getOrderListByArea(to) }
+
     suspend fun getOrderDetails(id: String) = withContext(Dispatchers.IO) { repository.getOrderDetails(id) }
 
     suspend fun changeStatus(invoice: String, status: Int, otp: Int) = withContext(Dispatchers.IO) { repository.changeStatus(invoice, status, otp) }

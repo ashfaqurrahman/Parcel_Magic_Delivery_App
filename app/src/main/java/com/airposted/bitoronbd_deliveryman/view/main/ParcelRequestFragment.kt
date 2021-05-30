@@ -15,6 +15,7 @@ import com.airposted.bitoronbd_deliveryman.databinding.FragmentParcelRequestBind
 import com.airposted.bitoronbd_deliveryman.model.OrderListModel
 import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -46,9 +47,46 @@ class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener, IOnBa
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        when {
+            requireArguments().getString("context") == "home" -> {
+                searchByFromTo()
+            }
+            requireArguments().getString("context") == "preferred" -> {
+                binding.layout.visibility = View.GONE
+                searchByTo(requireArguments().getInt("areaId"))
+            }
+            else -> {
+                binding.rootLayout.snackbar("Null context!!")
+            }
+        }
+
+    }
+
+    private fun searchByTo(id: Int) {
+        setProgressDialog(requireActivity())
+        lifecycleScope.launch {
+            try {
+                val response = viewModel.getOrderListByArea(id)
+                showOrderList(response)
+            } catch (e: MalformedJsonException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun searchByFromTo() {
         binding.from.text = requireArguments().getString("from")
         binding.to.text = requireArguments().getString("to")
-
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
@@ -67,7 +105,6 @@ class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener, IOnBa
                 binding.rootLayout.snackbar(e.message!!)
                 e.printStackTrace()
             }
-
         }
     }
 

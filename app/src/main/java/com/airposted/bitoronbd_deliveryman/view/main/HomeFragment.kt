@@ -122,6 +122,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     val bundle = Bundle()
                     bundle.putInt("fromId", fromId)
                     bundle.putInt("toId", toID)
+                    bundle.putString("context", "home")
                     bundle.putString("from", from)
                     bundle.putString("to", to)
                     fragment.arguments = bundle

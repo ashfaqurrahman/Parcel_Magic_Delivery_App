@@ -27,7 +27,8 @@ class MyAreaListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataModel = areaListDataModelModelList[position]
         holder.bind(dataModel)
-        holder.binding.delete.setOnClickListener { listener.onItemClick(dataModel) }
+        holder.binding.delete.setOnClickListener { listener.onItemDeleteListener(dataModel) }
+        holder.binding.item.setOnClickListener { listener.onItemClickListener(dataModel) }
     }
 
     override fun getItemCount(): Int {
