@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.util.MalformedJsonException
 import android.view.LayoutInflater
 import android.view.View
@@ -129,6 +130,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                     verify.setOnClickListener {
                         if (requireArguments().getInt("coc") == 1) {
                             if (check.isChecked) {
+                                Log.e("AAA", otp1)
                                 changeStatus(otp1.toInt(), 4, otpDialog)
                             } else {
                                 Toast.makeText(

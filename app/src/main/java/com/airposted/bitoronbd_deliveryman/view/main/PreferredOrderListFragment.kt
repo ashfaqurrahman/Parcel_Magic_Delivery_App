@@ -1,6 +1,7 @@
 package com.airposted.bitoronbd_deliveryman.view.main
 
 import android.os.Bundle
+import android.util.Log
 import android.util.MalformedJsonException
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 
 class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickListener, IOnBackPressed {
@@ -99,6 +101,7 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
         lifecycleScope.launch {
             try {
                 val response = viewModel.getPreferredOrderList()
+                Log.e("aaaaaaa", response.toString())
                 showOrderList(response)
             } catch (e: MalformedJsonException) {
                 dismissDialog()
