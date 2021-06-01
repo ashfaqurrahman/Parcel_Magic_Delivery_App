@@ -195,6 +195,7 @@
                     android:src="@drawable/empty_image" />
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -202,7 +203,6 @@
                     android:layout_toEndOf="@+id/delivery_man_image"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="8sp"
-                    android:text="@{currentOrderList.recp_name}"
                     android:textColor="#1a1662"
                     android:textSize="15sp"
                     android:textStyle="normal" />

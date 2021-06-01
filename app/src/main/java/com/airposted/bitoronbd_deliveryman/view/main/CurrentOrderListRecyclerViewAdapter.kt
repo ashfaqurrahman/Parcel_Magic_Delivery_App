@@ -36,6 +36,9 @@ class CurrentOrderListRecyclerViewAdapter(
                 holder.binding.tvCollected.alpha = 0.3F
                 holder.binding.imgDelivered.alpha = 0.3F
                 holder.binding.tvDelivered.alpha = 0.3F
+
+                holder.binding.name.text = dataModel.pic_name
+                holder.binding.calling.setOnClickListener { viewDetailsListener.onCallClick(dataModel.pic_phone) }
             }
             4 -> {
                 holder.binding.imgAccept.alpha = 0.3F
@@ -44,6 +47,9 @@ class CurrentOrderListRecyclerViewAdapter(
                 holder.binding.tvCollected.alpha = 1F
                 holder.binding.imgDelivered.alpha = 0.3F
                 holder.binding.tvDelivered.alpha = 0.3F
+
+                holder.binding.name.text = dataModel.recp_name
+                holder.binding.calling.setOnClickListener { viewDetailsListener.onCallClick(dataModel.recp_phone) }
             }
             5 -> {
                 holder.binding.imgAccept.alpha = 0.3F
@@ -55,7 +61,6 @@ class CurrentOrderListRecyclerViewAdapter(
             }
         }
         holder.binding.viewOrder.setOnClickListener { viewDetailsListener.onItemClick(dataModel) }
-        holder.binding.calling.setOnClickListener { viewDetailsListener.onCallClick(dataModel.recp_phone) }
     }
 
     override fun getItemCount(): Int {

@@ -13,7 +13,12 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        addContentFragment(HomeFragment(), false)
+
+        if (intent.getStringExtra("order_driver") != null){
+            addContentFragment(MyLiveDeliveryFragment(), true)
+        } else {
+            addContentFragment(HomeFragment(), false)
+        }
     }
 
     override fun addContentFragment(fragment: Fragment?, addToBackStack: Boolean) {

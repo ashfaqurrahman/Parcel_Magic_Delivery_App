@@ -15,6 +15,7 @@ import android.view.Window
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -200,7 +201,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                             if (!task.isSuccessful) {
                                 msg = getString(R.string.close)
                             }
-                            //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                         }
                     binding.rootLayout.snackbar(response.msg)
                     syncMyAreaList()

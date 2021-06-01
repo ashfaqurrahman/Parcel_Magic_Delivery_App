@@ -183,6 +183,7 @@
                                 />
 
                             <TextView
+                                android:id="@+id/distance"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_semi_bold"
@@ -227,7 +228,7 @@
 
                         </RelativeLayout>
 
-                        <RelativeLayout
+                        <!--<RelativeLayout
                             android:id="@+id/distance_layout"
                             android:layout_below="@+id/date_of_delivery_layout"
                             android:layout_marginTop="12dp"
@@ -258,7 +259,7 @@
                                 android:text="7.5 km"
                                 />
 
-                        </RelativeLayout>
+                        </RelativeLayout>-->
 
                     </RelativeLayout>
 
