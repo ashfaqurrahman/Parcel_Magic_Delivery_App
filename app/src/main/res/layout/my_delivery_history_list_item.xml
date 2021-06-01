@@ -102,7 +102,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_toEndOf="@+id/docs_icon"
                     android:fontFamily="@font/poppins_semi_bold"
-                    android:text="@{orderHistoryList.username}"
+                    android:text="@{orderHistoryList.recp_name}"
                     android:textColor="#1a1662"
                     android:textSize="20sp"
                     android:textStyle="normal" />

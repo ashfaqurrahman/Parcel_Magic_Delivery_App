@@ -1,6 +1,6 @@
 package com.airposted.bitoronbd_deliveryman.model
 
-data class OrderListModelData(
+data class DataX(
     val cancel_fee: Int,
     val cancelled_date: Any,
     val cartoon_box_type: Int,

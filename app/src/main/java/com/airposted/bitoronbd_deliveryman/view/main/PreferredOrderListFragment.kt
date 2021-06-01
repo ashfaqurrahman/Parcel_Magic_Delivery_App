@@ -78,6 +78,12 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
                             parent.selectedItem.toString(),
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        for(i in areaList.indices) {
+                            if (areaList[i].area_name == parent.selectedItem.toString()){
+                                binding.rootLayout.snackbar(areaList[0].area_id.toString())
+                            }
+                        }
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {}

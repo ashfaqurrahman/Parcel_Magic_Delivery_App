@@ -26,6 +26,7 @@ import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.model.ViewMyAreaModel
 import com.airposted.bitoronbd_deliveryman.model.ViewMyAreaModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -193,6 +194,14 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
             try {
                 val response = viewModel.addMyArea(area.id)
                 if (response.success) {
+                    FirebaseMessaging.getInstance().subscribeToTopic(area.area_name)
+                        .addOnCompleteListener { task ->
+                            var msg = getString(R.string.open)
+                            if (!task.isSuccessful) {
+                                msg = getString(R.string.close)
+                            }
+                            //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                        }
                     binding.rootLayout.snackbar(response.msg)
                     syncMyAreaList()
                 }
