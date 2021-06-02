@@ -73,15 +73,10 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
                         position: Int,
                         id: Long
                     ) {
-                        Toast.makeText(
-                            requireContext(),
-                            parent.selectedItem.toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
 
                         for(i in areaList.indices) {
                             if (areaList[i].area_name == parent.selectedItem.toString()){
-                                binding.rootLayout.snackbar(areaList[0].area_id.toString())
+                                //binding.rootLayout.snackbar(areaList[0].area_id.toString())
                             }
                         }
                     }
@@ -107,7 +102,6 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
         lifecycleScope.launch {
             try {
                 val response = viewModel.getPreferredOrderList()
-                Log.e("aaaaaaa", response.toString())
                 showOrderList(response)
             } catch (e: MalformedJsonException) {
                 dismissDialog()

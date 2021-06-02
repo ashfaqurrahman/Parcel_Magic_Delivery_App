@@ -201,7 +201,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                             if (!task.isSuccessful) {
                                 msg = getString(R.string.close)
                             }
-                            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                         }
                     binding.rootLayout.snackbar(response.msg)
                     syncMyAreaList()

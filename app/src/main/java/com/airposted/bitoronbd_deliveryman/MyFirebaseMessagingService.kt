@@ -41,7 +41,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val dataMap: Map<String, String> = remoteMessage.data
         val title = dataMap["title"]
         val body = dataMap["text"]
-        val click = dataMap["order_driver"]
+        val click = dataMap["click_action"]
         val id = dataMap["id"]?.toInt()
 
         activityIntent = if (PersistData.getBooleanData(this, AppHelper.OPEN_SCREEN_LOAD)) {

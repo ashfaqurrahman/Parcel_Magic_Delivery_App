@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentInterface {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        if (intent.getStringExtra("order_driver") != null){
+        if (intent.getStringExtra("notification") != null){
             addContentFragment(MyLiveDeliveryFragment(), true)
         } else {
             addContentFragment(HomeFragment(), false)
