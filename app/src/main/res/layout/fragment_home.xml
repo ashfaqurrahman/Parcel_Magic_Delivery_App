@@ -173,6 +173,22 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_dashboard_bg"/>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/white">
+
+                    <Switch
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="You're Offline"/>
+
+                </RelativeLayout>
+
             </RelativeLayout>
 
             <com.google.android.material.navigation.NavigationView
