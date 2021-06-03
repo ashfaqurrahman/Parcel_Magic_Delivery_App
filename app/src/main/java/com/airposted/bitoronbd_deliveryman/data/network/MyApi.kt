@@ -135,6 +135,18 @@ interface MyApi {
         @Part("image") requestBody: RequestBody
     ) : Response<ProfileModel>
 
+    @FormUrlEncoded
+    @POST("delivery/addfcmtoken")
+    suspend fun saveFcmToken(
+        @Header("Authorization") header: String,
+        @Field("fcm_token") fcm_token: String,
+    ): Response<AddMyAreaModel>
+
+    @GET("delivery/deletefcmtoken")
+    suspend fun deleteFcmToken(
+        @Header("Authorization") header: String
+    ): Response<AddMyAreaModel>
+
     companion object{
         operator fun invoke(
             networkConnectionInterceptor: NetworkConnectionInterceptor

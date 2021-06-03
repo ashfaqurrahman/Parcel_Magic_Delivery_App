@@ -9,7 +9,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white"
-        tools:context=".view.main.MyLiveDeliveryFragment">
+        tools:context=".view.main.MyLiveDeliveryFragment"
+        android:clickable="true"
+        android:focusable="true">
 
         <include layout="@layout/custom_toolbar"
             android:id="@+id/toolbar"/>

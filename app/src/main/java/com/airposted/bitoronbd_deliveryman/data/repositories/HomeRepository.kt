@@ -138,4 +138,18 @@ class HomeRepository(
             )
         }
     }
+
+    suspend fun saveFcmToken(fcm_token: String): AddMyAreaModel {
+        return apiRequest { api.saveFcmToken(
+            PersistentUser.getInstance().getAccessToken(
+                appContext
+            ), fcm_token) }
+    }
+
+    suspend fun deleteFcmToken(): AddMyAreaModel {
+        return apiRequest { api.deleteFcmToken(
+            PersistentUser.getInstance().getAccessToken(
+                appContext
+            )) }
+    }
 }
