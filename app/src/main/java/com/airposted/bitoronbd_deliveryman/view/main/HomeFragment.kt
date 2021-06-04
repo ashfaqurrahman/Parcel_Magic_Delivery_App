@@ -12,6 +12,7 @@ import android.view.*
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +28,8 @@ import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -68,9 +71,41 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         lifecycleScope.launch {
             try {
                 val response = viewModel.getAllAreaList()
+                val myAreaResponse = viewModel.viewMyArea()
+                if (myAreaResponse.data.isNotEmpty()){
+                    for (i in myAreaResponse.data.indices){
+                        FirebaseMessaging.getInstance().subscribeToTopic(myAreaResponse.data[i].area_name)
+                            .addOnCompleteListener { task ->
+                                var msg = getString(R.string.open)
+                                if (!task.isSuccessful) {
+                                    msg = getString(R.string.close)
+                                }
+                                //Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
                 areaList = response.data!!
+                FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+                    val token = instanceIdResult.token
+                    lifecycleScope.launch {
+                        try {
+                            val saveFcmTokenResponse = viewModel.saveFcmToken(token)
+                            if (saveFcmTokenResponse.success) {
+                                dismissDialog()
+                            }
+                        } catch (e: ApiException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: NoInternetException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        }
+                    }
+                }
                 dismissDialog()
-            } catch (e: MalformedJsonException) {
+            } catch (e: com.google.gson.stream.MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
                 e.printStackTrace()
@@ -287,10 +322,27 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     dialogs.dismiss()
                 }
                 ok.setOnClickListener {
-                    PersistentUser.getInstance().logOut(context)
-                    val intent = Intent(requireContext(), AuthActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    startActivity(intent)
+                    setProgressDialog(requireActivity())
+                    lifecycleScope.launch {
+                        val myAreaResponse = viewModel.viewMyArea()
+                        if (myAreaResponse.success){
+                            if (myAreaResponse.data.isNotEmpty()){
+                                for (i in myAreaResponse.data.indices){
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(myAreaResponse.data[i].area_name)
+                                }
+                                val deleteFcmTokenResponse = viewModel.deleteFcmToken()
+                                if (deleteFcmTokenResponse.success) {
+                                    dismissDialog()
+                                    Toast.makeText(requireActivity(), deleteFcmTokenResponse.msg, Toast.LENGTH_LONG).show()
+                                    PersistentUser.getInstance().logOut(context)
+                                    val intent = Intent(requireContext(), AuthActivity::class.java)
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    startActivity(intent)
+                                }
+                            }
+                        }
+
+                    }
                 }
                 dialogs.setCancelable(false)
                 dialogs.show()

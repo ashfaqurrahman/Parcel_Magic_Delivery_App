@@ -302,6 +302,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                 try {
                     val response = viewModel.deleteMyArea(area.id)
                     if (response.success) {
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(area.area_name)
                         binding.rootLayout.snackbar(response.msg)
                         syncMyAreaList()
                     }
