@@ -1,6 +1,7 @@
 package com.airposted.bitoronbd_deliveryman.view.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +14,13 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            val data = bundle.get("category")
+            Log.e("aaaaaa", data.toString())
+            //bundle must contain all info sent in "data" field of the notification
+        }
 
         if (intent.getStringExtra("notification") != null){
             addContentFragment(MyLiveDeliveryFragment(), true)
