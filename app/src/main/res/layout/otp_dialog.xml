@@ -13,76 +13,93 @@
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/title"
+            <LinearLayout
+                android:id="@+id/layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:justificationMode="inter_word"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Ask the sender for 6 digit \nOTP sent to his/her device"
-                android:textColor="#0f122f"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <in.aabhasjindal.otptextview.OtpTextView
-                android:id="@+id/otp_view"
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:justificationMode="inter_word"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="25dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Ask the sender for 6 digit \nOTP sent to his/her device"
+                    android:textColor="#0f122f"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <in.aabhasjindal.otptextview.OtpTextView
+                    android:id="@+id/otp_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="#0f122f"
+                    app:bar_enabled="false"
+                    app:bar_height="2dp"
+                    app:height="35dp"
+                    app:width="35dp"
+                    app:length="6"
+                    app:otp_box_background="@drawable/button_bg"
+                    app:otp_text_size="18dp"/>
+
+                <CheckBox
+                    android:id="@+id/check"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    tools:text="Text"
+                    android:drawablePadding="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_color"/>
+
+                <TextView
+                    android:id="@+id/verify"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/before_button_bg"
+                    android:gravity="center"
+                    android:paddingStart="35dp"
+                    android:paddingTop="13dp"
+                    android:paddingEnd="35dp"
+                    android:paddingBottom="13dp"
+                    android:text="@string/verify"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="#0f122f"
-                app:bar_enabled="false"
-                app:bar_height="2dp"
-                app:height="35dp"
-                app:width="35dp"
-                app:length="6"
-                app:otp_box_background="@drawable/button_bg"
-                app:otp_text_size="18dp"/>
+                android:layout_alignEnd="@+id/layout"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:rotation="90"
+                android:src="@drawable/ic_cross_icon" />
 
-            <CheckBox
-                android:id="@+id/check"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                tools:text="Text"
-                android:drawablePadding="10dp"
-                android:textSize="14sp"
-                android:textColor="@color/text_color"/>
-
-            <TextView
-                android:id="@+id/verify"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="35dp"
-                android:layout_weight="1"
-                android:background="@drawable/before_button_bg"
-                android:gravity="center"
-                android:paddingStart="35dp"
-                android:paddingTop="13dp"
-                android:paddingEnd="35dp"
-                android:paddingBottom="13dp"
-                android:text="@string/verify"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
