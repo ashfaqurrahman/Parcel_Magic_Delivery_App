@@ -13,6 +13,8 @@
         android:id="@+id/area_item"
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView

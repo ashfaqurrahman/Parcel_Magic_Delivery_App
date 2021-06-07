@@ -10,6 +10,8 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="#fcfcff"
+        android:clickable="true"
+        android:focusable="true"
         tools:context=".view.main.ProfileFragment">
 
         <include layout="@layout/custom_toolbar_profile"
