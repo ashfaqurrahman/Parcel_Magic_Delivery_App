@@ -93,7 +93,15 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                             if (saveFcmTokenResponse.success) {
                                 dismissDialog()
                             }
-                        } catch (e: ApiException) {
+                        } catch (e: com.google.gson.stream.MalformedJsonException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: com.google.android.gms.common.api.ApiException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        }catch (e: ApiException) {
                             dismissDialog()
                             binding.rootLayout.snackbar(e.message!!)
                             e.printStackTrace()
