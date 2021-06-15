@@ -20,11 +20,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitoronBD_Deliveryman">
-        <activity android:name=".view.IntroActivity"></activity>
-        <activity android:name=".view.auth.AuthActivity" />
-        <activity android:name=".view.WebViewActivity" />
+        <activity android:name=".view.IntroActivity"
+            android:screenOrientation="fullSensor"/>
+        <activity android:name=".view.auth.AuthActivity"
+            android:screenOrientation="fullSensor"/>
+        <activity android:name=".view.WebViewActivity"
+            android:screenOrientation="fullSensor"/>
         <activity
             android:name=".view.SplashActivity"
+            android:screenOrientation="fullSensor"
             android:theme="@style/Theme.BitoronBD_Deliveryman.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +39,8 @@
         <activity android:name=".view.main.MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
+            android:theme="@style/Base.Theme.AppCompat"
+            android:screenOrientation="fullSensor"/>
 
         <service android:name=".MyFirebaseMessagingService"
             android:exported="false">
