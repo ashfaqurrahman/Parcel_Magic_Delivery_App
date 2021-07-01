@@ -16,7 +16,13 @@ interface MyApi {
     @FormUrlEncoded
     @POST("phonenumbercheck")
     suspend fun numberCheck(
-        @Field("phone") email: String
+        @Field("phone") phone: String
+    ) : Response<AuthResponse>
+
+    @FormUrlEncoded
+    @POST("send_otp_message")
+    suspend fun sendOTP(
+        @Field("phone_number") phone: String
     ) : Response<AuthResponse>
 
     @Multipart
@@ -55,7 +61,7 @@ interface MyApi {
     suspend fun addMyArea(
         @Header("Authorization") header: String,
         @Field("area_id") areaId: Int
-    ) : Response<AddMyAreaModel>
+    ) : Response<RequestModel>
 
     @POST("delivery/prefered_area_list_view")
     suspend fun viewMyArea(
@@ -67,7 +73,7 @@ interface MyApi {
     suspend fun deleteMyArea(
         @Header("Authorization") header: String,
         @Field("prefered_area_id") id: Int
-    ) : Response<AddMyAreaModel>
+    ) : Response<RequestModel>
 
     @FormUrlEncoded
     @POST("delivery/search_order_list")
@@ -140,12 +146,12 @@ interface MyApi {
     suspend fun saveFcmToken(
         @Header("Authorization") header: String,
         @Field("fcm_token") fcm_token: String,
-    ): Response<AddMyAreaModel>
+    ): Response<RequestModel>
 
     @GET("delivery/deletefcmtoken")
     suspend fun deleteFcmToken(
         @Header("Authorization") header: String
-    ): Response<AddMyAreaModel>
+    ): Response<RequestModel>
 
     companion object{
         operator fun invoke(

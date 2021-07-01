@@ -24,7 +24,7 @@ class HomeRepository(
         }
     }
 
-    suspend fun addMyArea(areaId: Int): AddMyAreaModel {
+    suspend fun addMyArea(areaId: Int): RequestModel {
         return apiRequest {
             api.addMyArea(
                 PersistentUser.getInstance().getAccessToken(appContext),
@@ -43,7 +43,7 @@ class HomeRepository(
         }
     }
 
-    suspend fun deleteMyArea(id: Int): AddMyAreaModel {
+    suspend fun deleteMyArea(id: Int): RequestModel {
         return apiRequest {
             api.deleteMyArea(
                 PersistentUser.getInstance().getAccessToken(appContext), id
@@ -139,14 +139,14 @@ class HomeRepository(
         }
     }
 
-    suspend fun saveFcmToken(fcm_token: String): AddMyAreaModel {
+    suspend fun saveFcmToken(fcm_token: String): RequestModel {
         return apiRequest { api.saveFcmToken(
             PersistentUser.getInstance().getAccessToken(
                 appContext
             ), fcm_token) }
     }
 
-    suspend fun deleteFcmToken(): AddMyAreaModel {
+    suspend fun deleteFcmToken(): RequestModel {
         return apiRequest { api.deleteFcmToken(
             PersistentUser.getInstance().getAccessToken(
                 appContext

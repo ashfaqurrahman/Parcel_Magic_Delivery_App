@@ -7,23 +7,30 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.MalformedJsonException
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentRegisterBinding
-import com.airposted.bitoronbd_deliveryman.utils.customTextView
-import com.airposted.bitoronbd_deliveryman.utils.hideKeyboard
-import com.airposted.bitoronbd_deliveryman.utils.multipleTextWatcher
-import com.airposted.bitoronbd_deliveryman.utils.snackbar
+import com.airposted.bitoronbd_deliveryman.utils.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import kotlinx.coroutines.launch
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(), KodeinAware {
+    override val kodein by kodein()
+    private lateinit var viewModel: AuthViewModel
+    private val factory: AuthViewModelFactory by instance()
     private lateinit var binding: FragmentRegisterBinding
     private var communicatorFragmentInterface: AuthCommunicatorFragmentInterface? = null
     private var gender: String? = null
@@ -34,6 +41,7 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         return binding.root
     }
 
@@ -67,8 +75,47 @@ class RegisterFragment : Fragment() {
             val name = binding.name.text.toString()
             if (mCropImageUri != null) {
                 if (name.isNotEmpty()) {
+                    sendOTP()
+//                    val fragment = OTPFragment()
+//                    val bundle = Bundle()
+//                    bundle.putString("imageUri", mCropImageUri?.path)
+//                    bundle.putString("phone", requireArguments().getString("phone"))
+//                    bundle.putString("name", binding.name.text.toString())
+//                    bundle.putString("address", binding.address.text.toString())
+//                    if (id == "National ID") {
+//                        bundle.putString("nid", binding.idNumber.text.toString())
+//                    } else {
+//                        bundle.putString("drive_lisence", binding.idNumber.text.toString())
+//                    }
+//                    if (gender == "Male") {
+//                        bundle.putInt("gender", 1)
+//                    } else {
+//                        bundle.putInt("gender", 0)
+//                    }
+//                    bundle.putString("dob", binding.name.text.toString())
+//                    bundle.putBoolean("isAuth", false)
+//                    fragment.arguments = bundle
+//                    communicatorFragmentInterface?.addContentFragment(fragment, true)
+                } else {
+                    binding.main.snackbar("Username should not empty")
+                }
+            } else {
+                binding.main.snackbar("User photo is required")
+            }
+        }
+    }
+
+    private fun sendOTP() {
+        setProgressDialog(requireActivity())
+        lifecycleScope.launch {
+            try {
+                val response = viewModel.sendOTP(
+                    requireArguments().getString("phone")!!
+                )
+                if (response.success) {
                     val fragment = OTPFragment()
                     val bundle = Bundle()
+                    bundle.putString("otp", response.data?.token)
                     bundle.putString("imageUri", mCropImageUri?.path)
                     bundle.putString("phone", requireArguments().getString("phone"))
                     bundle.putString("name", binding.name.text.toString())
@@ -88,10 +135,21 @@ class RegisterFragment : Fragment() {
                     fragment.arguments = bundle
                     communicatorFragmentInterface?.addContentFragment(fragment, true)
                 } else {
-                    binding.main.snackbar("Username should not empty")
+                    binding.main.snackbar(response.msg)
                 }
-            } else {
-                binding.main.snackbar("User photo is required")
+                dismissDialog()
+            } catch (e: MalformedJsonException) {
+                dismissDialog()
+                binding.main.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.main.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.main.snackbar(e.message!!)
+                e.printStackTrace()
             }
         }
     }
