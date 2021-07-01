@@ -46,62 +46,66 @@ class PhoneNumberFragment : Fragment(), KodeinAware {
 
     private fun bindUI() {
         communicatorFragmentInterface = context as AuthCommunicatorFragmentInterface
-        textWatcher(requireContext(), 8, binding.phone, binding.next)
+        textWatcher(requireContext(), 9, binding.phone, binding.next)
         binding.next.setOnClickListener {
             hideKeyboard(requireActivity())
-            setProgressDialog(requireContext())
-            phone = binding.phone.text.toString().trim()
-            lifecycleScope.launch {
-                try {
-                    authResponse = viewModel.checkNumber("+8801$phone")
-                    if (authResponse?.user != null) {
-                        if (authResponse?.user!!.verified != null) {
-                            when(authResponse?.user?.verified) {
-                                0 -> {
-                                    dismissDialog()
-                                    createAccountSuccessDialog()
+            phone = zeroRemove(binding.phone.text.toString().trim())
+            if (phone!!.length == 10) {
+                setProgressDialog(requireContext())
+                lifecycleScope.launch {
+                    try {
+                        authResponse = viewModel.checkNumber("+880$phone")
+                        if (authResponse?.user != null) {
+                            if (authResponse?.user!!.verified != null) {
+                                when(authResponse?.user?.verified) {
+                                    0 -> {
+                                        dismissDialog()
+                                        createAccountSuccessDialog()
+                                    }
+                                    1 -> {
+                                        dismissDialog()
+                                        val fragment = WelcomeFragment()
+                                        val bundle = Bundle()
+                                        bundle.putString("phone", authResponse!!.user?.phone)
+                                        bundle.putString("token", authResponse!!.data?.token)
+                                        bundle.putInt("id", authResponse!!.user!!.id)
+                                        bundle.putString("image", authResponse!!.user!!.image)
+                                        bundle.putString("name", authResponse!!.user!!.username)
+                                        bundle.putBoolean("isAuth", true)
+                                        fragment.arguments = bundle
+                                        communicatorFragmentInterface?.addContentFragment(fragment, true)
+                                    }
                                 }
-                                1 -> {
-                                    dismissDialog()
-                                    val fragment = WelcomeFragment()
-                                    val bundle = Bundle()
-                                    bundle.putString("phone", authResponse!!.user?.phone)
-                                    bundle.putString("token", authResponse!!.data?.token)
-                                    bundle.putInt("id", authResponse!!.user!!.id)
-                                    bundle.putString("image", authResponse!!.user!!.image)
-                                    bundle.putString("name", authResponse!!.user!!.username)
-                                    bundle.putBoolean("isAuth", true)
-                                    fragment.arguments = bundle
-                                    communicatorFragmentInterface?.addContentFragment(fragment, true)
-                                }
+                            } else {
+                                dismissDialog()
+                                val fragment = RegisterFragment()
+                                val bundle = Bundle()
+                                bundle.putString("phone", "+880$phone")
+                                fragment.arguments = bundle
+                                communicatorFragmentInterface?.addContentFragment(fragment, true)
                             }
                         } else {
                             dismissDialog()
                             val fragment = RegisterFragment()
                             val bundle = Bundle()
-                            bundle.putString("phone", "+8801$phone")
+                            bundle.putString("phone", "+880$phone")
                             fragment.arguments = bundle
                             communicatorFragmentInterface?.addContentFragment(fragment, true)
                         }
-                    } else {
+                    } catch (e: ApiException) {
                         dismissDialog()
-                        val fragment = RegisterFragment()
-                        val bundle = Bundle()
-                        bundle.putString("phone", "+8801$phone")
-                        fragment.arguments = bundle
-                        communicatorFragmentInterface?.addContentFragment(fragment, true)
+                        binding.main.snackbar(e.message!!)
+                        e.printStackTrace()
+                    } catch (e: NoInternetException) {
+                        dismissDialog()
+                        binding.main.snackbar(e.message!!)
+                        e.printStackTrace()
                     }
-                } catch (e: ApiException) {
-                    dismissDialog()
-                    binding.main.snackbar(e.message!!)
-                    e.printStackTrace()
-                } catch (e: NoInternetException) {
-                    dismissDialog()
-                    binding.main.snackbar(e.message!!)
-                    e.printStackTrace()
                 }
             }
-
+            else {
+                binding.main.snackbar("Incorrect Phone Number")
+            }
         }
     }
 
