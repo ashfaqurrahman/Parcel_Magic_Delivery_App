@@ -3,10 +3,10 @@
 
     <group android:checkableBehavior="none">
 
-        <!--<item
+        <item
             android:id="@+id/my_wallet"
             android:icon="@drawable/ic_wallet"
-            android:title="@string/my_wallet" />-->
+            android:title="@string/my_wallet" />
 
         <item
             android:id="@+id/my_live_delivery"

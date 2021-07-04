@@ -273,10 +273,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-//            R.id.my_wallet -> {
-//                communicatorFragmentInterface?.addContentFragment(MyWalletFragment(), true)
-//                binding.drawerLayout.closeDrawers()
-//            }
+            R.id.my_wallet -> {
+                communicatorFragmentInterface?.addContentFragment(MyWalletFragment(), true)
+                binding.drawerLayout.closeDrawers()
+            }
             R.id.my_live_delivery -> {
                 binding.drawerLayout.closeDrawers()
                 communicatorFragmentInterface?.addContentFragment(
