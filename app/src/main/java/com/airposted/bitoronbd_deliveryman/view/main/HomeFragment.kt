@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.MalformedJsonException
 import android.view.*
 import android.widget.EditText
 import android.widget.ImageView
@@ -26,6 +25,8 @@ import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
 import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
+import com.airposted.bitoronbd_deliveryman.view.main.history.MyDeliveryHistoryFragment
+import com.airposted.bitoronbd_deliveryman.view.main.wallet.MyWalletFragment
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.iid.FirebaseInstanceId

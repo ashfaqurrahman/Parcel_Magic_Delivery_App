@@ -61,6 +61,16 @@ class HomeRepository(
         }
     }
 
+    suspend fun myWallet(): WalletModel {
+        return apiRequest {
+            api.myWallet(
+                PersistentUser.getInstance().getAccessToken(
+                    appContext
+                )
+            )
+        }
+    }
+
     suspend fun getOrderList(to: Int, from: Int): OrderListModel {
         return apiRequest {
             api.getOrderList(

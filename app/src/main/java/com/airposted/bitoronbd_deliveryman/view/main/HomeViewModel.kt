@@ -21,6 +21,8 @@ class HomeViewModel(
 
     suspend fun myProfile() = withContext(Dispatchers.IO) { repository.myProfile() }
 
+    suspend fun myWallet() = withContext(Dispatchers.IO) { repository.myWallet() }
+
     suspend fun getOrderList(to: Int, from: Int) = withContext(Dispatchers.IO) { repository.getOrderList(to, from) }
 
     suspend fun getOrderListByArea(to: Int) = withContext(Dispatchers.IO) { repository.getOrderListByArea(to) }

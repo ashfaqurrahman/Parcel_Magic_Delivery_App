@@ -116,6 +116,11 @@ interface MyApi {
         @Header("Authorization") header: String
     ) : Response<ProfileModel>
 
+    @GET("delivery/wallet")
+    suspend fun myWallet(
+        @Header("Authorization") header: String
+    ) : Response<WalletModel>
+
 
     @FormUrlEncoded
     @POST("delivery/delivery_user_update")

@@ -10,7 +10,7 @@
         android:background="#fcfcff"
         android:clickable="true"
         android:focusable="true"
-        tools:context=".view.main.MyDeliveryHistoryFragment">
+        tools:context=".view.main.history.MyDeliveryHistoryFragment">
 
         <include layout="@layout/custom_toolbar"
             android:id="@+id/toolbar"/>

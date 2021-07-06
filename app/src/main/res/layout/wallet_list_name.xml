@@ -1,141 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        app:cardCornerRadius="12dp"
-        app:cardBackgroundColor="@color/white">
+    <data>
+        <variable
+            name="walletHistoryList"
+            type="com.airposted.bitoronbd_deliveryman.model.WalletDataModel" />
+    </data>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:orientation="vertical">
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/white">
 
-            <RelativeLayout
-                android:visibility="visible"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/from"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textStyle="normal"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textSize="14sp"
-                    android:textColor="#1a1662"
-                    android:lineSpacingExtra="45sp"
-                    android:text="Uttara"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/from"
-                    android:layout_toStartOf="@+id/to"
-                    android:src="@drawable/ic_airline"/>
-
-                <TextView
-                    android:id="@+id/to"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:textAlignment="textEnd"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textStyle="normal"
-                    android:textSize="14sp"
-                    android:textColor="#1a1662"
-                    android:lineSpacingExtra="45sp"
-                    android:text="Badda"
-                    />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/view_color" />
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
+                android:padding="15dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/from"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textStyle="normal"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textSize="14sp"
+                        android:textColor="#1a1662"
+                        android:lineSpacingExtra="45sp"
+                        android:text="@{walletHistoryList.recp_address}"
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/from"
+                        android:layout_toStartOf="@+id/to"
+                        android:src="@drawable/ic_airline"/>
+
+                    <TextView
+                        android:id="@+id/to"
+                        android:layout_width="120dp"
+                        android:layout_marginStart="7dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textAlignment="textEnd"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#1a1662"
+                        android:lineSpacingExtra="45sp"
+                        android:text="@{walletHistoryList.pick_address}"
+                        />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/view_color" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/delivered_time"
-                    android:layout_alignBottom="@+id/delivered_time"
-                    android:fontFamily="@font/poppins_regular"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="7sp"
-                    android:text="Delivered Date:"
-                    android:textColor="#111329"
-                    android:textSize="14sp"
-                    android:textStyle="normal" />
+                    android:layout_marginTop="5dp">
 
-                <TextView
-                    android:id="@+id/delivered_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/poppins_bold"
-                    android:lineSpacingExtra="9sp"
-                    android:textColor="#0f122f"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="10/05/2021"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/delivered_time"
+                        android:layout_alignBottom="@+id/delivered_time"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:lineSpacingExtra="7sp"
+                        android:text="Delivered Date:"
+                        android:textColor="#111329"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/delivered_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:lineSpacingExtra="9sp"
+                        android:textColor="#0f122f"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@{walletHistoryList.delivery_date}"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/earning"
-                    android:layout_alignBottom="@+id/earning"
-                    android:fontFamily="@font/poppins_regular"
-                    android:gravity="center_vertical"
-                    android:lineSpacingExtra="7sp"
-                    android:text="Earn:"
-                    android:textColor="#111329"
-                    android:textSize="14sp"
-                    android:textStyle="normal" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/earning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/poppins_bold"
-                    android:lineSpacingExtra="9sp"
-                    android:textColor="#0f122f"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="BDT 200"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/earning"
+                        android:layout_alignBottom="@+id/earning"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:lineSpacingExtra="7sp"
+                        android:text="Earn:"
+                        android:textColor="#111329"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/earning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/poppins_bold"
+                        android:lineSpacingExtra="9sp"
+                        android:textColor="#0f122f"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text="@{String.valueOf(walletHistoryList.logistics_charge)}"/>
 
-        </LinearLayout>
+                </RelativeLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-</LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</layout>
