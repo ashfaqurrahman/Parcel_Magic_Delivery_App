@@ -12,7 +12,7 @@ data class WalletDataModel(
     val collection_date: Any,
     val created_at: String,
     val current_status: Int,
-    val delivery_charge: Int,
+    val delivery_charge: Double,
     val delivery_date: String,
     val delivery_type: Any,
     val dimention: Int,
@@ -53,7 +53,7 @@ data class WalletDataModel(
     val shop_id: Any,
     val special_instruction: Any,
     val status: Int,
-    val total_price: Any,
+    val total_price: Double,
     val updated_at: Any,
     val user_id: Int,
     val who_will_pay: Int

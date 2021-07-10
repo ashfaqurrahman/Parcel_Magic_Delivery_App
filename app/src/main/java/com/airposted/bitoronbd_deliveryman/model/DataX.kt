@@ -9,7 +9,7 @@ data class DataX(
     val collection_date: Any,
     val created_at: String,
     val current_status: Int,
-    val delivery_charge: Int,
+    val delivery_charge: Double,
     val delivery_date: String,
     val delivery_type: Int,
     val dimention: Int,
@@ -45,7 +45,7 @@ data class DataX(
     val shop_id: Int,
     val special_instruction: String,
     val ssl_transaction_id: Any,
-    val total_price: Int,
+    val total_price: Double,
     val updated_at: String,
     val user_id: Int,
     val who_will_pay: Int

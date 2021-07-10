@@ -9,7 +9,7 @@ data class OrderDetailsModelData(
     val collection_date: Any,
     val created_at: String,
     val current_status: Int,
-    val delivery_charge: Int,
+    val delivery_charge: Double,
     val delivery_date: String,
     val delivery_type: Any,
     val dimention: Int,
@@ -39,7 +39,7 @@ data class OrderDetailsModelData(
     val shop_id: Any,
     val special_instruction: String,
     val ssl_transaction_id: Any,
-    val total_price: Any,
+    val total_price: Double,
     val updated_at: String,
     val user_id: Int,
     val who_will_pay: Int

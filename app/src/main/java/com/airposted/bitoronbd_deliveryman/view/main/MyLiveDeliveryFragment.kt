@@ -124,7 +124,7 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         bundle.putInt("current_status", currentOrder.current_status)
         bundle.putInt("coc", currentOrder.coc)
         bundle.putInt("cod", currentOrder.cod)
-        bundle.putInt("price", currentOrder.delivery_charge)
+        bundle.putDouble("price", currentOrder.delivery_charge)
         bundle.putString("invoice", currentOrder.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)

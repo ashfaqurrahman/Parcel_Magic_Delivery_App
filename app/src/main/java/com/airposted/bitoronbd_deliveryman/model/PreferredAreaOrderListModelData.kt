@@ -9,7 +9,7 @@ data class PreferredAreaOrderListModelData(
     val collection_date: Any,
     val created_at: String,
     val current_status: Int,
-    val delivery_charge: Int,
+    val delivery_charge: Double,
     val delivery_date: String,
     val delivery_type: Int,
     val dimention: Int,
