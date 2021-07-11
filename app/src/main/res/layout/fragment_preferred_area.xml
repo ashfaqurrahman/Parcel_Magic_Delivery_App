@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:clickable="true"
         android:focusable="true"
-        tools:context=".view.main.PreferredAreaFragment">
+        tools:context=".view.main.preferred_area.PreferredAreaFragment">
 
         <include layout="@layout/custom_toolbar"
             android:id="@+id/toolbar"/>

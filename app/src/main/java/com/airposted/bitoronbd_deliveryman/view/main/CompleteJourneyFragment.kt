@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJourneyBinding
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeFragment
 
-class CompleteJourneyFragment : Fragment(),IOnBackPressed {
+class CompleteJourneyFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentCompleteJourneyBinding
     private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
     override fun onCreateView(
@@ -26,7 +29,7 @@ class CompleteJourneyFragment : Fragment(),IOnBackPressed {
     private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
 
-        binding.cost.text = "৳" + requireArguments().getInt("price")
+        binding.cost.text = "BDT " + requireArguments().getDouble("delivery_charge")
 
         binding.completeYourJourney.setOnClickListener {
             communicatorFragmentInterface?.addContentFragment(HomeFragment(), false)

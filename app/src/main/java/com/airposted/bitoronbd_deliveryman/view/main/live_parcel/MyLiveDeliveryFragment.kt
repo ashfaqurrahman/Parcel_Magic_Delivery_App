@@ -1,9 +1,8 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.live_parcel
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.MalformedJsonException
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,9 +13,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentMyLiveDeliveryBinding
-import com.airposted.bitoronbd_deliveryman.model.OrderListModel
 import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.airposted.bitoronbd_deliveryman.view.main.*
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -120,11 +123,13 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         bundle.putString("recp_phone", currentOrder.recp_phone)
         bundle.putString("sender_name", currentOrder.pic_name)
         bundle.putString("sender_phone", currentOrder.pic_phone)
+        bundle.putInt("item_qty", currentOrder.item_qty)
         bundle.putDouble("distance", currentOrder.distance)
+        bundle.putInt("item_type", currentOrder.item_type)
+        bundle.putDouble("delivery_charge", currentOrder.delivery_charge)
         bundle.putInt("current_status", currentOrder.current_status)
         bundle.putInt("coc", currentOrder.coc)
         bundle.putInt("cod", currentOrder.cod)
-        bundle.putDouble("price", currentOrder.delivery_charge)
         bundle.putString("invoice", currentOrder.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)

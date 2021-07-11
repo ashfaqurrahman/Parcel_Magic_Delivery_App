@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentWebViewBinding
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 
 class WebViewFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentWebViewBinding

@@ -1,4 +1,4 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.home
 
 import android.app.Dialog
 import android.content.Intent
@@ -25,7 +25,18 @@ import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
 import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
+import com.airposted.bitoronbd_deliveryman.view.main.HelpFragment
+import com.airposted.bitoronbd_deliveryman.view.main.ProfileFragment
+import com.airposted.bitoronbd_deliveryman.view.main.TermsConditionsFragment
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 import com.airposted.bitoronbd_deliveryman.view.main.history.MyDeliveryHistoryFragment
+import com.airposted.bitoronbd_deliveryman.view.main.live_parcel.MyLiveDeliveryFragment
+import com.airposted.bitoronbd_deliveryman.view.main.parcel_request.ParcelRequestFragment
+import com.airposted.bitoronbd_deliveryman.view.main.preferred_area.AreaClickListener
+import com.airposted.bitoronbd_deliveryman.view.main.preferred_area.AreaListRecyclerViewAdapter
+import com.airposted.bitoronbd_deliveryman.view.main.preferred_area.PreferredAreaFragment
+import com.airposted.bitoronbd_deliveryman.view.main.preferred_order.PreferredOrderListFragment
 import com.airposted.bitoronbd_deliveryman.view.main.wallet.MyWalletFragment
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView

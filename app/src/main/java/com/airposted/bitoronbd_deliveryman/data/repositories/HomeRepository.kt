@@ -5,6 +5,7 @@ import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.data.network.MyApi
 import com.airposted.bitoronbd_deliveryman.data.network.SafeApiRequest
 import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

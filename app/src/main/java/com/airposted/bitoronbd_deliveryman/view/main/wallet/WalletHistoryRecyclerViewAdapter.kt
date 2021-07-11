@@ -6,10 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.BR
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.databinding.MyDeliveryHistoryListItemBinding
 import com.airposted.bitoronbd_deliveryman.databinding.WalletListNameBinding
-import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
-import com.airposted.bitoronbd_deliveryman.model.WalletDataModel
+import com.airposted.bitoronbd_deliveryman.model.wallet.WalletDataModel
 
 class WalletHistoryRecyclerViewAdapter(
     private val walletListModelData: List<WalletDataModel>,

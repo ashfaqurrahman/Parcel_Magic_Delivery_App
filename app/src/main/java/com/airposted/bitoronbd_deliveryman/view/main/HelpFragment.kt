@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentHelpBinding
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 
 class HelpFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentHelpBinding

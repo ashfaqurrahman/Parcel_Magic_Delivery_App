@@ -1,43 +1,40 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.parcel_request
 
 import android.os.Bundle
-import android.util.Log
 import android.util.MalformedJsonException
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.databinding.FragmentPreferredOrderListBinding
-import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.databinding.FragmentParcelRequestBinding
+import com.airposted.bitoronbd_deliveryman.model.OrderListModel
+import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
-
-class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickListener, IOnBackPressed {
+class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener, IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
-    private lateinit var binding: FragmentPreferredOrderListBinding
+    private lateinit var binding: FragmentParcelRequestBinding
     var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
-    private lateinit var areaList: List<ViewMyAreaModelData>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPreferredOrderListBinding.inflate(inflater, container, false)
+        binding = FragmentParcelRequestBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         return binding.root
     }
@@ -49,59 +46,30 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
 
     private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
+        binding.toolbar.toolbarTitle.text = getString(R.string.parcel_request)
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.toolbar.toolbarTitle.text = getString(R.string.preferred_area_order_list)
-
-        setProgressDialog(requireActivity())
-        lifecycleScope.launch {
-            try {
-                dismissDialog()
-                val myAreaResponse = viewModel.viewMyArea()
-                areaList = myAreaResponse.data
-                val array = Array<String?>(areaList.size) { null }
-                for (i in areaList.indices) {
-                    array[i] = areaList[i].area_name
-                }
-                val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, array)
-                binding.spinner.adapter = arrayAdapter
-                binding.spinner.onItemSelectedListener = object : OnItemSelectedListener {
-                    override fun onItemSelected(
-                        parent: AdapterView<*>,
-                        view: View,
-                        position: Int,
-                        id: Long
-                    ) {
-
-                        for(i in areaList.indices) {
-                            if (areaList[i].area_name == parent.selectedItem.toString()){
-                                //binding.rootLayout.snackbar(areaList[0].area_id.toString())
-                            }
-                        }
-                    }
-
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
-                }
-            } catch (e: MalformedJsonException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            } catch (e: ApiException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            } catch (e: NoInternetException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
+        when {
+            requireArguments().getString("context") == "home" -> {
+                searchByFromTo()
+            }
+            requireArguments().getString("context") == "preferred" -> {
+                binding.layout.visibility = View.GONE
+                searchByTo(requireArguments().getInt("areaId"))
+            }
+            else -> {
+                binding.rootLayout.snackbar("Null context!!")
             }
         }
 
+    }
+
+    private fun searchByTo(id: Int) {
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
-                val response = viewModel.getPreferredOrderList()
+                val response = viewModel.getOrderListByArea(id)
                 showOrderList(response)
             } catch (e: MalformedJsonException) {
                 dismissDialog()
@@ -119,31 +87,58 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
         }
     }
 
-    private fun showOrderList(response: PreferredAreaOrderListModel) {
-        if (response.data.isNotEmpty()) {
-            binding.allParcelRequestList.visibility = View.VISIBLE
-            binding.noOrder.visibility = View.GONE
-            val myRecyclerViewAdapter = PreferredOrderListRecyclerViewAdapter(response.data, this)
-            binding.allParcelRequestList.layoutManager = GridLayoutManager(requireActivity(), 1)
-            binding.allParcelRequestList.itemAnimator = DefaultItemAnimator()
-            binding.allParcelRequestList.adapter = myRecyclerViewAdapter
-            dismissDialog()
-        }
-        else {
-            binding.allParcelRequestList.visibility = View.GONE
-            binding.noOrder.visibility = View.VISIBLE
-            dismissDialog()
+    private fun searchByFromTo() {
+        binding.from.text = requireArguments().getString("from")
+        binding.to.text = requireArguments().getString("to")
+        setProgressDialog(requireActivity())
+        lifecycleScope.launch {
+            try {
+                val response = viewModel.getOrderList(requireArguments().getInt("toId"), requireArguments().getInt("fromId"))
+                showOrderList(response)
+            } catch (e: MalformedJsonException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            }
         }
     }
 
-    override fun onItemClick(preferredOrder: PreferredAreaOrderListModelData) {
+    private fun showOrderList(response: OrderListModel) {
+        if (response.data.isNotEmpty()) {
+            binding.parcelRequestList.visibility = View.VISIBLE
+            binding.noOrder.visibility = View.GONE
+            val myRecyclerViewAdapter = OrderListRecyclerViewAdapter(response.data, this)
+            binding.parcelRequestList.layoutManager = GridLayoutManager(requireActivity(), 1)
+            binding.parcelRequestList.itemAnimator = DefaultItemAnimator()
+            binding.parcelRequestList.adapter = myRecyclerViewAdapter
+        }
+        else {
+            binding.parcelRequestList.visibility = View.GONE
+            binding.noOrder.visibility = View.VISIBLE
+        }
+        dismissDialog()
+    }
+
+    override fun onItemClick(order: OrderListModelData) {
         val fragment = ParcelDetailsFragment()
         val bundle = Bundle()
-        bundle.putString("delivery_date", preferredOrder.delivery_date)
-        bundle.putString("pick_address", preferredOrder.pick_address)
-        bundle.putString("recp_address", preferredOrder.recp_address)
-        bundle.putString("order_item_name", preferredOrder.order_item_name)
-        bundle.putString("invoice", preferredOrder.invoice_no)
+        bundle.putString("delivery_date", order.delivery_date)
+        bundle.putString("pick_address", order.pick_address)
+        bundle.putString("recp_address", order.recp_address)
+        bundle.putString("order_item_name", order.order_item_name)
+        bundle.putDouble("distance", order.distance)
+        bundle.putDouble("delivery_charge", order.delivery_charge)
+        bundle.putInt("item_type", order.item_type)
+        bundle.putInt("item_qty", order.item_qty)
+        bundle.putString("invoice", order.invoice_no)
         fragment.arguments = bundle
         communicatorFragmentInterface?.addContentFragment(fragment, true)
     }
@@ -151,5 +146,4 @@ class PreferredOrderListFragment : Fragment(), KodeinAware, PreferredOrderClickL
     override fun onBackPressed(): Boolean {
         return false
     }
-
 }

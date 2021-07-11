@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.R
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 
 class SettingFragment : Fragment(), IOnBackPressed {
 

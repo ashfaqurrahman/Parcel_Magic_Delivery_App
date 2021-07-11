@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white"
-        tools:context=".view.main.MyLiveDeliveryFragment"
+        tools:context=".view.main.live_parcel.MyLiveDeliveryFragment"
         android:clickable="true"
         android:focusable="true">
 

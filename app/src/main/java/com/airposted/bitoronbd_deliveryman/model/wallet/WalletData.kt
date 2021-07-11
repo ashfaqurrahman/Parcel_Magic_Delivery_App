@@ -1,4 +1,4 @@
-package com.airposted.bitoronbd_deliveryman.model
+package com.airposted.bitoronbd_deliveryman.model.wallet
 
 data class WalletData(
     val current_page: Int,

@@ -90,7 +90,7 @@
                             android:id="@+id/icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_document_large_icon"/>
+                            android:background="@drawable/ic_document_large_icon"/>
 
                         <LinearLayout
                             android:id="@+id/weight_layout"
@@ -107,10 +107,11 @@
                                 android:textStyle="normal"
                                 android:textSize="13sp"
                                 android:textColor="#b5b7dd"
-                                android:text="Weight"
+                                android:text="Quantity"
                                 />
 
                             <TextView
+                                android:id="@+id/item_qty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_semi_bold"
@@ -141,20 +142,22 @@
                                 />
 
                             <TextView
+                                android:id="@+id/size"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_semi_bold"
                                 android:textStyle="normal"
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
-                                android:text="20 cm"
+                                tools:text="8x8x8"
                                 />
 
                         </LinearLayout>
 
                         <LinearLayout
+                            android:layout_alignStart="@+id/charge_layout"
+                            android:id="@+id/distance_layout"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginStart="19dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
@@ -170,6 +173,7 @@
                                 />
 
                             <TextView
+                                android:id="@+id/distance"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_semi_bold"
@@ -177,6 +181,38 @@
                                 android:textSize="14sp"
                                 android:textColor="#1a1662"
                                 android:text="7.5 km"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/charge_layout"
+                            android:layout_below="@+id/distance_layout"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="19dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textStyle="normal"
+                                android:textSize="13sp"
+                                android:textColor="#b5b7dd"
+                                android:text="Delivery Charge"
+                                />
+
+                            <TextView
+                                android:id="@+id/delivery_charge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_semi_bold"
+                                android:textStyle="normal"
+                                android:textSize="14sp"
+                                android:textColor="#1a1662"
+                                android:text="BDT 100"
                                 />
 
                         </LinearLayout>

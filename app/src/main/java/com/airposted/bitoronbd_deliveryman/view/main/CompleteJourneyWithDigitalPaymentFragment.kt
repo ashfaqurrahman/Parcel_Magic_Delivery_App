@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJourneyBinding
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentCompleteJurneyWithDigitalPaymentBinding
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeFragment
 
 class CompleteJourneyWithDigitalPaymentFragment : Fragment(), IOnBackPressed {
 
@@ -29,7 +30,7 @@ class CompleteJourneyWithDigitalPaymentFragment : Fragment(), IOnBackPressed {
     private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
 
-        binding.cost.text = "৳" + requireArguments().getInt("price")
+        binding.cost.text = "BDT " + requireArguments().getDouble("delivery_charge")
 
         binding.completeYourJourney.setOnClickListener {
             communicatorFragmentInterface?.addContentFragment(HomeFragment(), false)

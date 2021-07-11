@@ -2,6 +2,7 @@ package com.airposted.bitoronbd_deliveryman.data.network
 
 import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody

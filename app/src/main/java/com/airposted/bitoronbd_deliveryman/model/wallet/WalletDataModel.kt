@@ -1,4 +1,4 @@
-package com.airposted.bitoronbd_deliveryman.model
+package com.airposted.bitoronbd_deliveryman.model.wallet
 
 data class WalletDataModel(
     val active: Any,
@@ -16,7 +16,7 @@ data class WalletDataModel(
     val delivery_date: String,
     val delivery_type: Any,
     val dimention: Int,
-    val distance: Int,
+    val distance: Double,
     val id: Int,
     val invoice_no: String,
     val item_des: Any,

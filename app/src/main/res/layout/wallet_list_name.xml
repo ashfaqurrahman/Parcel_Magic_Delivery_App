@@ -5,7 +5,7 @@
     <data>
         <variable
             name="walletHistoryList"
-            type="com.airposted.bitoronbd_deliveryman.model.WalletDataModel" />
+            type="com.airposted.bitoronbd_deliveryman.model.wallet.WalletDataModel" />
     </data>
 
     <LinearLayout

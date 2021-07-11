@@ -21,6 +21,7 @@
         app:cardCornerRadius="12dp">
 
         <LinearLayout
+            android:id="@+id/view_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -32,95 +33,32 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp">
-
-                <ImageView
-                    android:id="@+id/docs_icon"
-                    android:layout_alignTop="@+id/title"
-                    android:layout_alignBottom="@+id/weight_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_docs"/>
+                android:layout_marginTop="16dp">
 
                 <TextView
-                    android:id="@+id/title"
-                    android:layout_toEndOf="@+id/docs_icon"
-                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semi_bold"
-                    android:textStyle="normal"
-                    android:textSize="20sp"
-                    android:textColor="#1a1662"
+                    android:layout_alignParentStart="true"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:lineSpacingExtra="8sp"
                     android:text="@{currentOrderList.order_item_name}"
-                    />
+                    android:textColor="#1a1662"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:drawableStartCompat="@drawable/ic_car" />
 
-                <LinearLayout
-                    android:id="@+id/weight_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/title"
-                    android:layout_toEndOf="@+id/docs_icon"
-                    android:layout_marginStart="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="#b5b7dd"
-                        android:lineSpacingExtra="48sp"
-                        android:text="Weight  :  "
-                        />
-
-                    <TextView
-                        android:id="@+id/weight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_color"
-                        android:lineSpacingExtra="48sp"
-                        android:text="03 kg"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/title"
-                    android:layout_marginStart="15dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="#b5b7dd"
-                        android:lineSpacingExtra="48sp"
-                        android:text="Size  :  "
-                        />
-
-                    <TextView
-                        android:id="@+id/size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_color"
-                        android:lineSpacingExtra="48sp"
-                        android:text="20 cm"
-                        />
-
-                </LinearLayout>
+                    android:textIsSelectable="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:lineSpacingExtra="10sp"
+                    android:text="@{`Quantity: ` + currentOrderList.item_qty}"
+                    android:textColor="#1a1662"
+                    android:textSize="15sp"
+                    android:textStyle="normal" />
 
             </RelativeLayout>
 
@@ -219,12 +157,14 @@
             </RelativeLayout>
 
             <View
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/view_color" />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content">
@@ -255,18 +195,16 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="20dp"
                 android:background="@color/view_color" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/view_order"
+                    android:layout_toStartOf="@+id/view_order1"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
@@ -428,7 +366,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/view_order"
+                    android:id="@+id/view_order1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

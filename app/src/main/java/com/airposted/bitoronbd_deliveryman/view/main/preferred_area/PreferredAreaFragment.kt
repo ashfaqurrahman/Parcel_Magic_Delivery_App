@@ -1,4 +1,4 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.preferred_area
 
 import android.app.Dialog
 import android.graphics.Color
@@ -15,7 +15,6 @@ import android.view.Window
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -27,13 +26,20 @@ import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.model.ViewMyAreaModel
 import com.airposted.bitoronbd_deliveryman.model.ViewMyAreaModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.airposted.bitoronbd_deliveryman.view.main.*
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
+import com.airposted.bitoronbd_deliveryman.view.main.parcel_request.ParcelRequestFragment
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyAreaClickListener, IOnBackPressed {
+class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyAreaClickListener,
+    IOnBackPressed {
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel

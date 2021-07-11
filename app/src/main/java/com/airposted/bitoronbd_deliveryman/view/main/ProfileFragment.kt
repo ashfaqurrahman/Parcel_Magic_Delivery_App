@@ -22,6 +22,9 @@ import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentProfileBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import com.bumptech.glide.Glide
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView

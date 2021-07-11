@@ -1,10 +1,9 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.parcel_request
 
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.util.MalformedJsonException
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,6 +17,12 @@ import androidx.lifecycle.lifecycleScope
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentParcelDetailsBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.airposted.bitoronbd_deliveryman.view.main.*
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
+import com.airposted.bitoronbd_deliveryman.view.main.live_parcel.MyLiveDeliveryFragment
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -52,9 +57,27 @@ class ParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
         }
 
         binding.deliveryTime.text = requireArguments().getString("delivery_date")
+        binding.itemQty.text = requireArguments().getInt("item_qty").toString()
+        binding.distance.text = requireArguments().getDouble("distance").toString() + " km"
+        binding.deliveryCharge.text = "BDT " + requireArguments().getDouble("delivery_charge").toString()
         binding.from.text = requireArguments().getString("pick_address")
         binding.to.text = requireArguments().getString("recp_address")
         invoice = requireArguments().getString("invoice")!!
+
+        when(requireArguments().getInt("item_type")) {
+            1 -> {
+                binding.size.text = getString(R.string.envelope_size1)
+                binding.icon.setBackgroundResource(R.drawable.ic_document_large_icon)
+            }
+            2 -> {
+                binding.size.text = getString(R.string.small_size1)
+                binding.icon.setBackgroundResource(R.drawable.ic_box_large_icon)
+            }
+            3 -> {
+                binding.size.text = getString(R.string.large_size1)
+                binding.icon.setBackgroundResource(R.drawable.ic_box_large_icon)
+            }
+        }
 
         binding.confirmedOrder.setOnClickListener {
             val dialogs = Dialog(requireActivity())
@@ -80,8 +103,10 @@ class ParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                         val response = viewModel.changeStatus(invoice, 3, 0)
                         if (response.success) {
                             dismissDialog()
-                            requireActivity().supportFragmentManager.popBackStack(ParcelRequestFragment::class.java.name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                            communicatorFragmentInterface!!.addContentFragment(MyLiveDeliveryFragment(), true)
+                            requireActivity().supportFragmentManager.popBackStack(
+                                ParcelRequestFragment::class.java.name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                            communicatorFragmentInterface!!.addContentFragment(
+                                MyLiveDeliveryFragment(), true)
                         }
                         else {
                             binding.rootLayout.snackbar(response.msg)

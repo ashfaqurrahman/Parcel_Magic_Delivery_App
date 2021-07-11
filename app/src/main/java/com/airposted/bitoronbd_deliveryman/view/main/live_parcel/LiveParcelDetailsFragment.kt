@@ -1,4 +1,4 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.live_parcel
 
 import `in`.aabhasjindal.otptextview.OTPListener
 import `in`.aabhasjindal.otptextview.OtpTextView
@@ -8,12 +8,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.util.MalformedJsonException
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -23,6 +23,11 @@ import androidx.lifecycle.lifecycleScope
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentLiveParcelDetailsBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.airposted.bitoronbd_deliveryman.view.main.*
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -59,13 +64,30 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
         binding.toolbar.toolbarTitle.text = "Order From " + requireArguments().getString("sender_name")
 
         binding.deliveryDate.text = requireArguments().getString("delivery_date")
+        binding.quantity.text = requireArguments().getInt("item_qty").toString()
+        binding.distance.text = requireArguments().getDouble("distance").toString() + " Km"
+        binding.deliveryCharge.text = "BDT " + requireArguments().getDouble("delivery_charge").toString()
         binding.from.text = requireArguments().getString("pick_address")
         binding.to.text = requireArguments().getString("recp_address")
         binding.receiverName.text = requireArguments().getString("recp_name")
         binding.receiverPhone.text = requireArguments().getString("recp_phone")
         binding.senderName.text = requireArguments().getString("sender_name")
         binding.senderPhone.text = requireArguments().getString("sender_phone")
-        binding.distance.text = requireArguments().getDouble("distance").toString() + " Km"
+
+        when(requireArguments().getInt("item_type")) {
+            1 -> {
+                binding.size.text = getString(R.string.envelope_size1)
+                binding.icon.setBackgroundResource(R.drawable.ic_document_large_icon)
+            }
+            2 -> {
+                binding.size.text = getString(R.string.small_size1)
+                binding.icon.setBackgroundResource(R.drawable.ic_box_large_icon)
+            }
+            3 -> {
+                binding.size.text = getString(R.string.large_size1)
+                binding.icon.setBackgroundResource(R.drawable.ic_box_large_icon)
+            }
+        }
 
         binding.calling.setOnClickListener {
             when(requireArguments().getInt("current_status")) {
@@ -109,12 +131,15 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                 1 -> {
                     val otpDialog = Dialog(requireContext())
                     otpDialog.setContentView(R.layout.otp_dialog)
+                    otpDialog.findViewById<ImageView>(R.id.cancel).setOnClickListener {
+                        otpDialog.dismiss()
+                    }
                     otpDialog.findViewById<TextView>(R.id.title).text =
                         "Ask the sender for 6 digit \n OTP sent to his/her device"
                     val check = otpDialog.findViewById<CheckBox>(R.id.check)
                     if (requireArguments().getInt("coc") == 1) {
                         check.text =
-                            "Collected " + requireArguments().getInt("price") + " Tk from sender"
+                            "Collected " + requireArguments().getDouble("delivery_charge") + " Tk from sender"
                         check.visibility = View.VISIBLE
                     }
                     val verify = otpDialog.findViewById<TextView>(R.id.verify)
@@ -165,12 +190,15 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
                 2 -> {
                     val otpDialog = Dialog(requireContext())
                     otpDialog.setContentView(R.layout.otp_dialog)
+                    otpDialog.findViewById<ImageView>(R.id.cancel).setOnClickListener {
+                        otpDialog.dismiss()
+                    }
                     otpDialog.findViewById<TextView>(R.id.title).text =
                         "Ask the receiver for 6 digit \n OTP sent to his/her device"
                     val check = otpDialog.findViewById<CheckBox>(R.id.check)
                     if (requireArguments().getInt("cod") == 1) {
                         check.text =
-                            "Collected " + requireArguments().getInt("price") + " Tk from receiver"
+                            "Collected " + requireArguments().getDouble("delivery_charge") + " Tk from receiver"
                         check.visibility = View.VISIBLE
                     }
                     val verify = otpDialog.findViewById<TextView>(R.id.verify)
@@ -266,13 +294,13 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
             if (requireArguments().getInt("coc") == 0 && requireArguments().getInt("cod") == 0) {
                 val fragment = CompleteJourneyWithDigitalPaymentFragment()
                 val bundle = Bundle()
-                bundle.putInt("price", requireArguments().getInt("price"))
+                bundle.putDouble("delivery_charge", requireArguments().getDouble("delivery_charge"))
                 fragment.arguments = bundle
                 communicatorFragmentInterface!!.addContentFragment(fragment, false)
             } else {
                 val fragment = CompleteJourneyFragment()
                 val bundle = Bundle()
-                bundle.putInt("price", requireArguments().getInt("price"))
+                bundle.putDouble("delivery_charge", requireArguments().getDouble("delivery_charge"))
                 fragment.arguments = bundle
                 communicatorFragmentInterface!!.addContentFragment(fragment, false)
             }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentTermsConditionsBinding
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 
 class TermsConditionsFragment : Fragment(), IOnBackPressed {
     private lateinit var binding: FragmentTermsConditionsBinding

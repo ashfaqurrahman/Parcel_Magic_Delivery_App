@@ -10,7 +10,7 @@
         android:background="@color/white"
         android:clickable="true"
         android:focusable="true"
-        tools:context=".view.main.HomeFragment">
+        tools:context=".view.main.home.HomeFragment">
 
         <androidx.drawerlayout.widget.DrawerLayout
             android:layout_width="match_parent"

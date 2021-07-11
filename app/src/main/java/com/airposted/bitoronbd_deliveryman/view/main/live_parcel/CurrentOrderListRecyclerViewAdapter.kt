@@ -1,4 +1,4 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.live_parcel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

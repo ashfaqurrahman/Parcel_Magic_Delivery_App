@@ -11,12 +11,13 @@
         android:orientation="vertical"
         android:clickable="true"
         android:focusable="true"
-        tools:context=".view.main.PreferredOrderListFragment">
+        tools:context=".view.main.preferred_order.PreferredOrderListFragment">
 
         <include layout="@layout/custom_toolbar"
             android:id="@+id/toolbar"/>
 
         <com.google.android.material.card.MaterialCardView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

@@ -10,7 +10,7 @@ import com.airposted.bitoronbd_deliveryman.data.network.NetworkConnectionInterce
 import com.airposted.bitoronbd_deliveryman.data.network.preferences.PreferenceProvider
 import com.airposted.bitoronbd_deliveryman.data.repositories.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthViewModelFactory
-import com.airposted.bitoronbd_deliveryman.view.main.HomeViewModelFactory
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule

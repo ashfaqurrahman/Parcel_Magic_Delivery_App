@@ -1,4 +1,4 @@
-package com.airposted.bitoronbd_deliveryman.view.main
+package com.airposted.bitoronbd_deliveryman.view.main.preferred_order
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.BR
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.databinding.ParcelRequestListItemBinding
 import com.airposted.bitoronbd_deliveryman.databinding.PreferredOrderListItemBinding
 import com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModelData
 

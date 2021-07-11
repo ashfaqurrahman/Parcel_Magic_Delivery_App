@@ -11,12 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentMyWalletBinding
-import com.airposted.bitoronbd_deliveryman.model.WalletModel
+import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
 import com.airposted.bitoronbd_deliveryman.utils.*
-import com.airposted.bitoronbd_deliveryman.view.main.HomeViewModel
-import com.airposted.bitoronbd_deliveryman.view.main.HomeViewModelFactory
-import com.airposted.bitoronbd_deliveryman.view.main.IOnBackPressed
-import com.airposted.bitoronbd_deliveryman.view.main.history.OrderHistoryRecyclerViewAdapter
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
+import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
