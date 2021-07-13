@@ -9,13 +9,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.MalformedJsonException
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.aapbd.appbajarlib.storage.PersistentUser
@@ -63,12 +63,17 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
             requireActivity().onBackPressed()
         }
 
-        Glide.with(requireActivity()).load(
-            PersistentUser.getInstance().getUserImage(requireActivity())
-        ).placeholder(R.mipmap.ic_launcher).error(
-            R.drawable.sample_pro_pic
-        ).into(binding.profileImage)
-        binding.profileName.text = PersistentUser.getInstance().getFullName(requireActivity())
+        viewModel.name.observe(viewLifecycleOwner) {
+            binding.profileName.text = it
+        }
+
+        viewModel.image.observe(viewLifecycleOwner) {
+            Glide.with(requireActivity()).load(
+                it
+            ).placeholder(R.mipmap.ic_launcher).error(
+                R.drawable.sample_pro_pic
+            ).into(binding.profileImage)
+        }
 
         if (PersistentUser.getInstance().getFullName(requireActivity()).isEmpty()) {
             binding.profileName.text = "No Name"
@@ -235,5 +240,19 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         return false
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            1 -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                imagePick()
+            } else {
+
+            }
+        }
     }
 }

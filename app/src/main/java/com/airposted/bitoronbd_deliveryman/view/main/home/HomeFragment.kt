@@ -144,12 +144,18 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         val hView: View = binding.navigationView.getHeaderView(0)
         val pic = hView.findViewById<CircleImageView>(R.id.profile_image)
         val name = hView.findViewById<TextView>(R.id.user_name)
-        Glide.with(requireActivity()).load(
-            PersistentUser.getInstance().getUserImage(requireActivity())
-        ).placeholder(R.mipmap.ic_launcher).error(
-            R.drawable.sample_pro_pic
-        ).into(pic)
-        name.text = PersistentUser.getInstance().getFullName(requireActivity())
+
+        viewModel.name.observe(viewLifecycleOwner, ) {
+            name.text = it
+        }
+
+        viewModel.image.observe(viewLifecycleOwner, ) {
+            Glide.with(requireActivity()).load(
+                it
+            ).placeholder(R.mipmap.ic_launcher).error(
+                R.drawable.sample_pro_pic
+            ).into(pic)
+        }
 
         binding.menu.setOnClickListener {
             binding.drawerLayout.openDrawer(Gravity.LEFT)

@@ -1,6 +1,7 @@
 package com.airposted.bitoronbd_deliveryman.data.repositories
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.data.network.MyApi
 import com.airposted.bitoronbd_deliveryman.data.network.SafeApiRequest
@@ -14,6 +15,22 @@ class HomeRepository(
     private val api: MyApi
 ) : SafeApiRequest() {
     private val appContext = context.applicationContext
+
+    val userName = MutableLiveData<String>()
+    val userImage = MutableLiveData<String>()
+
+    init {
+        getName()
+        getImage()
+    }
+
+    private fun getName() {
+        userName.postValue(PersistentUser.getInstance().getFullName(appContext))
+    }
+
+    private fun getImage() {
+        userImage.postValue(PersistentUser.getInstance().getUserImage(appContext))
+    }
 
     suspend fun getAllAreaList(): AreaListDataModel {
         return apiRequest {
@@ -138,29 +155,43 @@ class HomeRepository(
         header: String,
         photo: MultipartBody.Part,
         photo_name: RequestBody
-    ) : ProfileModel {
-        return apiRequest { api.userImageUpdate(header, photo, photo_name)}
+    ): ProfileModel {
+        val response = apiRequest { api.userImageUpdate(header, photo, photo_name) }
+        PersistentUser.getInstance().setUserImage(appContext, response.data.image)
+        userImage.postValue(response.data.image)
+        return response
     }
 
     suspend fun userNameUpdate(username: String): ProfileModel {
-        return apiRequest {
+        val response = apiRequest {
             api.userNameUpdate(
                 PersistentUser.getInstance().getAccessToken(appContext), username
             )
         }
+
+        PersistentUser.getInstance().setFullname(appContext, response.data.username)
+        userName.postValue(response.data.username)
+
+        return response
     }
 
     suspend fun saveFcmToken(fcm_token: String): RequestModel {
-        return apiRequest { api.saveFcmToken(
-            PersistentUser.getInstance().getAccessToken(
-                appContext
-            ), fcm_token) }
+        return apiRequest {
+            api.saveFcmToken(
+                PersistentUser.getInstance().getAccessToken(
+                    appContext
+                ), fcm_token
+            )
+        }
     }
 
     suspend fun deleteFcmToken(): RequestModel {
-        return apiRequest { api.deleteFcmToken(
-            PersistentUser.getInstance().getAccessToken(
-                appContext
-            )) }
+        return apiRequest {
+            api.deleteFcmToken(
+                PersistentUser.getInstance().getAccessToken(
+                    appContext
+                )
+            )
+        }
     }
 }
