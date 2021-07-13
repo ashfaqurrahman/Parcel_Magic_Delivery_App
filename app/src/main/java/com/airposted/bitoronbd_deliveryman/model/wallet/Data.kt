@@ -1,6 +1,6 @@
 package com.airposted.bitoronbd_deliveryman.model.wallet
 
-data class WalletDataModel(
+data class Data(
     val active: Any,
     val bill_invoice: Any,
     val billing_status: Int,

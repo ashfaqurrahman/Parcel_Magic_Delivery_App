@@ -80,10 +80,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
+                        android:padding="15dp"
                         >
 
                         <ImageView
@@ -233,10 +230,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="20dp"
-                        android:paddingEnd="20dp"
-                        android:paddingTop="15dp"
-                        android:paddingBottom="15dp"
+                        android:padding="15dp"
                         >
 
                         <TextView
@@ -253,7 +247,6 @@
 
                         <ImageView
                             android:id="@+id/from_icon"
-                            android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_alignTop="@+id/from"
                             android:layout_width="wrap_content"
@@ -266,13 +259,12 @@
                             android:src="@drawable/doted_line_blue"
                             android:layout_marginTop="-5dp"
                             android:layout_marginBottom="-5dp"
-                            android:layout_marginStart="21dp"
+                            android:layout_marginStart="6dp"
                             android:layout_below="@+id/from_icon"
                             android:layout_above="@id/to_icon"/>
 
                         <RelativeLayout
                             android:id="@+id/to_icon"
-                            android:layout_marginStart="15dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -291,14 +283,15 @@
                             android:layout_marginTop="15dp"
                             android:layout_below="@+id/delivery_details"
                             android:layout_toEndOf="@+id/from_icon"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="15dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:textStyle="normal"
                             android:textSize="14sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             android:textColor="#1a1662"
-                            android:lineSpacingExtra="13sp"
                             tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 
@@ -306,15 +299,16 @@
                             android:id="@+id/to"
                             android:layout_toEndOf="@+id/to_icon"
                             android:layout_marginTop="30dp"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="15dp"
                             android:layout_below="@+id/from"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semi_bold"
                             android:textStyle="normal"
                             android:textSize="14sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             android:textColor="#1a1662"
-                            android:lineSpacingExtra="13sp"
                             tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
                             />
 

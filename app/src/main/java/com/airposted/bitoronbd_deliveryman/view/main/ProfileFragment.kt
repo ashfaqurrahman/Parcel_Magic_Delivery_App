@@ -70,8 +70,10 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
         ).into(binding.profileImage)
         binding.profileName.text = PersistentUser.getInstance().getFullName(requireActivity())
 
-        if (binding.profileName.text.toString().isEmpty()) {
+        if (PersistentUser.getInstance().getFullName(requireActivity()).isEmpty()) {
             binding.profileName.text = "No Name"
+        } else {
+            binding.profileName.text = PersistentUser.getInstance().getFullName(requireActivity())
         }
 
         binding.phone.text = PersistentUser.getInstance().getPhoneNumber(requireActivity())
@@ -96,15 +98,15 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
                         .getFullName(requireActivity())
                 ) {
                     setProgressDialog(requireActivity())
+                    val name = binding.editProfileName.text.toString().trimEnd()
                     lifecycleScope.launch {
                         try {
-                            val response = viewModel.userNameUpdate(binding.editProfileName.text.toString())
+                            val response = viewModel.userNameUpdate(name)
                             dismissDialog()
-                            binding.profileName.text =
-                                binding.editProfileName.text.toString()
+                            binding.profileName.text = name
                             PersistentUser.getInstance().setFullname(
                                 requireContext(),
-                                binding.editProfileName.text.toString()
+                                name
                             )
                             binding.profileName.visibility = View.VISIBLE
                             binding.editProfileName.visibility = View.GONE

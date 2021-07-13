@@ -57,7 +57,7 @@ class ParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
         }
 
         binding.deliveryTime.text = requireArguments().getString("delivery_date")
-        binding.itemQty.text = requireArguments().getInt("item_qty").toString()
+        binding.itemQty.text = "0" + requireArguments().getInt("item_qty").toString()
         binding.distance.text = requireArguments().getDouble("distance").toString() + " km"
         binding.deliveryCharge.text = "BDT " + requireArguments().getDouble("delivery_charge").toString()
         binding.from.text = requireArguments().getString("pick_address")

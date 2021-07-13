@@ -124,6 +124,7 @@
                     android:text="Sender" />
 
                 <RatingBar
+                    android:visibility="gone"
                     android:id="@+id/rating_bar"
                     android:layout_width="wrap_content"
                     android:layout_centerVertical="true"

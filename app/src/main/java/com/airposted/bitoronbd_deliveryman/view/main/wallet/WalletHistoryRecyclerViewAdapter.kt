@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.BR
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.WalletListNameBinding
-import com.airposted.bitoronbd_deliveryman.model.wallet.WalletDataModel
+import com.airposted.bitoronbd_deliveryman.model.wallet.Data
 
 class WalletHistoryRecyclerViewAdapter(
-    private val walletListModelData: List<WalletDataModel>,
+    private val walletListModelData: List<Data>,
 //    private val listener: OrderClickListener
 ) : RecyclerView.Adapter<WalletHistoryRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(

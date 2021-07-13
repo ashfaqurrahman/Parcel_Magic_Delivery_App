@@ -5,7 +5,7 @@
     <data>
         <variable
             name="walletHistoryList"
-            type="com.airposted.bitoronbd_deliveryman.model.wallet.WalletDataModel" />
+            type="com.airposted.bitoronbd_deliveryman.model.wallet.Data" />
     </data>
 
     <LinearLayout
@@ -44,7 +44,7 @@
                         android:textSize="14sp"
                         android:textColor="#1a1662"
                         android:lineSpacingExtra="45sp"
-                        android:text="@{walletHistoryList.recp_address}"
+                        android:text="@{walletHistoryList.pick_address}"
                         />
 
                     <ImageView
@@ -69,7 +69,7 @@
                         android:textSize="14sp"
                         android:textColor="#1a1662"
                         android:lineSpacingExtra="45sp"
-                        android:text="@{walletHistoryList.pick_address}"
+                        android:text="@{walletHistoryList.recp_address}"
                         />
 
                 </RelativeLayout>

@@ -54,7 +54,7 @@
                     android:textIsSelectable="true"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="10sp"
-                    android:text="@{`Quantity: ` + orderList.item_qty}"
+                    android:text="@{`Quantity: 0` + orderList.item_qty}"
                     android:textColor="#1a1662"
                     android:textSize="15sp"
                     android:textStyle="normal" />

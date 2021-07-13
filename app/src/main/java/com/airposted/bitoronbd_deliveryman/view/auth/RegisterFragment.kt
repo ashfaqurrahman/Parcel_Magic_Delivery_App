@@ -135,7 +135,7 @@ class RegisterFragment : Fragment(), KodeinAware {
                     fragment.arguments = bundle
                     communicatorFragmentInterface?.addContentFragment(fragment, true)
                 } else {
-                    binding.main.snackbar(response.msg)
+                    binding.main.snackbar("This number already registered as user, please try with different number!")
                 }
                 dismissDialog()
             } catch (e: MalformedJsonException) {

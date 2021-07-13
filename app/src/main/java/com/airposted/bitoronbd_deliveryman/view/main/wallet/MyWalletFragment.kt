@@ -75,10 +75,10 @@ class MyWalletFragment : Fragment(), KodeinAware, IOnBackPressed {
     }
 
     private fun showWalletHistory(response: WalletModel) {
-        if (response.data.data.isNotEmpty()) {
+        if (response.data.isNotEmpty()) {
             binding.myWalletHistoryList.visibility = View.VISIBLE
             binding.noOrder.visibility = View.GONE
-            val myRecyclerViewAdapter = WalletHistoryRecyclerViewAdapter(response.data.data)
+            val myRecyclerViewAdapter = WalletHistoryRecyclerViewAdapter(response.data)
             binding.myWalletHistoryList.layoutManager = GridLayoutManager(requireActivity(), 1)
             binding.myWalletHistoryList.itemAnimator = DefaultItemAnimator()
             binding.myWalletHistoryList.adapter = myRecyclerViewAdapter

@@ -64,7 +64,7 @@ class LiveParcelDetailsFragment : Fragment(), KodeinAware, IOnBackPressed {
         binding.toolbar.toolbarTitle.text = "Order From " + requireArguments().getString("sender_name")
 
         binding.deliveryDate.text = requireArguments().getString("delivery_date")
-        binding.quantity.text = requireArguments().getInt("item_qty").toString()
+        binding.quantity.text = "0" + requireArguments().getInt("item_qty").toString()
         binding.distance.text = requireArguments().getDouble("distance").toString() + " Km"
         binding.deliveryCharge.text = "BDT " + requireArguments().getDouble("delivery_charge").toString()
         binding.from.text = requireArguments().getString("pick_address")
