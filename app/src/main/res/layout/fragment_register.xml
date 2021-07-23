@@ -112,7 +112,7 @@
                             android:textColor="@color/text_color"
                             android:textColorHint="@color/hint_color"
                             android:backgroundTint="@color/hint_color"
-                            android:hint="Full Name (Same as NID/License)"/>
+                            android:hint="Full Name (Same as NID/License)*"/>
 
                         <EditText
                             android:id="@+id/address"
@@ -126,58 +126,6 @@
                             android:textColorHint="@color/hint_color"
                             android:backgroundTint="@color/hint_color"
                             android:hint="Address"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:weightSum="5"
-                            android:gravity="top"
-                            android:orientation="horizontal">
-
-                            <com.skydoves.powerspinner.PowerSpinnerView
-                                android:id="@+id/id"
-                                android:layout_width="0dp"
-                                android:layout_weight="2"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/border_bottom"
-                                android:gravity="start"
-                                android:hint="Your ID"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:paddingStart="5dp"
-                                android:paddingEnd="5dp"
-                                android:textColor="@color/text_color"
-                                android:textColorHint="@color/hint_color"
-                                android:textSize="14.5sp"
-                                app:spinner_arrow_gravity="end"
-                                app:spinner_arrow_padding="8dp"
-                                app:spinner_arrow_show="true"
-                                app:spinner_arrow_tint="@color/text_color"
-                                app:spinner_arrow_drawable="@drawable/ic_down_arrow"
-                                app:spinner_divider_color="@color/hint_color"
-                                app:spinner_divider_show="true"
-                                app:spinner_divider_size="0.4dp"
-                                app:spinner_item_array="@array/id"
-                                app:spinner_popup_animation="dropdown"
-                                app:spinner_popup_background="@color/white"
-                                app:spinner_popup_elevation="14dp" />
-
-                            <EditText
-                                android:id="@+id/id_number"
-                                android:layout_width="0dp"
-                                android:layout_weight="3"
-                                android:textSize="14sp"
-                                android:inputType="number"
-                                android:layout_marginTop="7dp"
-                                android:layout_marginStart="15dp"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/text_color"
-                                android:textColorHint="@color/hint_color"
-                                android:backgroundTint="@color/hint_color"
-                                android:hint="NID Number*"/>
-
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -229,6 +177,60 @@
                                 android:textColorHint="@color/hint_color"
                                 android:backgroundTint="@color/hint_color"
                                 android:hint="Date of Birth (dd/mm/yyyy)"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="15dp"
+                            android:layout_height="wrap_content">
+
+                            <com.skydoves.powerspinner.PowerSpinnerView
+                                android:id="@+id/id_type"
+                                android:layout_width="match_parent"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_bottom"
+                                android:gravity="start"
+                                android:hint="Upload Your NID / Driving Licence*"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:paddingStart="5dp"
+                                android:paddingEnd="5dp"
+                                android:textColor="@color/text_color"
+                                android:textColorHint="@color/hint_color"
+                                android:textSize="14.5sp"
+                                app:spinner_arrow_gravity="end"
+                                app:spinner_arrow_padding="8dp"
+                                app:spinner_arrow_show="true"
+                                app:spinner_arrow_tint="@color/text_color"
+                                app:spinner_arrow_drawable="@drawable/ic_down_arrow"
+                                app:spinner_divider_color="@color/hint_color"
+                                app:spinner_divider_show="true"
+                                app:spinner_divider_size="0.4dp"
+                                app:spinner_item_array="@array/id"
+                                app:spinner_popup_animation="dropdown"
+                                app:spinner_popup_background="@color/white"
+                                app:spinner_popup_elevation="14dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:weightSum="3"
+                            android:gravity="center_horizontal">
+
+                            <ImageView
+                                android:id="@+id/id"
+                                android:layout_width="0dp"
+                                android:visibility="gone"
+                                android:layout_height="120dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/empty_image"
+                                android:layout_weight="2"
+                                android:layout_marginStart="5dp"/>
 
                         </LinearLayout>
 

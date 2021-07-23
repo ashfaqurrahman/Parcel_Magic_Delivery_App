@@ -17,7 +17,7 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="did_not_receive_the_code">Did not receive the code?</string>
     <string name="personal_information">Personal Information</string>
-    <string name="take_your_photo">Take your photo</string>
+    <string name="take_your_photo">Take your photo*</string>
     <string name="next">Next</string>
     <string name="NID">NID</string>
     <string name="account_information">Account Information</string>

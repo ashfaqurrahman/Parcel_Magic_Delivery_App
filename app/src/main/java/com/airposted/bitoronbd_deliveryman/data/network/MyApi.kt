@@ -31,6 +31,7 @@ interface MyApi {
     suspend fun userSignUpWithNid(
         @Part("username") name: RequestBody,
         @Part("phone") phone: RequestBody,
+        @Part nidFile: MultipartBody.Part,
         @Part("nid") nid: RequestBody,
         @Part("dob") dob: RequestBody,
         @Part("gender") gender: RequestBody,
@@ -44,6 +45,7 @@ interface MyApi {
     suspend fun userSignUpWithDriveLicense(
         @Part("username") name: RequestBody,
         @Part("phone") phone: RequestBody,
+        @Part licenceFile: MultipartBody.Part,
         @Part("drive_lisence") drivingLicence: RequestBody,
         @Part("dob") dob: RequestBody,
         @Part("gender") gender: RequestBody,
@@ -117,6 +119,13 @@ interface MyApi {
         @Header("Authorization") header: String
     ) : Response<ProfileModel>
 
+    @FormUrlEncoded
+    @POST("delivery/getAverageRating")
+    suspend fun getAverageRating(
+        @Header("Authorization") header: String,
+        @Field("logisticId") logisticId: Int
+    ) : Response<AverageRatingModel>
+
     @GET("delivery/wallet")
     suspend fun myWallet(
         @Header("Authorization") header: String
@@ -172,7 +181,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okkHttpclient)
-                .baseUrl("https://parcel.airposted.com/api/")
+                .baseUrl("https://api.staging.parcelmagic.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)

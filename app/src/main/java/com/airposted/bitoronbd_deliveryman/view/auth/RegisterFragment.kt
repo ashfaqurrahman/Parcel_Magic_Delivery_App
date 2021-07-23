@@ -34,8 +34,10 @@ class RegisterFragment : Fragment(), KodeinAware {
     private lateinit var binding: FragmentRegisterBinding
     private var communicatorFragmentInterface: AuthCommunicatorFragmentInterface? = null
     private var gender: String? = null
-    private var id: String? = null
+    private var flag: Int? = null
+    private var idType: String? = null
     private var mCropImageUri: Uri? = null
+    private var mCropIDUri: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +61,12 @@ class RegisterFragment : Fragment(), KodeinAware {
         }
 
         binding.imageUpload.setOnClickListener {
+            flag = 0
+            uploadImage()
+        }
+
+        binding.id.setOnClickListener {
+            flag = 1
             uploadImage()
         }
 
@@ -66,41 +74,22 @@ class RegisterFragment : Fragment(), KodeinAware {
             gender = newText
         }
 
-        binding.id.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newText ->
-            id = newText
+        binding.idType.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newText ->
+            idType = newText
+            binding.id.visibility = View.VISIBLE
         }
 
         binding.signUp.setOnClickListener {
             hideKeyboard(requireActivity())
             val name = binding.name.text.toString()
-            if (mCropImageUri != null) {
+            if (mCropImageUri != null && mCropIDUri != null) {
                 if (name.isNotEmpty()) {
                     sendOTP()
-//                    val fragment = OTPFragment()
-//                    val bundle = Bundle()
-//                    bundle.putString("imageUri", mCropImageUri?.path)
-//                    bundle.putString("phone", requireArguments().getString("phone"))
-//                    bundle.putString("name", binding.name.text.toString())
-//                    bundle.putString("address", binding.address.text.toString())
-//                    if (id == "National ID") {
-//                        bundle.putString("nid", binding.idNumber.text.toString())
-//                    } else {
-//                        bundle.putString("drive_lisence", binding.idNumber.text.toString())
-//                    }
-//                    if (gender == "Male") {
-//                        bundle.putInt("gender", 1)
-//                    } else {
-//                        bundle.putInt("gender", 0)
-//                    }
-//                    bundle.putString("dob", binding.name.text.toString())
-//                    bundle.putBoolean("isAuth", false)
-//                    fragment.arguments = bundle
-//                    communicatorFragmentInterface?.addContentFragment(fragment, true)
                 } else {
                     binding.main.snackbar("Username should not empty")
                 }
             } else {
-                binding.main.snackbar("User photo is required")
+                binding.main.snackbar("User photo & ID card is required")
             }
         }
     }
@@ -117,14 +106,16 @@ class RegisterFragment : Fragment(), KodeinAware {
                     val bundle = Bundle()
                     bundle.putString("otp", response.data?.token)
                     bundle.putString("imageUri", mCropImageUri?.path)
+                    bundle.putString("idUri", mCropIDUri?.path)
+                    bundle.putString("idType", idType)
                     bundle.putString("phone", requireArguments().getString("phone"))
                     bundle.putString("name", binding.name.text.toString())
                     bundle.putString("address", binding.address.text.toString())
-                    if (id == "National ID") {
-                        bundle.putString("nid", binding.idNumber.text.toString())
-                    } else {
-                        bundle.putString("drive_lisence", binding.idNumber.text.toString())
-                    }
+//                    if (id == "National ID") {
+//                        bundle.putString("nid", binding.idNumber.text.toString())
+//                    } else {
+//                        bundle.putString("drive_lisence", binding.idNumber.text.toString())
+//                    }
                     if (gender == "Male") {
                         bundle.putInt("gender", 1)
                     } else {
@@ -178,7 +169,7 @@ class RegisterFragment : Fragment(), KodeinAware {
     private fun imagePick() {
         CropImage.activity()
             .setGuidelines(CropImageView.Guidelines.ON)
-            .setAspectRatio(1, 1)
+//            .setAspectRatio(1, 1)
             .start(requireContext(), this)
     }
 
@@ -187,8 +178,17 @@ class RegisterFragment : Fragment(), KodeinAware {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                mCropImageUri = result.uri
-                binding.profileImage.setImageURI(mCropImageUri)
+                when (flag) {
+                    0 -> {
+                        mCropImageUri = result.uri
+                        binding.profileImage.setImageURI(mCropImageUri)
+                    }
+                    1 -> {
+                        mCropIDUri = result.uri
+                        binding.id.setImageURI(mCropIDUri)
+                    }
+                }
+
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 val error = result.error
             }

@@ -56,8 +56,6 @@ class OTPFragment : Fragment(), KodeinAware {
     var otp: String? = null
     private var timer: CountDownTimer? = null
     private var isAuth = false
-    private var nid: RequestBody? = null
-    private var drivingLicence: RequestBody? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -140,37 +138,71 @@ class OTPFragment : Fragment(), KodeinAware {
                 hideKeyboard(requireActivity())
                 lifecycleScope.launch {
                     try {
-                        var signUpResponse: AuthResponse?
-                        val part: MultipartBody.Part?
-                        val photoName: RequestBody?
-                        val path = requireArguments().getString("imageUri")
-                        val file = File(path!!)
-                        val compressedImage = reduceImageSize(file)
-                        if (compressedImage != null) {
-                            val fileReqBody = RequestBody.create(
+                        val signUpResponse: AuthResponse?
+
+                        val imagePart: MultipartBody.Part?
+                        val imagePhotoName: RequestBody?
+                        val imagePath = requireArguments().getString("imageUri")
+                        val imageFile = File(imagePath!!)
+                        val compressedImage = reduceImageSize(imageFile)
+
+                        val idPart: MultipartBody.Part?
+                        val idPhotoName: RequestBody?
+                        val idPath = requireArguments().getString("imageUri")
+                        val idFile = File(idPath!!)
+                        val compressedId = reduceImageSize(idFile)
+
+                        if (compressedImage != null && compressedId != null) {
+                            val imageFileReqBody = RequestBody.create(
                                 MediaType.parse("image/*"),
                                 compressedImage
                             )
-                            part = MultipartBody.Part.createFormData(
+                            imagePart = MultipartBody.Part.createFormData(
                                 "image",
                                 compressedImage.name,
-                                fileReqBody
+                                imageFileReqBody
                             )
-                            photoName = RequestBody.create(
+                            imagePhotoName = RequestBody.create(
+                                MediaType.parse("text/plain"),
+                                "image-type"
+                            )
+                            val idFileReqBody = RequestBody.create(
+                                MediaType.parse("image/*"),
+                                compressedImage
+                            )
+                            idPart = MultipartBody.Part.createFormData(
+                                "image",
+                                compressedImage.name,
+                                idFileReqBody
+                            )
+                            idPhotoName = RequestBody.create(
                                 MediaType.parse("text/plain"),
                                 "image-type"
                             )
                         } else {
-                            val fileReqBody = RequestBody.create(
+                            val imageFileReqBody = RequestBody.create(
                                 MediaType.parse("image/*"),
-                                file
+                                imageFile
                             )
-                            part = MultipartBody.Part.createFormData(
+                            imagePart = MultipartBody.Part.createFormData(
                                 "image",
-                                file.name,
-                                fileReqBody
+                                imageFile.name,
+                                imageFileReqBody
                             )
-                            photoName = RequestBody.create(
+                            imagePhotoName = RequestBody.create(
+                                MediaType.parse("text/plain"),
+                                "image-type"
+                            )
+                            val idFileReqBody = RequestBody.create(
+                                MediaType.parse("image/*"),
+                                imageFile
+                            )
+                            idPart = MultipartBody.Part.createFormData(
+                                "image",
+                                imageFile.name,
+                                idFileReqBody
+                            )
+                            idPhotoName = RequestBody.create(
                                 MediaType.parse("text/plain"),
                                 "image-type"
                             )
@@ -197,102 +229,49 @@ class OTPFragment : Fragment(), KodeinAware {
                             MediaType.parse("text/plain"),
                             requireArguments().getString("address")!!
                         )
-                        if (requireArguments().getString("nid") != null){
-                            nid = RequestBody.create(
-                                MediaType.parse("text/plain"),
-                                requireArguments().getString("nid")!!
-                            )
-
+                        if (requireArguments().getString("idType") == "National ID"){
                             signUpResponse = viewModel.userSignUpWithNid(
                                 name,
                                 phone,
-                                nid!!,
+                                idPart,
+                                idPhotoName,
                                 dob,
                                 gender,
                                 address,
-                                part,
-                                photoName
+                                imagePart,
+                                imagePhotoName
                             )
 
                             if (signUpResponse.data != null) {
                                 dismissDialog()
                                 binding.main.snackbar(signUpResponse.msg)
-                                /*PersistentUser.getInstance().setLogin(requireContext())
-                                PersistentUser.getInstance().setAccessToken(
-                                    requireContext(),
-                                    "Bearer " + signUpResponse.data?.token
-                                )
-                                PersistentUser.getInstance().setUserID(
-                                    requireContext(),
-                                    signUpResponse.user?.id.toString()
-                                )
-                                PersistentUser.getInstance().setFullname(
-                                    requireContext(),
-                                    signUpResponse.user?.username
-                                )
-                                PersistentUser.getInstance().setPhonenumber(
-                                    requireContext(),
-                                    signUpResponse.user?.phone
-                                )
-                                PersistentUser.getInstance().setUserImage(
-                                    requireContext(),
-                                    signUpResponse.user?.image
-                                )*/
                                 createAccountSuccessDialog()
                             } else {
                                 dismissDialog()
                                 binding.main.snackbar(signUpResponse.msg)
                             }
-                        }
-
-                        if (requireArguments().getString("drive_lisence") != null){
-                            drivingLicence = RequestBody.create(
-                                MediaType.parse("text/plain"),
-                                requireArguments().getString("drive_lisence")!!
-                            )
-
+                        } else if (requireArguments().getString("idType") == "Driving Lic.") {
                             signUpResponse = viewModel.userSignUpWithDriveLicense(
                                 name,
                                 phone,
-                                drivingLicence!!,
+                                idPart,
+                                idPhotoName,
                                 dob,
                                 gender,
                                 address,
-                                part,
-                                photoName
+                                imagePart,
+                                imagePhotoName
                             )
 
                             if (signUpResponse.data != null) {
                                 dismissDialog()
-                                /*binding.main.snackbar(signUpResponse.msg)
-                                PersistentUser.getInstance().setLogin(requireContext())
-                                PersistentUser.getInstance().setAccessToken(
-                                    requireContext(),
-                                    "Bearer " + signUpResponse.data?.token
-                                )
-                                PersistentUser.getInstance().setUserID(
-                                    requireContext(),
-                                    signUpResponse.user?.id.toString()
-                                )
-                                PersistentUser.getInstance().setFullname(
-                                    requireContext(),
-                                    signUpResponse.user?.username
-                                )
-                                PersistentUser.getInstance().setPhonenumber(
-                                    requireContext(),
-                                    signUpResponse.user?.phone
-                                )
-                                PersistentUser.getInstance().setUserImage(
-                                    requireContext(),
-                                    signUpResponse.user?.image
-                                )*/
+                                binding.main.snackbar(signUpResponse.msg)
                                 createAccountSuccessDialog()
                             } else {
                                 dismissDialog()
                                 binding.main.snackbar(signUpResponse.msg)
                             }
                         }
-
                     } catch (e: ApiException) {
                         dismissDialog()
                         binding.main.snackbar(e.message!!)

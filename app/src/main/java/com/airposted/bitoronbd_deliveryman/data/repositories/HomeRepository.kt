@@ -79,6 +79,15 @@ class HomeRepository(
         }
     }
 
+    suspend fun getAverageRating(logisticId: Int): AverageRatingModel {
+        return apiRequest {
+            api.getAverageRating(
+                PersistentUser.getInstance().getAccessToken(appContext),
+                logisticId
+            )
+        }
+    }
+
     suspend fun myWallet(): WalletModel {
         return apiRequest {
             api.myWallet(

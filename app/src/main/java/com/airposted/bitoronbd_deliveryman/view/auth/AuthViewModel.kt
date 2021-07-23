@@ -32,23 +32,25 @@ class AuthViewModel(
     suspend fun userSignUpWithNid(
         name: RequestBody,
         phone: RequestBody,
-        nid: RequestBody,
+        nid: MultipartBody.Part,
+        nidName: RequestBody,
         dob: RequestBody,
         gender: RequestBody,
         address: RequestBody,
         photo: MultipartBody.Part,
         photo_name: RequestBody
-    ) = withContext(Dispatchers.IO) { repository.userSignUpWithNid(name, phone, nid, dob, gender, address, photo, photo_name) }
+    ) = withContext(Dispatchers.IO) { repository.userSignUpWithNid(name, phone, nid, nidName, dob, gender, address, photo, photo_name) }
 
     suspend fun userSignUpWithDriveLicense(
         name: RequestBody,
         phone: RequestBody,
-        drivingLicence: RequestBody,
+        drivingLicence: MultipartBody.Part,
+        drivingLicenceName: RequestBody,
         dob: RequestBody,
         gender: RequestBody,
         address: RequestBody,
         photo: MultipartBody.Part,
         photo_name: RequestBody
-    ) = withContext(Dispatchers.IO) { repository.userSignUpWithDriveLicense(name, phone, drivingLicence, dob, gender, address, photo, photo_name) }
+    ) = withContext(Dispatchers.IO) { repository.userSignUpWithDriveLicense(name, phone, drivingLicence, drivingLicenceName, dob, gender, address, photo, photo_name) }
 
 }

@@ -75,6 +75,27 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
             ).into(binding.profileImage)
         }
 
+        setProgressDialog(requireActivity())
+        lifecycleScope.launch {
+            try {
+                val response = viewModel.getAverageRating(PersistentUser.getInstance().getUserID(requireContext()).toInt())
+                binding.ratingBar.rating = response.rating[0].ratings_average.toFloat()
+            } catch (e: MalformedJsonException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            }
+            dismissDialog()
+        }
+
         if (PersistentUser.getInstance().getFullName(requireActivity()).isEmpty()) {
             binding.profileName.text = "No Name"
         } else {
