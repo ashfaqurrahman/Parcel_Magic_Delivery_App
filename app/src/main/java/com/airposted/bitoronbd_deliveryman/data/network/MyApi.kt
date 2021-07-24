@@ -181,7 +181,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okkHttpclient)
-                .baseUrl("https://api.staging.parcelmagic.com/api/")
+                .baseUrl("https://api.parcelmagic.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)
