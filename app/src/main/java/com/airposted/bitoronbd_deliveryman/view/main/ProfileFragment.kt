@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.MalformedJsonException
 import android.view.LayoutInflater
 import android.view.View
@@ -79,7 +80,15 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
         lifecycleScope.launch {
             try {
                 val response = viewModel.getAverageRating(PersistentUser.getInstance().getUserID(requireContext()).toInt())
-                binding.ratingBar.rating = response.rating[0].ratings_average.toFloat()
+                if (response.rating.isNotEmpty()) {
+                    if (response.rating[0].ratings_average != null) {
+                        binding.ratingBar.rating = response.rating[0].ratings_average!!.toFloat()
+                    } else {
+                        binding.ratingBar.rating = 0F
+                    }
+                } else {
+                    binding.ratingBar.rating = 0F
+                }
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
