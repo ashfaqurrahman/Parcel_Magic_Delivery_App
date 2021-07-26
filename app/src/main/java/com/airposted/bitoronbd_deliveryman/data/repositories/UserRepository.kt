@@ -2,7 +2,8 @@ package com.airposted.bitoronbd_deliveryman.data.repositories
 
 import com.airposted.bitoronbd_deliveryman.data.network.MyApi
 import com.airposted.bitoronbd_deliveryman.data.network.SafeApiRequest
-import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
+import com.airposted.bitoronbd_deliveryman.model.auth.AuthResponse
+import com.airposted.bitoronbd_deliveryman.model.register.SignUpModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -37,7 +38,7 @@ class UserRepository(
         address: RequestBody,
         photo: MultipartBody.Part,
         photo_name: RequestBody
-    ) : AuthResponse {
+    ) : SignUpModel {
         return apiRequest{ api.userSignUpWithNid(name, phone, nid, nid_name, dob, gender, address, photo,  photo_name)}
     }
 
@@ -51,7 +52,7 @@ class UserRepository(
         address: RequestBody,
         photo: MultipartBody.Part,
         photo_name: RequestBody
-    ) : AuthResponse {
+    ) : SignUpModel {
         return apiRequest{ api.userSignUpWithDriveLicense(name, phone, drivingLicence, drivingLicenceName, dob, gender, address, photo, photo_name)}
     }
 

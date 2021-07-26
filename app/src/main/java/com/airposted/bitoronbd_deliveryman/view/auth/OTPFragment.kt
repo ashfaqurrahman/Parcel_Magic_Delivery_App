@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.util.MalformedJsonException
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,23 +16,16 @@ import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentOTPBinding
+import com.airposted.bitoronbd_deliveryman.model.register.SignUpModel
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
-import com.airposted.bitoronbd_deliveryman.view.main.ProfileFragment
-import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
-import com.theartofdev.edmodo.cropper.CropImage
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -41,9 +33,7 @@ import okhttp3.RequestBody
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 import java.io.File
-import java.util.concurrent.TimeUnit
 
 class OTPFragment : Fragment(), KodeinAware {
     override val kodein by kodein()
@@ -138,7 +128,6 @@ class OTPFragment : Fragment(), KodeinAware {
                 hideKeyboard(requireActivity())
                 lifecycleScope.launch {
                     try {
-                        val signUpResponse: AuthResponse?
 
                         val imagePart: MultipartBody.Part?
                         val imagePhotoName: RequestBody?
@@ -148,7 +137,7 @@ class OTPFragment : Fragment(), KodeinAware {
 
                         val idPart: MultipartBody.Part?
                         val idPhotoName: RequestBody?
-                        val idPath = requireArguments().getString("imageUri")
+                        val idPath = requireArguments().getString("idUri")
                         val idFile = File(idPath!!)
                         val compressedId = reduceImageSize(idFile)
 
@@ -168,11 +157,11 @@ class OTPFragment : Fragment(), KodeinAware {
                             )
                             val idFileReqBody = RequestBody.create(
                                 MediaType.parse("image/*"),
-                                compressedImage
+                                compressedId
                             )
                             idPart = MultipartBody.Part.createFormData(
                                 "image",
-                                compressedImage.name,
+                                compressedId.name,
                                 idFileReqBody
                             )
                             idPhotoName = RequestBody.create(
@@ -230,7 +219,7 @@ class OTPFragment : Fragment(), KodeinAware {
                             requireArguments().getString("address")!!
                         )
                         if (requireArguments().getString("idType") == "National ID"){
-                            signUpResponse = viewModel.userSignUpWithNid(
+                            val signUpResponse = viewModel.userSignUpWithNid(
                                 name,
                                 phone,
                                 idPart,
@@ -251,7 +240,7 @@ class OTPFragment : Fragment(), KodeinAware {
                                 binding.main.snackbar(signUpResponse.msg)
                             }
                         } else if (requireArguments().getString("idType") == "Driving Lic.") {
-                            signUpResponse = viewModel.userSignUpWithDriveLicense(
+                            val signUpResponse = viewModel.userSignUpWithDriveLicense(
                                 name,
                                 phone,
                                 idPart,
@@ -272,6 +261,14 @@ class OTPFragment : Fragment(), KodeinAware {
                                 binding.main.snackbar(signUpResponse.msg)
                             }
                         }
+                    } catch (e: MalformedJsonException) {
+                        dismissDialog()
+                        binding.main.snackbar(e.message!!)
+                        e.printStackTrace()
+                    } catch (e: JsonSyntaxException) {
+                        dismissDialog()
+                        binding.main.snackbar(e.message!!)
+                        e.printStackTrace()
                     } catch (e: ApiException) {
                         dismissDialog()
                         binding.main.snackbar(e.message!!)
@@ -337,6 +334,10 @@ class OTPFragment : Fragment(), KodeinAware {
                     binding.main.snackbar(response.msg)
                 }
                 dismissDialog()
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.main.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.main.snackbar(e.message!!)

@@ -27,6 +27,7 @@ import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
 import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import com.bumptech.glide.Glide
+import com.google.gson.JsonSyntaxException
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.coroutines.launch
@@ -79,16 +80,20 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
-                val response = viewModel.getAverageRating(PersistentUser.getInstance().getUserID(requireContext()).toInt())
-                if (response.rating.isNotEmpty()) {
-                    if (response.rating[0].ratings_average != null) {
-                        binding.ratingBar.rating = response.rating[0].ratings_average!!.toFloat()
+                val response = viewModel.getAverageRating()
+                if (response.data.isNotEmpty()) {
+                    if (response.data[0].ratings_average != null) {
+                        binding.ratingBar.rating = response.data[0].ratings_average!!.toFloat()
                     } else {
                         binding.ratingBar.rating = 0F
                     }
                 } else {
                     binding.ratingBar.rating = 0F
                 }
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
@@ -148,6 +153,10 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
                             binding.editName.setImageResource(R.drawable.ic_edit)
                             edit = false
                             binding.rootLayout.snackbar(response.msg)
+                        } catch (e: JsonSyntaxException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
                         } catch (e: MalformedJsonException) {
                             dismissDialog()
                             binding.rootLayout.snackbar(e.message!!)
@@ -247,6 +256,10 @@ class ProfileFragment : Fragment(), KodeinAware, IOnBackPressed {
                         } else {
                             binding.rootLayout.snackbar("Update failed")
                         }
+                    } catch (e: JsonSyntaxException) {
+                        dismissDialog()
+                        binding.rootLayout.snackbar(e.message!!)
+                        e.printStackTrace()
                     } catch (e: MalformedJsonException) {
                         dismissDialog()
                         binding.rootLayout.snackbar(e.message!!)

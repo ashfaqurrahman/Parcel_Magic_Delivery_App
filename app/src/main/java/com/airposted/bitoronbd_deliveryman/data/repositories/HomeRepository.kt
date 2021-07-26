@@ -6,6 +6,7 @@ import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.data.network.MyApi
 import com.airposted.bitoronbd_deliveryman.data.network.SafeApiRequest
 import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.model.rating.AverageRatingModel
 import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -79,11 +80,10 @@ class HomeRepository(
         }
     }
 
-    suspend fun getAverageRating(logisticId: Int): AverageRatingModel {
+    suspend fun getAverageRating(): AverageRatingModel {
         return apiRequest {
             api.getAverageRating(
-                PersistentUser.getInstance().getAccessToken(appContext),
-                logisticId
+                PersistentUser.getInstance().getAccessToken(appContext)
             )
         }
     }

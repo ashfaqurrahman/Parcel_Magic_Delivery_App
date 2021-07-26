@@ -19,6 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentRegisterBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.google.gson.JsonSyntaxException
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.coroutines.launch
@@ -101,7 +102,7 @@ class RegisterFragment : Fragment(), KodeinAware {
                 val response = viewModel.sendOTP(
                     requireArguments().getString("phone")!!
                 )
-                if (response.success) {
+                if (response.success!!) {
                     val fragment = OTPFragment()
                     val bundle = Bundle()
                     bundle.putString("otp", response.data?.token)
@@ -126,9 +127,13 @@ class RegisterFragment : Fragment(), KodeinAware {
                     fragment.arguments = bundle
                     communicatorFragmentInterface?.addContentFragment(fragment, true)
                 } else {
-                    binding.main.snackbar("This number already registered as user, please try with different number!")
+                    binding.main.snackbar(response.msg!!)
                 }
                 dismissDialog()
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.main.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.main.snackbar(e.message!!)

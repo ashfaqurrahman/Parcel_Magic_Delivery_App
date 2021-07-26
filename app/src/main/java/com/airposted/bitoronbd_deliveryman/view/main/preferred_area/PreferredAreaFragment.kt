@@ -33,6 +33,7 @@ import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
 import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import com.airposted.bitoronbd_deliveryman.view.main.parcel_request.ParcelRequestFragment
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -76,11 +77,14 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                 areaList = allAreaResponse.data!!
                 if (allAreaResponse.success && myAreaResponse.success) {
                     showMyArea(myAreaResponse)
-                }
-                else {
+                } else {
                     binding.rootLayout.snackbar(myAreaResponse.msg)
                     dismissDialog()
                 }
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
@@ -216,6 +220,10 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                     binding.rootLayout.snackbar(response.msg)
                     dismissDialog()
                 }
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
@@ -243,6 +251,10 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                     binding.rootLayout.snackbar(response.msg)
                     dismissDialog()
                 }
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
@@ -316,6 +328,10 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                         binding.rootLayout.snackbar(response.msg)
                         dismissDialog()
                     }
+                } catch (e: JsonSyntaxException) {
+                    dismissDialog()
+                    binding.rootLayout.snackbar(e.message!!)
+                    e.printStackTrace()
                 } catch (e: MalformedJsonException) {
                     dismissDialog()
                     binding.rootLayout.snackbar(e.message!!)

@@ -42,6 +42,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.gson.JsonSyntaxException
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -105,6 +106,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                             if (saveFcmTokenResponse.success) {
                                 dismissDialog()
                             }
+                        } catch (e: JsonSyntaxException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
                         } catch (e: com.google.gson.stream.MalformedJsonException) {
                             dismissDialog()
                             binding.rootLayout.snackbar(e.message!!)

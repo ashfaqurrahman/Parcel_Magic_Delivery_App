@@ -1,7 +1,9 @@
 package com.airposted.bitoronbd_deliveryman.data.network
 
-import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
 import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.model.auth.AuthResponse
+import com.airposted.bitoronbd_deliveryman.model.rating.AverageRatingModel
+import com.airposted.bitoronbd_deliveryman.model.register.SignUpModel
 import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -15,19 +17,19 @@ import java.util.concurrent.TimeUnit
 interface MyApi {
 
     @FormUrlEncoded
-    @POST("phonenumbercheck")
+    @POST("driver-phonenumber-check")
     suspend fun numberCheck(
         @Field("phone") phone: String
     ) : Response<AuthResponse>
 
     @FormUrlEncoded
-    @POST("send_otp_message")
+    @POST("send-otp-message")
     suspend fun sendOTP(
         @Field("phone_number") phone: String
     ) : Response<AuthResponse>
 
     @Multipart
-    @POST("register_delivery")
+    @POST("register-delivery")
     suspend fun userSignUpWithNid(
         @Part("username") name: RequestBody,
         @Part("phone") phone: RequestBody,
@@ -38,10 +40,10 @@ interface MyApi {
         @Part("address") address: RequestBody,
         @Part file: MultipartBody.Part,
         @Part("image") requestBody: RequestBody
-    ) : Response<AuthResponse>
+    ) : Response<SignUpModel>
 
     @Multipart
-    @POST("register_delivery")
+    @POST("register-delivery")
     suspend fun userSignUpWithDriveLicense(
         @Part("username") name: RequestBody,
         @Part("phone") phone: RequestBody,
@@ -52,7 +54,7 @@ interface MyApi {
         @Part("address") address: RequestBody,
         @Part file: MultipartBody.Part,
         @Part("image") requestBody: RequestBody
-    ) : Response<AuthResponse>
+    ) : Response<SignUpModel>
 
     @GET("delivery/area")
     suspend fun getAllAreaList(
@@ -60,26 +62,26 @@ interface MyApi {
     ) : Response<AreaListDataModel>
 
     @FormUrlEncoded
-    @POST("delivery/prefered_area_list_add")
+    @POST("delivery/prefered-area-list-add")
     suspend fun addMyArea(
         @Header("Authorization") header: String,
         @Field("area_id") areaId: Int
     ) : Response<RequestModel>
 
-    @POST("delivery/prefered_area_list_view")
+    @POST("delivery/prefered-area-list-view")
     suspend fun viewMyArea(
         @Header("Authorization") header: String
     ) : Response<ViewMyAreaModel>
 
     @FormUrlEncoded
-    @POST("delivery/prefered_area_list_delete")
+    @POST("delivery/prefered-area-list-delete")
     suspend fun deleteMyArea(
         @Header("Authorization") header: String,
         @Field("prefered_area_id") id: Int
     ) : Response<RequestModel>
 
     @FormUrlEncoded
-    @POST("delivery/search_order_list")
+    @POST("delivery/search-order-list")
     suspend fun getOrderList(
         @Header("Authorization") header: String,
         @Field("to") to: Int,
@@ -87,7 +89,7 @@ interface MyApi {
     ) : Response<OrderListModel>
 
     @FormUrlEncoded
-    @POST("delivery/single_search_order_list")
+    @POST("delivery/single-search-order-list")
     suspend fun getOrderListByArea(
         @Header("Authorization") header: String,
         @Field("to") to: Int
@@ -99,17 +101,17 @@ interface MyApi {
         @Path("id") id: String
     ): Response<OrderDetailsModel>
 
-    @POST("delivery/order_history")
+    @POST("delivery/order-history")
     suspend fun myOrderHistory(
         @Header("Authorization") header: String
     ) : Response<OrderListModel>
 
-    @POST("delivery/deliverycurrentorderlist")
+    @POST("delivery/delivery-current-orderlist")
     suspend fun getCurrentOrderList(
         @Header("Authorization") header: String
     ) : Response<OrderListModel>
 
-    @POST("delivery/prefered_area_order_list")
+    @POST("delivery/prefered-area-order-list")
     suspend fun getPreferredOrderList(
         @Header("Authorization") header: String
     ) : Response<PreferredAreaOrderListModel>
@@ -119,11 +121,9 @@ interface MyApi {
         @Header("Authorization") header: String
     ) : Response<ProfileModel>
 
-    @FormUrlEncoded
-    @POST("delivery/getAverageRating")
+    @GET("delivery/get-average-rating")
     suspend fun getAverageRating(
-        @Header("Authorization") header: String,
-        @Field("logisticId") logisticId: Int
+        @Header("Authorization") header: String
     ) : Response<AverageRatingModel>
 
     @GET("delivery/wallet")
@@ -133,14 +133,14 @@ interface MyApi {
 
 
     @FormUrlEncoded
-    @POST("delivery/delivery_user_update")
+    @POST("delivery/delivery-user-update")
     suspend fun userNameUpdate(
         @Header("Authorization") header: String,
         @Field("username") username: String
     ) : Response<ProfileModel>
 
     @FormUrlEncoded
-    @POST("delivery/orderstatuschange")
+    @POST("delivery/order-status-change")
     suspend fun changeStatus(
         @Header("Authorization") header: String,
         @Field("invoice_no") invoice: String,
@@ -149,7 +149,7 @@ interface MyApi {
     ) : Response<StatusChangeModel>
 
     @Multipart
-    @POST("delivery/delivery_user_update")
+    @POST("delivery/delivery-user-update")
     suspend fun userImageUpdate(
         @Header("Authorization") header: String,
         @Part file: MultipartBody.Part,
@@ -157,13 +157,13 @@ interface MyApi {
     ) : Response<ProfileModel>
 
     @FormUrlEncoded
-    @POST("delivery/addfcmtoken")
+    @POST("delivery/add-fcmtoken")
     suspend fun saveFcmToken(
         @Header("Authorization") header: String,
         @Field("fcm_token") fcm_token: String,
     ): Response<RequestModel>
 
-    @GET("delivery/deletefcmtoken")
+    @GET("delivery/delete-fcm-token")
     suspend fun deleteFcmToken(
         @Header("Authorization") header: String
     ): Response<RequestModel>

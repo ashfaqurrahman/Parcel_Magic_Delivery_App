@@ -1,50 +1,20 @@
 package com.airposted.bitoronbd_deliveryman.view.auth
 
-import `in`.aabhasjindal.otptextview.OTPListener
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
-import android.util.MalformedJsonException
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.aapbd.appbajarlib.storage.PersistentUser
-import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.data.network.responses.AuthResponse
-import com.airposted.bitoronbd_deliveryman.databinding.FragmentOTPBinding
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentOTPFirebaseBinding
+import com.airposted.bitoronbd_deliveryman.model.auth.AuthResponse
 import com.airposted.bitoronbd_deliveryman.utils.*
-import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
-import com.airposted.bitoronbd_deliveryman.view.main.ProfileFragment
-import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
-import com.theartofdev.edmodo.cropper.CropImage
-import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
-import java.io.File
-import java.util.concurrent.TimeUnit
 
 class OTPFirebaseFragment : Fragment(), KodeinAware {
     override val kodein by kodein()

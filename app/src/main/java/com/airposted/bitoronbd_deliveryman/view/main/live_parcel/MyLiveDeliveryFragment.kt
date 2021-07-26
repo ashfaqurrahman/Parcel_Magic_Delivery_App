@@ -20,6 +20,7 @@ import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragment
 import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
 import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -60,6 +61,10 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
                 val response = viewModel.getCurrentOrderList()
                 orderList = response.data
                 showOrderList(orderList)
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentWelcomeBinding
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -68,6 +69,10 @@ class WelcomeFragment : Fragment(), KodeinAware {
                     binding.rootLayout.snackbar(response.msg)
                 }
                 dismissDialog()
+            } catch (e: JsonSyntaxException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             } catch (e: MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)

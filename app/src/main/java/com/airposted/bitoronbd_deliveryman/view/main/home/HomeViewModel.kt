@@ -21,7 +21,7 @@ class HomeViewModel(
 
     suspend fun myProfile() = withContext(Dispatchers.IO) { repository.myProfile() }
 
-    suspend fun getAverageRating(logisticId: Int) = withContext(Dispatchers.IO) { repository.getAverageRating(logisticId) }
+    suspend fun getAverageRating() = withContext(Dispatchers.IO) { repository.getAverageRating() }
 
     val name = repository.userName
     val image = repository.userImage
