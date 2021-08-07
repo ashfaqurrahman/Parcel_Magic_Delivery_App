@@ -24,6 +24,7 @@ import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentOTPBinding
 import com.airposted.bitoronbd_deliveryman.model.register.SignUpModel
 import com.airposted.bitoronbd_deliveryman.utils.*
+import com.airposted.bitoronbd_deliveryman.view.PermissionActivity
 import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
 import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.launch
@@ -119,7 +120,7 @@ class OTPFragment : Fragment(), KodeinAware {
                 PersistentUser.getInstance().setFullname(requireContext(), requireArguments().getString("name"))
                 PersistentUser.getInstance().setPhonenumber(requireContext(), requireArguments().getString("phone"))
                 PersistentUser.getInstance().setUserImage(requireContext(), requireArguments().getString("image"))
-                val intent = Intent(requireContext(), MainActivity::class.java)
+                val intent = Intent(requireContext(), PermissionActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
             }

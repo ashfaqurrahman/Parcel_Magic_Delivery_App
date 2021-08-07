@@ -2,16 +2,13 @@ package com.airposted.bitoronbd_deliveryman.data.repositories
 
 import android.Manifest
 import android.content.Context
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -26,6 +23,7 @@ import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
 import com.google.android.gms.location.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import timber.log.Timber
 import java.lang.reflect.InvocationTargetException
 import java.util.*
 
@@ -38,7 +36,7 @@ class HomeRepository(
     private val gps = MutableLiveData<Boolean>()
     private var mLocationManager: LocationManager? = null
 
-    var mLocationRequest: LocationRequest? = null
+    private var mLocationRequest: LocationRequest? = null
     var mLastLocation: Location? = null
     var mFusedLocationClient: FusedLocationProviderClient? = null
     private val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -54,7 +52,7 @@ class HomeRepository(
             ) ==
             PackageManager.PERMISSION_GRANTED
         ) {
-            mLocationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0F, this)
+            mLocationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 100F, this)
         }
         getName()
         getImage()
@@ -244,7 +242,18 @@ class HomeRepository(
     }
 
     override fun onLocationChanged(location: Location) {
-        //Log.e("aaaaaa", location.latitude.toString())
+        PreferenceProvider(appContext).saveSharedPreferences("latitude", location.latitude.toString())
+        PreferenceProvider(appContext).saveSharedPreferences("longitude", location.longitude.toString())
+        val geo = Geocoder(appContext, Locale.ENGLISH)
+        try {
+            val addresses = geo.getFromLocation(location.latitude, location.longitude, 1)
+            if (addresses.isNotEmpty()) {
+                PreferenceProvider(appContext).saveSharedPreferences("location", addresses[0].subLocality)
+                gps.postValue(true)
+            }
+        } catch (e: InvocationTargetException) {
+            Timber.e("Location not found")
+        }
 
     }
     override fun onStatusChanged(provider: String, status: Int, extras: Bundle?) {}
@@ -261,24 +270,23 @@ class HomeRepository(
         }
     }
 
-    private fun locationCallback() {
+    fun locationCallback() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(appContext)
         mLocationRequest = LocationRequest()
 
         if (ActivityCompat.checkSelfPermission(
                 appContext,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 appContext,
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-
+            mFusedLocationClient!!.requestLocationUpdates(
+                mLocationRequest,
+                mLocationCallback, Looper.myLooper()
+            )
         }
-        mFusedLocationClient!!.requestLocationUpdates(
-            mLocationRequest,
-            mLocationCallback, Looper.myLooper()
-        )
     }
 
     private var mLocationCallback: LocationCallback = object : LocationCallback() {
@@ -289,20 +297,6 @@ class HomeRepository(
                 mLastLocation = location
                 PreferenceProvider(appContext).saveSharedPreferences("latitude", location.latitude.toString())
                 PreferenceProvider(appContext).saveSharedPreferences("longitude", location.longitude.toString())
-                Log.e("aaaaa", location.latitude.toString())
-                val geo = Geocoder(appContext, Locale.getDefault())
-                try {
-                    val addresses = geo.getFromLocation(location.latitude, location.longitude, 1);
-                    if (addresses.isEmpty()) {
-
-                    }
-                    else {
-                        gps.postValue(true)
-//                        currentLocation.postValue(LocationDetailsWithName(addresses[0].featureName + ", " + addresses[0].thoroughfare + ", " + addresses[0].subLocality + ", " + addresses[0].locality, location.latitude, location.longitude))
-                    }
-                } catch (e: InvocationTargetException) {
-                    Log.e("aaaaaa", "Location not found")
-                }
             }
         }
     }

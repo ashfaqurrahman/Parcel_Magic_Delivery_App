@@ -2,11 +2,13 @@ package com.airposted.bitoronbd_deliveryman.view.main.home
 
 import android.app.Dialog
 import android.content.Intent
+import android.content.IntentSender
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.ImageView
@@ -21,11 +23,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.BuildConfig
 import com.airposted.bitoronbd_deliveryman.R
+import com.airposted.bitoronbd_deliveryman.data.network.preferences.PreferenceProvider
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
 import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
 import com.airposted.bitoronbd_deliveryman.view.main.HelpFragment
+import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
 import com.airposted.bitoronbd_deliveryman.view.main.ProfileFragment
 import com.airposted.bitoronbd_deliveryman.view.main.TermsConditionsFragment
 import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
@@ -39,8 +43,12 @@ import com.airposted.bitoronbd_deliveryman.view.main.preferred_area.PreferredAre
 import com.airposted.bitoronbd_deliveryman.view.main.preferred_order.PreferredOrderListFragment
 import com.airposted.bitoronbd_deliveryman.view.main.wallet.MyWalletFragment
 import com.bumptech.glide.Glide
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.PendingResult
+import com.google.android.gms.common.api.Status
+import com.google.android.gms.location.*
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.installations.FirebaseInstallations
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonSyntaxException
 import de.hdodenhof.circleimageview.CircleImageView
@@ -48,6 +56,8 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware,
     AreaClickListener, IOnBackPressed {
@@ -63,6 +73,11 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     private var toID = 0
     private var from = ""
     private var to = ""
+
+    private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 10000
+    private val FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS: Long = 5000
+    private val REQUEST_CHECK_SETTINGS = 0x1
+    private lateinit var googleApiClient: GoogleApiClient
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,7 +113,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     }
                 }
                 areaList = response.data!!
-                FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+                FirebaseInstallations.getInstance().getToken(true).addOnSuccessListener { instanceIdResult ->
                     val token = instanceIdResult.token
                     lifecycleScope.launch {
                         try {
@@ -146,6 +161,19 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
         }
 
+        googleApiClient = getAPIClientInstance()
+        googleApiClient.connect()
+
+        viewModel.gps.observe( viewLifecycleOwner, {
+            if (it) {
+                val location = PreferenceProvider(requireActivity()).getSharedPreferences("location")
+                binding.from.setText(location)
+
+            } else {
+                requestGPSSettings()
+            }
+        })
+
         val hView: View = binding.navigationView.getHeaderView(0)
         val pic = hView.findViewById<CircleImageView>(R.id.profile_image)
         val name = hView.findViewById<TextView>(R.id.user_name)
@@ -169,10 +197,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.versionName.text = "Version " + BuildConfig.VERSION_NAME
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
 
-        binding.from.setOnClickListener {
+        /*binding.from.setOnClickListener {
             currentLocationClick = true
             searchArea()
-        }
+        }*/
 
         binding.to.setOnClickListener {
             currentLocationClick = false
@@ -198,6 +226,63 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 }
             } else {
                 binding.rootLayout.snackbar("Please set a pick up location.")
+            }
+        }
+    }
+
+    private fun getAPIClientInstance(): GoogleApiClient {
+        return GoogleApiClient.Builder(requireActivity())
+            .addApi(LocationServices.API).build()
+    }
+
+    private fun requestGPSSettings() {
+        val locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = UPDATE_INTERVAL_IN_MILLISECONDS
+        locationRequest.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        builder.setAlwaysShow(true)
+        val result: PendingResult<LocationSettingsResult> =
+            LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
+        result.setResultCallback { result ->
+            val status: Status = result.status
+            when (status.statusCode) {
+                LocationSettingsStatusCodes.SUCCESS -> {
+                    Log.i("", "All location settings are satisfied.")
+                    Toast.makeText(
+                        requireActivity(),
+                        "GPS is already enable",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
+                }
+                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
+                    Log.i(
+                        "",
+                        "Location settings are not satisfied. Show the user a dialog to" + "upgrade location settings "
+                    )
+                    try {
+                        status.startResolutionForResult(
+                            requireActivity(),
+                            REQUEST_CHECK_SETTINGS
+                        )
+                    } catch (e: IntentSender.SendIntentException) {
+                        Log.e("Applicationsett", e.toString())
+                    }
+                }
+                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
+                    Log.i(
+                        "",
+                        "Location settings are inadequate, and cannot be fixed here. Dialog " + "not created."
+                    )
+                    Toast.makeText(
+                        requireActivity(),
+                        "Location settings are inadequate, and cannot be fixed here",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

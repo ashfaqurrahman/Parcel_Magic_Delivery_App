@@ -4,8 +4,9 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.location.LocationManager
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.aapbd.appbajarlib.storage.PersistData
@@ -36,16 +37,18 @@ class SplashActivity : AppCompatActivity(), KodeinAware {
         if (PersistData.getBooleanData(context, AppHelper.OPEN_SCREEN_LOAD)) {
             if (PersistentUser.getInstance().isLogged(context)) {
                 if (checkPermissions()) {
-                    viewModel.gps.observe(this, {
-                        if (it) {
-                            startActivity(Intent(context, MainActivity::class.java))
-                            finish()
+                    val manager = getSystemService(LOCATION_SERVICE) as LocationManager
+                    val statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-                        } else {
-                            startActivity(Intent(context, PermissionActivity::class.java))
-                            finish()
-                        }
-                    })
+                    if (statusOfGPS) {
+                        viewModel.startLocation
+                        startActivity(Intent(context, MainActivity::class.java))
+                        finish()
+
+                    } else {
+                        startActivity(Intent(context, PermissionActivity::class.java))
+                        finish()
+                    }
                 } else {
                     startActivity(Intent(context, PermissionActivity::class.java))
                     finish()

@@ -6,12 +6,8 @@ import android.content.Intent
 import android.content.IntentSender
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.ActivityPermissionBinding
@@ -26,8 +22,8 @@ import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
-import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 import java.util.ArrayList
 
 class PermissionActivity : AppCompatActivity(), KodeinAware {
@@ -65,8 +61,8 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
                     override fun onGranted() {
 
                         viewModel.gps.observe( this@PermissionActivity, {
-                            Log.e("aaaaa", it.toString())
                             if (it) {
+                                viewModel.gps.removeObservers(this@PermissionActivity)
                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                 startActivity(intent)
@@ -108,11 +104,11 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
         builder.setAlwaysShow(true)
         val result: PendingResult<LocationSettingsResult> =
             LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
-        result.setResultCallback { result ->
-            val status: Status = result.status
+        result.setResultCallback { result1 ->
+            val status: Status = result1.status
             when (status.statusCode) {
                 LocationSettingsStatusCodes.SUCCESS -> {
-                    Log.i("", "All location settings are satisfied.")
+                    Timber.i( "All location settings are satisfied.")
                     Toast.makeText(
                         this,
                         "GPS is already enable",
@@ -123,9 +119,7 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
                     startActivity(intent)
                 }
                 LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
-                    Log.i(
-                        "",
-                        "Location settings are not satisfied. Show the user a dialog to" + "upgrade location settings "
+                    Timber.i("Location settings are not satisfied. Show the user a dialog to upgrade location settings "
                     )
                     try {
                         status.startResolutionForResult(
@@ -133,13 +127,11 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
                             REQUEST_CHECK_SETTINGS
                         )
                     } catch (e: IntentSender.SendIntentException) {
-                        Log.e("Applicationsett", e.toString())
+                        Timber.e(e.toString())
                     }
                 }
                 LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                    Log.i(
-                        "",
-                        "Location settings are inadequate, and cannot be fixed here. Dialog " + "not created."
+                    Timber.i("Location settings are inadequate, and cannot be fixed here. Dialog not created."
                     )
                     Toast.makeText(
                         this,
