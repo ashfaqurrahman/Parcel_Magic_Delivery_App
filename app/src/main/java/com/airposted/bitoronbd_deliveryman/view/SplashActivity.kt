@@ -1,9 +1,12 @@
 package com.airposted.bitoronbd_deliveryman.view
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import com.aapbd.appbajarlib.storage.PersistData
 import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
@@ -21,8 +24,13 @@ class SplashActivity : AppCompatActivity() {
 
         if (PersistData.getBooleanData(context, AppHelper.OPEN_SCREEN_LOAD)) {
             if (PersistentUser.getInstance().isLogged(context)) {
-                startActivity(Intent(context, MainActivity::class.java))
-                finish()
+                if (checkPermissions()) {
+                    startActivity(Intent(context, MainActivity::class.java))
+                    finish()
+                } else {
+                    startActivity(Intent(context, PermissionActivity::class.java))
+                    finish()
+                }
             } else {
                 startActivity(Intent(context, AuthActivity::class.java))
                 finish()
@@ -31,5 +39,13 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(context, IntroActivity::class.java))
             finish()
         }
+    }
+
+    private fun checkPermissions(): Boolean {
+        val permissionState = ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+        return permissionState == PackageManager.PERMISSION_GRANTED
     }
 }

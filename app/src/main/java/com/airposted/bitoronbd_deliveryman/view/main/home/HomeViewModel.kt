@@ -53,4 +53,5 @@ class HomeViewModel(
     suspend fun saveFcmToken(fcm_token: String) = withContext(Dispatchers.IO) { repository.saveFcmToken(fcm_token) }
     suspend fun deleteFcmToken() = withContext(Dispatchers.IO) { repository.deleteFcmToken() }
 
+    val gps = repository.location()
 }
