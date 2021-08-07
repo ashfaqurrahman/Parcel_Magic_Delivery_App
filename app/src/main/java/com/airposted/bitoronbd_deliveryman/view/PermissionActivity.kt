@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.airposted.bitoronbd_deliveryman.R
@@ -52,6 +53,9 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
     private fun setupUI() {
         //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right)
 
+        googleApiClient = getAPIClientInstance()
+        googleApiClient.connect()
+
         permissionBinding.currentLocation.setOnClickListener {
             Permissions.check(
                 this,
@@ -59,10 +63,9 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
                 null,
                 object : PermissionHandler() {
                     override fun onGranted() {
-                        googleApiClient = getAPIClientInstance()
-                        googleApiClient.connect()
 
-                        viewModel.gps.observe(this@PermissionActivity, {
+                        viewModel.gps.observe( this@PermissionActivity, {
+                            Log.e("aaaaa", it.toString())
                             if (it) {
                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -115,6 +118,9 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
                         "GPS is already enable",
                         Toast.LENGTH_SHORT
                     ).show()
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
                 }
                 LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
                     Log.i(

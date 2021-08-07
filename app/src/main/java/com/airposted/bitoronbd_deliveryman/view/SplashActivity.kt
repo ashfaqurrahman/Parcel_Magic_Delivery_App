@@ -7,26 +7,45 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
 import com.aapbd.appbajarlib.storage.PersistData
 import com.aapbd.appbajarlib.storage.PersistentUser
 import com.airposted.bitoronbd_deliveryman.utils.AppHelper
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
 import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
+import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity(), KodeinAware {
 
     private var context: Context? = null
+    private lateinit var viewModel: HomeViewModel
+    override val kodein by kodein()
+    private val factory: HomeViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
 
         context = this
 
         if (PersistData.getBooleanData(context, AppHelper.OPEN_SCREEN_LOAD)) {
             if (PersistentUser.getInstance().isLogged(context)) {
                 if (checkPermissions()) {
-                    startActivity(Intent(context, MainActivity::class.java))
-                    finish()
+                    viewModel.gps.observe(this, {
+                        if (it) {
+                            startActivity(Intent(context, MainActivity::class.java))
+                            finish()
+
+                        } else {
+                            startActivity(Intent(context, PermissionActivity::class.java))
+                            finish()
+                        }
+                    })
                 } else {
                     startActivity(Intent(context, PermissionActivity::class.java))
                     finish()

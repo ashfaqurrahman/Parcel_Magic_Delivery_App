@@ -289,6 +289,7 @@ class HomeRepository(
                 mLastLocation = location
                 PreferenceProvider(appContext).saveSharedPreferences("latitude", location.latitude.toString())
                 PreferenceProvider(appContext).saveSharedPreferences("longitude", location.longitude.toString())
+                Log.e("aaaaa", location.latitude.toString())
                 val geo = Geocoder(appContext, Locale.getDefault())
                 try {
                     val addresses = geo.getFromLocation(location.latitude, location.longitude, 1);
