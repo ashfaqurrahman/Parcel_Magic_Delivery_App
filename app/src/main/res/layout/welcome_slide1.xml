@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg_gradient_start_end">
+    android:background="@drawable/intro_main_bg">
 
     <ImageView
         android:id="@+id/intro_one_bg"
@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/intro_one_bg"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="80dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginBottom="1dp"
         android:src="@drawable/ic_intro_one_car" />
 
     <LinearLayout
@@ -38,7 +39,7 @@
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             android:gravity="center"
-            android:text="Earn money by riding your own bike/cycle"
+            android:text="Send parcel whenever you want!"
             />
 
         <TextView
@@ -53,7 +54,7 @@
             android:textSize="14sp"
             android:textColor="#ffffff"
             android:gravity="center"
-            android:text="Register as our delivery agent &amp; deliver parcel around the city. Earn money and ensure a hassle-free delivery to our customers."
+            android:text="Need to send something in less than 24 hours? Don’t worry Airposted parcel has got you covered. Our service is absolutely hassle-free and wallet friendly!"
             />
 
     </LinearLayout>

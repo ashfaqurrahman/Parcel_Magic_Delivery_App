@@ -70,7 +70,7 @@
                     android:textSize="13sp"
                     android:textColor="#b5b7dd"
                     android:gravity="center_horizontal"
-                    android:text="@string/_25_order_delivered_in_the_area"
+                    android:text="@{myArea.count + ` order in this area`}"
                     />
 
             </LinearLayout>

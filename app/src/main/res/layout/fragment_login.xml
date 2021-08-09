@@ -30,25 +30,9 @@
 
                 <ImageView
                     android:id="@+id/text"
-                    android:layout_alignTop="@+id/icon"
-                    android:layout_alignBottom="@+id/icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_airposted_logo"/>
-
-                <TextView
-                    android:id="@+id/icon"
-                    android:layout_toEndOf="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginStart="6dp"
-                    android:fontFamily="@font/gill_sans_heavy"
-                    android:textStyle="normal"
-                    android:textSize="27sp"
-                    android:textColor="#000000"
-                    android:text="@string/drive"
-                    />
+                    android:src="@drawable/ic_logo_light" />
 
             </RelativeLayout>
 
@@ -133,18 +117,17 @@
 
             <TextView
                 android:id="@+id/create_account"
-                android:layout_below="@+id/sign_in"
-                android:layout_marginTop="34dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:textStyle="normal"
-                android:textSize="15sp"
-                android:textColor="#3b5998"
-                android:lineSpacingExtra="46sp"
+                android:layout_below="@+id/sign_in"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:lineSpacingExtra="46sp"
                 android:text="Create New Account"
-                />
+                android:textColor="@color/purple_500"
+                android:textSize="15sp"
+                android:textStyle="normal" />
 
         </RelativeLayout>
 
@@ -153,7 +136,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_open_screen_bg"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_open_screen_bg" />
 
     </RelativeLayout>
 

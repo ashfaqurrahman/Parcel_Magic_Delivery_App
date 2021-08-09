@@ -28,10 +28,7 @@ import com.airposted.bitoronbd_deliveryman.databinding.FragmentHomeBinding
 import com.airposted.bitoronbd_deliveryman.model.AreaListDataModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.auth.AuthActivity
-import com.airposted.bitoronbd_deliveryman.view.main.HelpFragment
-import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
-import com.airposted.bitoronbd_deliveryman.view.main.ProfileFragment
-import com.airposted.bitoronbd_deliveryman.view.main.TermsConditionsFragment
+import com.airposted.bitoronbd_deliveryman.view.main.*
 import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
 import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 import com.airposted.bitoronbd_deliveryman.view.main.history.MyDeliveryHistoryFragment
@@ -78,6 +75,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     private val FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS: Long = 5000
     private val REQUEST_CHECK_SETTINGS = 0x1
     private lateinit var googleApiClient: GoogleApiClient
+    private var gpsDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,6 +93,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     }
 
     private fun bindUI() {
+        gpsDialog = Dialog(requireActivity())
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
@@ -166,11 +165,17 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
         viewModel.gps.observe( viewLifecycleOwner, {
             if (it) {
+                if (gpsDialog!!.isShowing) {
+                    gpsDialog!!.dismiss()
+                }
                 val location = PreferenceProvider(requireActivity()).getSharedPreferences("location")
-                binding.from.setText(location)
+                val latitude = PreferenceProvider(requireActivity()).getSharedPreferences("latitude")
+                val longitude = PreferenceProvider(requireActivity()).getSharedPreferences("longitude")
+                binding.from.setText(location + " " + latitude + " " + longitude)
 
+                // hit api
             } else {
-                requestGPSSettings()
+                turnOnGPS()
             }
         })
 
@@ -479,6 +484,20 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             toID = area.id
             to = area.area_name
         }
+    }
+
+    private fun turnOnGPS() {
+        gpsDialog!!.setContentView(R.layout.gps_dialog)
+        gpsDialog!!.findViewById<TextView>(R.id.turn_on).setOnClickListener {
+            requestGPSSettings()
+        }
+        gpsDialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        gpsDialog!!.window?.setLayout(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        gpsDialog!!.setCancelable(false)
+        gpsDialog!!.show()
     }
 
     override fun onBackPressed(): Boolean {

@@ -19,9 +19,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:background="@color/teal_200"/>
+            android:background="@drawable/ic_profile_bg"/>
 
         <RelativeLayout
             android:layout_width="120dp"
@@ -39,10 +39,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginEnd="3dp"
                 android:layout_marginBottom="3dp"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/ic_edit_profile"/>
+                android:src="@drawable/ic_edit_profile" />
 
         </RelativeLayout>
 
@@ -158,7 +158,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:textStyle="normal"
                         android:textSize="14sp"
-                        android:textColor="#3b5998"
+                        android:textColor="@color/purple_500"
                         android:gravity="center_horizontal"
                         android:text="Delivery \nCompleted"
                         />
@@ -170,7 +170,7 @@
                         android:fontFamily="@font/poppins_semi_bold"
                         android:textStyle="normal"
                         android:textSize="28sp"
-                        android:textColor="#3b5998"
+                        android:textColor="@color/purple_500"
                         android:lineSpacingExtra="33sp"
                         android:text="00"
                         />
@@ -206,7 +206,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:textStyle="normal"
                         android:textSize="14sp"
-                        android:textColor="#ff4141"
+                        android:textColor="@color/orange"
                         android:gravity="center_horizontal"
                         android:text="Delivery is \npending"
                         />
@@ -218,7 +218,7 @@
                         android:fontFamily="@font/poppins_semi_bold"
                         android:textStyle="normal"
                         android:textSize="28sp"
-                        android:textColor="#ff4141"
+                        android:textColor="@color/orange"
                         android:lineSpacingExtra="33sp"
                         android:text="00"
                         />

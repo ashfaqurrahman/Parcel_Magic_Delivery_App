@@ -51,9 +51,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/from"
                         android:layout_toStartOf="@+id/to"
-                        android:src="@drawable/ic_airline"/>
+                        android:layout_toEndOf="@+id/from"
+                        android:src="@drawable/ic_airline" />
 
                     <TextView
                         android:id="@+id/to"
