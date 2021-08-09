@@ -3,42 +3,21 @@ package com.airposted.bitoronbd_deliveryman.view
 import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.IntentSender
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.airposted.bitoronbd_deliveryman.R
 import com.airposted.bitoronbd_deliveryman.databinding.ActivityPermissionBinding
 import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
-import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
-import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.PendingResult
-import com.google.android.gms.common.api.Status
-import com.google.android.gms.location.*
 import com.nabinbhandari.android.permissions.PermissionHandler
 import com.nabinbhandari.android.permissions.Permissions
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
-import timber.log.Timber
 import java.util.ArrayList
 
-class PermissionActivity : AppCompatActivity(), KodeinAware {
-    private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 10000
-    private val FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS: Long = 5000
-    private val REQUEST_CHECK_SETTINGS = 0x1
-    private lateinit var googleApiClient: GoogleApiClient
+class PermissionActivity : AppCompatActivity() {
     private lateinit var permissionBinding: ActivityPermissionBinding
-    private lateinit var viewModel: HomeViewModel
-    override val kodein by kodein()
-    private val factory: HomeViewModelFactory by instance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         permissionBinding = DataBindingUtil.setContentView(this, R.layout.activity_permission)
-        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
     }
 
     override fun onResume() {
@@ -49,9 +28,6 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
     private fun setupUI() {
         //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right)
 
-        googleApiClient = getAPIClientInstance()
-        googleApiClient.connect()
-
         permissionBinding.currentLocation.setOnClickListener {
             Permissions.check(
                 this,
@@ -60,17 +36,9 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
                 object : PermissionHandler() {
                     override fun onGranted() {
 
-                        viewModel.gps.observe( this@PermissionActivity, {
-                            if (it) {
-                                viewModel.gps.removeObservers(this@PermissionActivity)
-                                val intent = Intent(applicationContext, MainActivity::class.java)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                startActivity(intent)
-
-                            } else {
-                                requestGPSSettings()
-                            }
-                        })
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        startActivity(intent)
                     }
 
                     override fun onDenied(
@@ -87,59 +55,6 @@ class PermissionActivity : AppCompatActivity(), KodeinAware {
                         return super.onBlocked(context, blockedList)
                     }
                 })
-        }
-    }
-
-    private fun getAPIClientInstance(): GoogleApiClient {
-        return GoogleApiClient.Builder(this)
-            .addApi(LocationServices.API).build()
-    }
-
-    private fun requestGPSSettings() {
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = UPDATE_INTERVAL_IN_MILLISECONDS
-        locationRequest.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
-        builder.setAlwaysShow(true)
-        val result: PendingResult<LocationSettingsResult> =
-            LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
-        result.setResultCallback { result1 ->
-            val status: Status = result1.status
-            when (status.statusCode) {
-                LocationSettingsStatusCodes.SUCCESS -> {
-                    Timber.i( "All location settings are satisfied.")
-                    Toast.makeText(
-                        this,
-                        "GPS is already enable",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                    startActivity(intent)
-                }
-                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
-                    Timber.i("Location settings are not satisfied. Show the user a dialog to upgrade location settings "
-                    )
-                    try {
-                        status.startResolutionForResult(
-                            this,
-                            REQUEST_CHECK_SETTINGS
-                        )
-                    } catch (e: IntentSender.SendIntentException) {
-                        Timber.e(e.toString())
-                    }
-                }
-                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                    Timber.i("Location settings are inadequate, and cannot be fixed here. Dialog not created."
-                    )
-                    Toast.makeText(
-                        this,
-                        "Location settings are inadequate, and cannot be fixed here",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
         }
     }
 }

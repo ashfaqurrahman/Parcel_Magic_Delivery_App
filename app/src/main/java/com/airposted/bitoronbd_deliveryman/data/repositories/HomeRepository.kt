@@ -7,7 +7,6 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.os.Bundle
 import android.os.Looper
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -256,13 +255,14 @@ class HomeRepository(
         }
 
     }
-    override fun onStatusChanged(provider: String, status: Int, extras: Bundle?) {}
+
     override fun onProviderEnabled(provider: String) {
         if (provider == LocationManager.GPS_PROVIDER) {
             gps.postValue(true)
             locationCallback()
         }
     }
+
     override fun onProviderDisabled(provider: String) {
         if (provider == LocationManager.GPS_PROVIDER) {
             gps.postValue(false)
@@ -297,6 +297,7 @@ class HomeRepository(
                 mLastLocation = location
                 PreferenceProvider(appContext).saveSharedPreferences("latitude", location.latitude.toString())
                 PreferenceProvider(appContext).saveSharedPreferences("longitude", location.longitude.toString())
+                gps.postValue(true)
             }
         }
     }

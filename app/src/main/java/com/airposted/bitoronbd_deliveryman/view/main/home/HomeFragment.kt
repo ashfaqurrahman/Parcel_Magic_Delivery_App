@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.IntentSender
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.LocationManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -162,6 +164,13 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
         googleApiClient = getAPIClientInstance()
         googleApiClient.connect()
+
+        val manager = requireActivity().getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
+        val statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        if (statusOfGPS) {
+            viewModel.startLocation
+        }
 
         viewModel.gps.observe( viewLifecycleOwner, {
             if (it) {
