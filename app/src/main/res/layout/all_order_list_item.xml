@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="preferredOrderList"
-            type="com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModelData" />
+            name="data"
+            type="com.airposted.bitoronbd_deliveryman.model.all_orders.Data" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -41,7 +41,7 @@
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="8sp"
-                    android:text="@{preferredOrderList.order_item_name}"
+                    android:text="@{data.order_item_name}"
                     android:textColor="#1a1662"
                     android:textSize="15sp"
                     android:textStyle="normal"
@@ -54,7 +54,7 @@
                     android:textIsSelectable="true"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="10sp"
-                    android:text="@{`Quantity: 0` + preferredOrderList.item_qty}"
+                    android:text="@{`Quantity: 0` + data.item_qty}"
                     android:textColor="#1a1662"
                     android:textSize="15sp"
                     android:textStyle="normal" />
@@ -93,7 +93,7 @@
                     android:textSize="16sp"
                     android:textColor="#1a1662"
                     android:lineSpacingExtra="48sp"
-                    android:text="@{preferredOrderList.delivery_date}"
+                    android:text="@{data.delivery_date}"
                     />
 
             </RelativeLayout>

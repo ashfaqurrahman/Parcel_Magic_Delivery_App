@@ -47,8 +47,7 @@
             android:id="@+id/my_rea_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            tools:listitem="@layout/my_area_list_item" />
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:id="@+id/my_no_area"
@@ -59,6 +58,94 @@
             android:text="No area add yet!!"
             android:visibility="gone"
             android:gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/area_item"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/all_orders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="15dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/ic_preferred_area"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:textStyle="normal"
+                        android:textSize="16sp"
+                        android:textColor="#11123e"
+                        android:lineSpacingExtra="8sp"
+                        android:text="All Orders"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="#b5b7dd"
+                        android:gravity="center_horizontal"
+                        android:text="0 order in this area"
+                        />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:rotation="90"
+                        android:src="@drawable/ic_cross_icon" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -98,7 +98,7 @@ class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener, IOnBa
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
             try {
-                val response = viewModel.getOrderList(requireArguments().getInt("toId"), requireArguments().getInt("fromId"))
+                val response = viewModel.getOrderList(requireArguments().getInt("toId"))
                 showOrderList(response)
             } catch (e: JsonSyntaxException) {
                 dismissDialog()

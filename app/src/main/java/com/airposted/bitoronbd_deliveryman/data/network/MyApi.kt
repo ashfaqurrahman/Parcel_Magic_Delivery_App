@@ -2,6 +2,7 @@ package com.airposted.bitoronbd_deliveryman.data.network
 
 import com.airposted.bitoronbd_deliveryman.model.*
 import com.airposted.bitoronbd_deliveryman.model.auth.AuthResponse
+import com.airposted.bitoronbd_deliveryman.model.my_current_area.MyCurrentArea
 import com.airposted.bitoronbd_deliveryman.model.rating.AverageRatingModel
 import com.airposted.bitoronbd_deliveryman.model.register.SignUpModel
 import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
@@ -81,19 +82,38 @@ interface MyApi {
     ) : Response<RequestModel>
 
     @FormUrlEncoded
-    @POST("delivery/search-order-list")
+    @POST("delivery/single-search-order-list")
     suspend fun getOrderList(
         @Header("Authorization") header: String,
         @Field("to") to: Int,
-        @Field("from") from: Int
+        @Field("driver_latitude") latitude: String,
+        @Field("driver_longitude") longitude: String
     ) : Response<OrderListModel>
 
     @FormUrlEncoded
     @POST("delivery/single-search-order-list")
     suspend fun getOrderListByArea(
         @Header("Authorization") header: String,
-        @Field("to") to: Int
+        @Field("to") to: Int,
+        @Field("driver_latitude") latitude: String,
+        @Field("driver_longitude") longitude: String
     ) : Response<OrderListModel>
+
+    @FormUrlEncoded
+    @POST("delivery/my-current-area")
+    suspend fun getMyCurrentArea(
+        @Header("Authorization") header: String,
+        @Field("driver_latitude") latitude: String,
+        @Field("driver_longitude") longitude: String
+    ) : Response<MyCurrentArea>
+
+    @FormUrlEncoded
+    @POST("delivery/all-order-list")
+    suspend fun getAllOrders(
+        @Header("Authorization") header: String,
+        @Field("driver_latitude") latitude: String,
+        @Field("driver_longitude") longitude: String
+    ) : Response<MyCurrentArea>
 
     @GET("delivery/orderdetails/{id}")
     suspend fun getOrderDetails(
@@ -181,7 +201,7 @@ interface MyApi {
 
             return Retrofit.Builder()
                 .client(okkHttpclient)
-                .baseUrl("https://api.staging.parcelmagic.com/api/")
+                .baseUrl("https://api.parcelmagic.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)

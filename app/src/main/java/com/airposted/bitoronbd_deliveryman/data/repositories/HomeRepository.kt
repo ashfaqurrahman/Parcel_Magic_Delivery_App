@@ -17,6 +17,7 @@ import com.airposted.bitoronbd_deliveryman.data.network.MyApi
 import com.airposted.bitoronbd_deliveryman.data.network.SafeApiRequest
 import com.airposted.bitoronbd_deliveryman.data.network.preferences.PreferenceProvider
 import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.model.my_current_area.MyCurrentArea
 import com.airposted.bitoronbd_deliveryman.model.rating.AverageRatingModel
 import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
 import com.google.android.gms.location.*
@@ -130,10 +131,13 @@ class HomeRepository(
         }
     }
 
-    suspend fun getOrderList(to: Int, from: Int): OrderListModel {
+    suspend fun getOrderList(to: Int): OrderListModel {
         return apiRequest {
             api.getOrderList(
-                PersistentUser.getInstance().getAccessToken(appContext), to, from
+                PersistentUser.getInstance().getAccessToken(appContext),
+                to,
+                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
+                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
             )
         }
     }
@@ -141,7 +145,30 @@ class HomeRepository(
     suspend fun getOrderListByArea(to: Int): OrderListModel {
         return apiRequest {
             api.getOrderListByArea(
-                PersistentUser.getInstance().getAccessToken(appContext), to
+                PersistentUser.getInstance().getAccessToken(appContext),
+                to,
+                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
+                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
+            )
+        }
+    }
+
+    suspend fun getMyCurrentArea(to: Int): MyCurrentArea {
+        return apiRequest {
+            api.getMyCurrentArea(
+                PersistentUser.getInstance().getAccessToken(appContext),
+                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
+                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
+            )
+        }
+    }
+
+    suspend fun getAllOrders(to: Int): MyCurrentArea {
+        return apiRequest {
+            api.getAllOrders(
+                PersistentUser.getInstance().getAccessToken(appContext),
+                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
+                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
             )
         }
     }

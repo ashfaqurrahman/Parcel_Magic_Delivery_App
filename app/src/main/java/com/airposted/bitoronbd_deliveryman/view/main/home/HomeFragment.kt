@@ -180,9 +180,38 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 val location = PreferenceProvider(requireActivity()).getSharedPreferences("location")
                 val latitude = PreferenceProvider(requireActivity()).getSharedPreferences("latitude")
                 val longitude = PreferenceProvider(requireActivity()).getSharedPreferences("longitude")
-                binding.from.setText(location + " " + latitude + " " + longitude)
 
-                // hit api
+                if (latitude.isNullOrEmpty() && longitude.isNullOrEmpty()) {
+                    lifecycleScope.launch {
+                        try {
+                            val resources = viewModel.getMyCurrentArea()
+                            if (resources.success) {
+                                dismissDialog()
+                                binding.from.setText(resources.data.area_name)
+                            }
+                        } catch (e: JsonSyntaxException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: com.google.gson.stream.MalformedJsonException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: com.google.android.gms.common.api.ApiException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        }catch (e: ApiException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: NoInternetException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        }
+                    }
+                }
             } else {
                 turnOnGPS()
             }

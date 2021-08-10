@@ -28,9 +28,13 @@ class HomeViewModel(
 
     suspend fun myWallet() = withContext(Dispatchers.IO) { repository.myWallet() }
 
-    suspend fun getOrderList(to: Int, from: Int) = withContext(Dispatchers.IO) { repository.getOrderList(to, from) }
+    suspend fun getOrderList(to: Int) = withContext(Dispatchers.IO) { repository.getOrderList(to) }
 
     suspend fun getOrderListByArea(to: Int) = withContext(Dispatchers.IO) { repository.getOrderListByArea(to) }
+
+    suspend fun getMyCurrentArea() = withContext(Dispatchers.IO) { repository.getMyCurrentArea() }
+
+    suspend fun getAllOrders() = withContext(Dispatchers.IO) { repository.getAllOrders() }
 
     suspend fun getOrderDetails(id: String) = withContext(Dispatchers.IO) { repository.getOrderDetails(id) }
 
