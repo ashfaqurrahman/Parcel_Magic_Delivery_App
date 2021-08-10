@@ -21,6 +21,7 @@ import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
 import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModelFactory
 import com.airposted.bitoronbd_deliveryman.view.main.parcel_request.ParcelDetailsFragment
 import com.google.gson.JsonSyntaxException
+import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance

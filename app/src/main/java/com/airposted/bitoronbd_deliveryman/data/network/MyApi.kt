@@ -1,6 +1,7 @@
 package com.airposted.bitoronbd_deliveryman.data.network
 
 import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.model.all_orders.AllOrders
 import com.airposted.bitoronbd_deliveryman.model.auth.AuthResponse
 import com.airposted.bitoronbd_deliveryman.model.my_current_area.MyCurrentArea
 import com.airposted.bitoronbd_deliveryman.model.rating.AverageRatingModel
@@ -113,7 +114,7 @@ interface MyApi {
         @Header("Authorization") header: String,
         @Field("driver_latitude") latitude: String,
         @Field("driver_longitude") longitude: String
-    ) : Response<MyCurrentArea>
+    ) : Response<AllOrders>
 
     @GET("delivery/orderdetails/{id}")
     suspend fun getOrderDetails(

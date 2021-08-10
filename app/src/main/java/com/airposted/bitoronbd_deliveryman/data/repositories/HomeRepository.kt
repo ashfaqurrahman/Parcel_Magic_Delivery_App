@@ -17,6 +17,7 @@ import com.airposted.bitoronbd_deliveryman.data.network.MyApi
 import com.airposted.bitoronbd_deliveryman.data.network.SafeApiRequest
 import com.airposted.bitoronbd_deliveryman.data.network.preferences.PreferenceProvider
 import com.airposted.bitoronbd_deliveryman.model.*
+import com.airposted.bitoronbd_deliveryman.model.all_orders.AllOrders
 import com.airposted.bitoronbd_deliveryman.model.my_current_area.MyCurrentArea
 import com.airposted.bitoronbd_deliveryman.model.rating.AverageRatingModel
 import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
@@ -153,7 +154,7 @@ class HomeRepository(
         }
     }
 
-    suspend fun getMyCurrentArea(to: Int): MyCurrentArea {
+    suspend fun getMyCurrentArea(): MyCurrentArea {
         return apiRequest {
             api.getMyCurrentArea(
                 PersistentUser.getInstance().getAccessToken(appContext),
@@ -163,7 +164,7 @@ class HomeRepository(
         }
     }
 
-    suspend fun getAllOrders(to: Int): MyCurrentArea {
+    suspend fun getAllOrders(): AllOrders {
         return apiRequest {
             api.getAllOrders(
                 PersistentUser.getInstance().getAccessToken(appContext),
