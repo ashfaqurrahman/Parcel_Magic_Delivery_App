@@ -25,6 +25,7 @@ import com.google.android.gms.location.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import timber.log.Timber
+import java.io.IOException
 import java.lang.reflect.InvocationTargetException
 import java.util.*
 
@@ -148,8 +149,8 @@ class HomeRepository(
             api.getOrderListByArea(
                 PersistentUser.getInstance().getAccessToken(appContext),
                 to,
-                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
-                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
+                PreferenceProvider(appContext).getSharedPreferences("latitude")!!,
+                PreferenceProvider(appContext).getSharedPreferences("longitude")!!
             )
         }
     }
@@ -158,8 +159,8 @@ class HomeRepository(
         return apiRequest {
             api.getMyCurrentArea(
                 PersistentUser.getInstance().getAccessToken(appContext),
-                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
-                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
+                PreferenceProvider(appContext).getSharedPreferences("latitude")!!,
+                PreferenceProvider(appContext).getSharedPreferences("longitude")!!
             )
         }
     }
@@ -168,8 +169,8 @@ class HomeRepository(
         return apiRequest {
             api.getAllOrders(
                 PersistentUser.getInstance().getAccessToken(appContext),
-                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
-                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
+                PreferenceProvider(appContext).getSharedPreferences("latitude")!!,
+                PreferenceProvider(appContext).getSharedPreferences("longitude")!!
             )
         }
     }
@@ -279,6 +280,10 @@ class HomeRepository(
                 gps.postValue(true)
             }
         } catch (e: InvocationTargetException) {
+            Timber.e("Location not found")
+        } catch (e: IOException) {
+            Timber.e("Location not found")
+        } catch (e: RuntimeException) {
             Timber.e("Location not found")
         }
 

@@ -120,7 +120,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                         try {
                             val saveFcmTokenResponse = viewModel.saveFcmToken(token)
                             if (saveFcmTokenResponse.success) {
-                                dismissDialog()
+                                //dismissDialog()
                             }
                         } catch (e: JsonSyntaxException) {
                             dismissDialog()
@@ -145,7 +145,6 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                         }
                     }
                 }
-                dismissDialog()
             } catch (e: com.google.gson.stream.MalformedJsonException) {
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
@@ -181,13 +180,13 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 val latitude = PreferenceProvider(requireActivity()).getSharedPreferences("latitude")
                 val longitude = PreferenceProvider(requireActivity()).getSharedPreferences("longitude")
 
-                if (latitude.isNullOrEmpty() && longitude.isNullOrEmpty()) {
+                if (!latitude.isNullOrEmpty() && !longitude.isNullOrEmpty()) {
                     lifecycleScope.launch {
                         try {
                             val resources = viewModel.getMyCurrentArea()
                             if (resources.success) {
-                                dismissDialog()
                                 binding.from.setText(resources.data.area_name)
+                                dismissDialog()
                             }
                         } catch (e: JsonSyntaxException) {
                             dismissDialog()

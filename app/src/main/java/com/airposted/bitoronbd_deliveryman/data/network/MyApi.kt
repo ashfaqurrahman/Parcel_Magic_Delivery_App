@@ -104,8 +104,8 @@ interface MyApi {
     @POST("delivery/my-current-area")
     suspend fun getMyCurrentArea(
         @Header("Authorization") header: String,
-        @Field("driver_latitude") latitude: String,
-        @Field("driver_longitude") longitude: String
+        @Field("latitude") latitude: String,
+        @Field("longitude") longitude: String
     ) : Response<MyCurrentArea>
 
     @FormUrlEncoded
