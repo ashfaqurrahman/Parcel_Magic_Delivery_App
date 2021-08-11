@@ -51,7 +51,7 @@ class AllOrdersFragment : Fragment(), KodeinAware, AllOrderClickListener, IOnBac
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.toolbar.toolbarTitle.text = getString(R.string.preferred_area)
+        binding.toolbar.toolbarTitle.text = getString(R.string.all_orders)
 
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
@@ -86,7 +86,7 @@ class AllOrdersFragment : Fragment(), KodeinAware, AllOrderClickListener, IOnBac
             binding.allOrdersRecycler.visibility = View.VISIBLE
             binding.myNoArea.visibility = View.GONE
             val myRecyclerViewAdapter = AllOrderListRecyclerViewAdapter(response.data, this)
-            binding.allOrdersRecycler.layoutManager = GridLayoutManager(requireActivity(), 2)
+            binding.allOrdersRecycler.layoutManager = GridLayoutManager(requireActivity(), 1)
             binding.allOrdersRecycler.itemAnimator = DefaultItemAnimator()
             binding.allOrdersRecycler.adapter = myRecyclerViewAdapter
             dismissDialog()

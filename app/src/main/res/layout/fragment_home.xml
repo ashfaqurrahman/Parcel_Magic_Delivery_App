@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_dashboard_bg"/>
+                    android:src="@drawable/ic_home_bg" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

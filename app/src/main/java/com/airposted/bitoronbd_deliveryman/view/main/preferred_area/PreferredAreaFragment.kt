@@ -27,6 +27,7 @@ import com.airposted.bitoronbd_deliveryman.model.ViewMyAreaModel
 import com.airposted.bitoronbd_deliveryman.model.ViewMyAreaModelData
 import com.airposted.bitoronbd_deliveryman.utils.*
 import com.airposted.bitoronbd_deliveryman.view.main.*
+import com.airposted.bitoronbd_deliveryman.view.main.all_orders.AllOrdersFragment
 import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
 import com.airposted.bitoronbd_deliveryman.view.main.common.IOnBackPressed
 import com.airposted.bitoronbd_deliveryman.view.main.home.HomeViewModel
@@ -64,10 +65,16 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
 
     private fun bindUI() {
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
+
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
+
         binding.toolbar.toolbarTitle.text = getString(R.string.preferred_area)
+
+        binding.allOrders.setOnClickListener {
+            communicatorFragmentInterface!!.addContentFragment(AllOrdersFragment(), true)
+        }
 
         setProgressDialog(requireActivity())
         lifecycleScope.launch {
