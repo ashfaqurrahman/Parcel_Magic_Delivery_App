@@ -186,6 +186,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                             val resources = viewModel.getMyCurrentArea()
                             if (resources.success) {
                                 binding.from.setText(resources.data.area_name)
+                                from = resources.data.area_name
                                 dismissDialog()
                             }
                         } catch (e: JsonSyntaxException) {
@@ -250,9 +251,8 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         }
 
         binding.getOrderRequest.setOnClickListener {
-            if (fromId != 0) {
+            if (from.isNotEmpty()) {
                 if (toID != 0) {
-                    binding.from.setText("")
                     binding.to.setText("")
                     val fragment = ParcelRequestFragment()
                     val bundle = Bundle()
@@ -263,11 +263,12 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     bundle.putString("to", to)
                     fragment.arguments = bundle
                     communicatorFragmentInterface?.addContentFragment(fragment, true)
+                    toID = 0
                 } else {
                     binding.rootLayout.snackbar("Please set a destination location")
                 }
             } else {
-                binding.rootLayout.snackbar("Please set a pick up location.")
+                binding.rootLayout.snackbar("Please wait for pick up location.")
             }
         }
     }
@@ -434,13 +435,13 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     true
                 )
             }
-            R.id.preferred_area_order_list -> {
-                binding.drawerLayout.closeDrawers()
-                communicatorFragmentInterface?.addContentFragment(
-                    PreferredOrderListFragment(),
-                    true
-                )
-            }
+//            R.id.preferred_area_order_list -> {
+//                binding.drawerLayout.closeDrawers()
+//                communicatorFragmentInterface?.addContentFragment(
+//                    PreferredOrderListFragment(),
+//                    true
+//                )
+//            }
             R.id.preferred_area -> {
                 binding.drawerLayout.closeDrawers()
                 communicatorFragmentInterface?.addContentFragment(PreferredAreaFragment(), true)

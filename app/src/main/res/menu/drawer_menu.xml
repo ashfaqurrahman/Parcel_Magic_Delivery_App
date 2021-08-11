@@ -13,10 +13,10 @@
             android:icon="@drawable/ic_delivery_box"
             android:title="@string/my_live_delivery" />
 
-        <item
+        <!--<item
             android:id="@+id/preferred_area_order_list"
             android:icon="@drawable/ic_delivery"
-            android:title="@string/preferred_area_order_list" />
+            android:title="@string/preferred_area_order_list" />-->
 
         <item
             android:id="@+id/preferred_area"

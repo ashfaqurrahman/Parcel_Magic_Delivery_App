@@ -257,6 +257,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
                 else {
                     binding.rootLayout.snackbar(response.msg)
                     dismissDialog()
+                    binding.allOrdersLayout.visibility = View.VISIBLE
                 }
             } catch (e: JsonSyntaxException) {
                 dismissDialog()
@@ -281,6 +282,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
     private fun showMyArea(myAreaResponse: ViewMyAreaModel) {
         if (myAreaResponse.data.isNotEmpty()) {
             binding.myReaRecycler.visibility = View.VISIBLE
+            binding.allOrdersLayout.visibility = View.VISIBLE
             binding.myNoArea.visibility = View.GONE
             val myRecyclerViewAdapter = MyAreaListRecyclerViewAdapter(myAreaResponse.data, this)
             binding.myReaRecycler.layoutManager = GridLayoutManager(requireActivity(), 2)
@@ -291,6 +293,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
         else {
             binding.myReaRecycler.visibility = View.GONE
             binding.myNoArea.visibility = View.VISIBLE
+            binding.allOrdersLayout.visibility = View.VISIBLE
             dismissDialog()
         }
     }

@@ -49,18 +49,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" />
 
-        <TextView
-            android:id="@+id/my_no_area"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="16sp"
-            android:text="No area add yet!!"
-            android:visibility="gone"
-            android:gravity="center"/>
-
         <LinearLayout
-            android:id="@+id/area_item"
+            android:id="@+id/all_orders_layout"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:clickable="true"
@@ -146,6 +137,16 @@
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/my_no_area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="16sp"
+            android:text="No area add yet!!"
+            android:visibility="gone"
+            android:gravity="center"/>
 
     </LinearLayout>
 
