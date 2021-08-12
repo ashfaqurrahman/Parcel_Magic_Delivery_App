@@ -122,4 +122,7 @@ dependencies {
 //    implementation (name: 'sslCommerzSdk', ext:'aar')
     //PowerSpinner
     implementation 'com.github.skydoves:powerspinner:1.1.8'
+
+    // circularprogressbar
+    implementation 'com.jackandphantom.android:circularprogressbar:1.2.0'
 }
