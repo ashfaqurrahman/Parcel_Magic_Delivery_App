@@ -63,8 +63,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     //Kotlin Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
 
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
@@ -102,18 +102,18 @@ dependencies {
 
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation "com.github.bumptech.glide:glide:4.11.0"
-    kapt "com.github.bumptech.glide:compiler:4.11.0"
-    implementation ('com.github.bumptech.glide:okhttp3-integration:4.7.1'){
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation ('com.github.bumptech.glide:okhttp3-integration:4.12.0'){
         exclude group: 'glide-parent'
     }
     implementation 'com.google.android.libraries.places:places:2.4.0'
-    implementation 'com.google.maps.android:android-maps-utils:2.2.0'
+    implementation 'com.google.maps.android:android-maps-utils:2.2.5'
 
     implementation "com.nabinbhandari.android:permissions:$permissions"
     debugImplementation "com.jakewharton.timber:timber:$timber"
 
-    def lottieVersion = "3.6.0"
+    def lottieVersion = '4.0.0'
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
     //rating
@@ -121,5 +121,5 @@ dependencies {
 
 //    implementation (name: 'sslCommerzSdk', ext:'aar')
     //PowerSpinner
-    implementation "com.github.skydoves:powerspinner:1.1.7"
+    implementation 'com.github.skydoves:powerspinner:1.1.8'
 }

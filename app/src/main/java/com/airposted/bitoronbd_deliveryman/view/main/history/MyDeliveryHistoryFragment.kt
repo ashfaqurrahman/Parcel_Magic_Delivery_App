@@ -78,7 +78,7 @@ class MyDeliveryHistoryFragment : Fragment(), KodeinAware, IOnBackPressed {
     }
 
     private fun showOrderHistory(response: OrderListModel) {
-        if (response.data.isNotEmpty()) {
+        if (!response.data!!.isNullOrEmpty()) {
             binding.myOrderHistoryList.visibility = View.VISIBLE
             binding.noOrder.visibility = View.GONE
             val myRecyclerViewAdapter = OrderHistoryRecyclerViewAdapter(response.data)

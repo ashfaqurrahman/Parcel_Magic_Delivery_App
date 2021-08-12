@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import java.io.EOFException
 
 class AllOrdersFragment : Fragment(), KodeinAware, AllOrderClickListener, IOnBackPressed {
     override val kodein by kodein()
@@ -76,13 +77,17 @@ class AllOrdersFragment : Fragment(), KodeinAware, AllOrderClickListener, IOnBac
                 dismissDialog()
                 binding.rootLayout.snackbar(e.message!!)
                 e.printStackTrace()
+            } catch (e: EOFException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
             }
         }
 
     }
 
     private fun showAllArea(response: AllOrders) {
-        if (response.data.isNotEmpty()) {
+        if (response.data!!.isNotEmpty()) {
             binding.allOrdersRecycler.visibility = View.VISIBLE
             binding.myNoArea.visibility = View.GONE
             val myRecyclerViewAdapter = AllOrderListRecyclerViewAdapter(response.data, this)
@@ -110,8 +115,8 @@ class AllOrdersFragment : Fragment(), KodeinAware, AllOrderClickListener, IOnBac
         bundle.putString("recp_address", data.recp_address)
         bundle.putString("order_item_name", data.order_item_name)
         bundle.putDouble("distance", data.distance)
-        bundle.putDouble("delivery_charge", data.delivery_charge)
-        bundle.putInt("item_type", data.item_type)
+        bundle.putDouble("delivery_charge", data.delivery_charge!!)
+        bundle.putInt("item_type", data.item_type!!)
         bundle.putInt("item_qty", data.item_qty)
         bundle.putString("invoice", data.invoice_no)
         fragment.arguments = bundle

@@ -121,7 +121,7 @@ class ParcelRequestFragment : Fragment(), KodeinAware, OrderClickListener, IOnBa
     }
 
     private fun showOrderList(response: OrderListModel) {
-        if (response.data.isNotEmpty()) {
+        if (!response.data!!.isNullOrEmpty()) {
             binding.parcelRequestList.visibility = View.VISIBLE
             binding.noOrder.visibility = View.GONE
             val myRecyclerViewAdapter = OrderListRecyclerViewAdapter(response.data, this)

@@ -59,7 +59,7 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         lifecycleScope.launch {
             try {
                 val response = viewModel.getCurrentOrderList()
-                orderList = response.data
+                orderList = response.data!!
                 showOrderList(orderList)
             } catch (e: JsonSyntaxException) {
                 dismissDialog()
