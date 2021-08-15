@@ -49,34 +49,37 @@
                                 android:src="@drawable/ic_menu" />
 
                             <LinearLayout
+                                android:id="@+id/pending_orders"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="46dp"
+                                android:background="@drawable/order_request_bg"
                                 android:paddingStart="20dp"
-                                android:paddingEnd="20dp"
                                 android:paddingTop="8dp"
+                                android:paddingEnd="20dp"
                                 android:paddingBottom="8dp"
-                                android:background="@drawable/order_request_bg">
+                                android:visibility="gone">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/poppins_regular"
-                                    android:drawablePadding="10dp"
                                     android:drawableLeft="@drawable/ic_panding_order"
-                                    android:textColor="@color/black"
-                                    android:text="Pending Order"/>
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="Pending Order"
+                                    android:textColor="@color/black" />
 
                                 <TextView
+                                    android:id="@+id/counter"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/poppins_medium"
-                                    android:textColor="@color/white"
                                     android:layout_marginStart="10dp"
-                                    android:gravity="center"
                                     android:background="@drawable/order_count_bg"
-                                    android:text="4" />
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:gravity="center"
+                                    android:text="0"
+                                    android:textColor="@color/white" />
 
                             </LinearLayout>
 
@@ -221,13 +224,14 @@
                     android:layout_alignParentBottom="true"
                     android:background="@color/white">
 
-                    <Switch
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/online_offline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:textSize="18dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="You're Offline"/>
+                        android:padding="15dp"
+                        android:text="You're Offline"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 

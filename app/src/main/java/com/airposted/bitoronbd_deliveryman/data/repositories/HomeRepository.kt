@@ -8,6 +8,7 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Looper
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
@@ -21,13 +22,16 @@ import com.airposted.bitoronbd_deliveryman.model.all_orders.AllOrders
 import com.airposted.bitoronbd_deliveryman.model.my_current_area.MyCurrentArea
 import com.airposted.bitoronbd_deliveryman.model.rating.AverageRatingModel
 import com.airposted.bitoronbd_deliveryman.model.wallet.WalletModel
+import com.airposted.bitoronbd_deliveryman.view.OrderRequestFragment
 import com.google.android.gms.location.*
+import com.google.firebase.database.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import timber.log.Timber
 import java.io.IOException
 import java.lang.reflect.InvocationTargetException
 import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeRepository(
     context: Context,
@@ -46,6 +50,11 @@ class HomeRepository(
     val userName = MutableLiveData<String>()
     val userImage = MutableLiveData<String>()
 
+    var firebaseDatabase: FirebaseDatabase? = null
+    var databaseReference: DatabaseReference? = null
+    val orders = MutableLiveData<ArrayList<LiveOrders>>()
+    val order = MutableLiveData<ArrayList<LiveOrders>>()
+
     init {
         mLocationManager = appContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ContextCompat.checkSelfPermission(
@@ -58,6 +67,49 @@ class HomeRepository(
         }
         getName()
         getImage()
+        firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase!!.getReference("Parcelmagic")
+
+        getData()
+    }
+
+    suspend fun directionSearch(url: String): GoogleMapDTO {
+        return apiRequest { api.getDirectionsList(url)}
+    }
+
+    private fun getData() {
+        val products = arrayListOf<LiveOrders>()
+        databaseReference!!.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val orderList = arrayListOf<LiveOrders>()
+                val product = snapshot.getValue(LiveOrders::class.java)
+                products.add(product!!)
+                orderList.add(product)
+
+                orders.postValue(products)
+                order.postValue(orderList)
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val orderList = arrayListOf<LiveOrders>()
+                val product = snapshot.getValue(LiveOrders::class.java)
+                orderList.add(product!!)
+                order.postValue(orderList)
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                val product = snapshot.getValue(LiveOrders::class.java)
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
     private fun getName() {

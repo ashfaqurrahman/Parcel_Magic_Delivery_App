@@ -38,8 +38,7 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/layout"
-                android:layout_marginBottom="-21dp" />
+                android:layout_above="@id/layout" />
 
             <LinearLayout
                 android:id="@+id/layout"
@@ -70,6 +69,7 @@
                             android:animateLayoutChanges="true">
 
                             <TextView
+                                android:id="@+id/quantity_type"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="41dp"
@@ -79,31 +79,21 @@
                                 android:textSize="17sp"
                                 android:textColor="#0f122f"
                                 android:lineSpacingExtra="10sp"
-                                android:text="2 Small Box, Tk 117" />
+                                tools:text="2 Small Box, Tk 117" />
 
                             <com.jackandphantom.circularprogressbar.CircleProgressbar
+                                android:id="@+id/timer"
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
                                 android:layout_marginTop="10dp"
-                                app:cpb_progress="50"
+                                app:cpb_progress="100"
                                 app:cpb_roundedCorner="true"
                                 app:cpb_foregroundProgressWidth="15"
                                 app:cpb_foregroundProgressColor="@color/orange"
-                                app:cpb_touchEnabled="true"/>
+                                app:cpb_touchEnabled="false"/>
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginEnd="25dp"
-                                android:textStyle="bold"
-                                android:textSize="36sp"
-                                android:textColor="#1a1a1a"
-                                android:lineSpacingExtra="52sp"
-                                android:text="5 min"/>
-
-                            <TextView
+                                android:id="@+id/timer_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_regular"
@@ -113,12 +103,25 @@
                                 android:textSize="24sp"
                                 android:textColor="#1a1a1a"
                                 android:lineSpacingExtra="52sp"
-                                android:text="1.6 km"/>
+                                tools:text="5 min"/>
+
+                            <TextView
+                                android:id="@+id/distance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginEnd="25dp"
+                                android:textStyle="bold"
+                                android:textSize="24sp"
+                                android:textColor="#1a1a1a"
+                                android:lineSpacingExtra="52sp"
+                                tools:text="1.6 km"/>
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/confirm_delivery"
+                            android:id="@+id/accept"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp"

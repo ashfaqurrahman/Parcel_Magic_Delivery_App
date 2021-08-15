@@ -39,7 +39,6 @@ import com.airposted.bitoronbd_deliveryman.view.main.parcel_request.ParcelReques
 import com.airposted.bitoronbd_deliveryman.view.main.preferred_area.AreaClickListener
 import com.airposted.bitoronbd_deliveryman.view.main.preferred_area.AreaListRecyclerViewAdapter
 import com.airposted.bitoronbd_deliveryman.view.main.preferred_area.PreferredAreaFragment
-import com.airposted.bitoronbd_deliveryman.view.main.preferred_order.PreferredOrderListFragment
 import com.airposted.bitoronbd_deliveryman.view.main.wallet.MyWalletFragment
 import com.bumptech.glide.Glide
 import com.google.android.gms.common.api.GoogleApiClient
@@ -57,6 +56,14 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.util.*
 import kotlin.collections.ArrayList
+import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
+
+import com.airposted.bitoronbd_deliveryman.view.OrderRequestFragment
+import com.google.firebase.database.*
+import android.widget.CompoundButton
+
+
+
 
 class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware,
     AreaClickListener, IOnBackPressed {
@@ -83,7 +90,6 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         return binding.root
@@ -105,10 +111,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     for (i in myAreaResponse.data.indices){
                         FirebaseMessaging.getInstance().subscribeToTopic(myAreaResponse.data[i].area_name)
                             .addOnCompleteListener { task ->
-                                var msg = getString(R.string.open)
-                                if (!task.isSuccessful) {
-                                    msg = getString(R.string.close)
-                                }
+
+                                /*if (!task.isSuccessful) {
+
+                                }*/
                                 //Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                             }
                     }
@@ -186,6 +192,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                             val resources = viewModel.getMyCurrentArea()
                             if (resources.success) {
                                 binding.from.setText(resources.data.area_name)
+                                PreferenceProvider(requireActivity()).saveSharedPreferences("area_id", resources.data.id.toString())
                                 from = resources.data.area_name
                                 dismissDialog()
                             }
@@ -221,11 +228,11 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         val pic = hView.findViewById<CircleImageView>(R.id.profile_image)
         val name = hView.findViewById<TextView>(R.id.user_name)
 
-        viewModel.name.observe(viewLifecycleOwner, ) {
+        viewModel.name.observe(viewLifecycleOwner) {
             name.text = it
         }
 
-        viewModel.image.observe(viewLifecycleOwner, ) {
+        viewModel.image.observe(viewLifecycleOwner) {
             Glide.with(requireActivity()).load(
                 it
             ).placeholder(R.mipmap.ic_launcher).error(
@@ -248,6 +255,48 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.to.setOnClickListener {
             currentLocationClick = false
             searchArea()
+        }
+
+        binding.onlineOffline.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.onlineOffline.text = "You're Online"
+                viewModel.orders.observe(viewLifecycleOwner, {
+                    binding.counter.text = it.size.toString()
+                    binding.pendingOrders.visibility = View.VISIBLE
+                })
+
+                var status = 0
+                viewModel.order.observe(viewLifecycleOwner, {
+                    if (status == 1) {
+                        if (it[0].sender_area == PreferenceProvider(requireActivity()).getSharedPreferences(
+                                "area_id"
+                            )!!.toInt()
+                        ) {
+                            val fragment = OrderRequestFragment()
+                            val bundle = Bundle()
+                            bundle.putString("invoice", it[0].invoice_no)
+                            bundle.putString("sender_address", it[0].sender_address)
+                            bundle.putString("receiver_address", it[0].receiver_address)
+                            bundle.putDouble("sender_lat", it[0].sender_lat)
+                            bundle.putDouble("sender_long", it[0].sender_long)
+                            bundle.putDouble("receiver_lat", it[0].receiver_lat)
+                            bundle.putDouble("receiver_long", it[0].receiver_long)
+                            bundle.putDouble("earning", it[0].earning)
+                            bundle.putDouble("distance", it[0].distance)
+                            bundle.putInt("quantity", it[0].qty)
+                            bundle.putInt("type", it[0].type)
+                            fragment.arguments = bundle
+                            communicatorFragmentInterface!!.addContentFragment(fragment, true)
+                        }
+                    }
+                    status = 1
+                })
+            } else {
+                viewModel.orders.removeObservers(viewLifecycleOwner)
+                viewModel.order.removeObservers(viewLifecycleOwner)
+                binding.onlineOffline.text = "You're Offline"
+                binding.pendingOrders.visibility = View.GONE
+            }
         }
 
         binding.getOrderRequest.setOnClickListener {

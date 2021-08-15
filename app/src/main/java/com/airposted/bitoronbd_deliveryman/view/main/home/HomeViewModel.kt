@@ -25,6 +25,12 @@ class HomeViewModel(
 
     val name = repository.userName
     val image = repository.userImage
+    val orders = repository.orders
+    val order = repository.order
+
+    suspend fun getDirections(
+        url: String
+    ) = withContext(Dispatchers.IO) { repository.directionSearch(url) }
 
     suspend fun myWallet() = withContext(Dispatchers.IO) { repository.myWallet() }
 

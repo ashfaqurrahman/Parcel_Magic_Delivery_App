@@ -116,6 +116,9 @@ interface MyApi {
         @Field("driver_longitude") longitude: String
     ) : Response<AllOrders>
 
+    @GET
+    suspend fun getDirectionsList(@Url url: String): Response<GoogleMapDTO>
+
     @GET("delivery/orderdetails/{id}")
     suspend fun getOrderDetails(
         @Header("Authorization") header: String,

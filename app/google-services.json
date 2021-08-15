@@ -1,26 +1,19 @@
 {
   "project_info": {
     "project_number": "355650705651",
+    "firebase_url": "https://bitoronbd-driver-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "bitoronbd-driver",
     "storage_bucket": "bitoronbd-driver.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:355650705651:android:456ada861fed1c2bf57f86",
+        "mobilesdk_app_id": "1:355650705651:android:881f0170480b3a88f57f86",
         "android_client_info": {
-          "package_name": "com.airposted.bitoronbd"
+          "package_name": "com.airposted.bitoronbd_deliveryman"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "355650705651-ujn9qkol5jlanbgr8q1rq5f2kd619j59.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.airposted.bitoronbd",
-            "certificate_hash": "a43d6d3578da828502bbae04af1754077681e4f3"
-          }
-        },
         {
           "client_id": "355650705651-btenouoci7vo39il7p7s9cbgr7nkifub.apps.googleusercontent.com",
           "client_type": 3
@@ -44,18 +37,26 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:355650705651:android:98e778a51709d89af57f86",
+        "mobilesdk_app_id": "1:355650705651:android:e3bf0a7618eae043f57f86",
         "android_client_info": {
-          "package_name": "com.airposted.bitoronbd_deliveryman"
+          "package_name": "com.airposted.bohon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "355650705651-4j3fqt99erism6gdi7hov2ppkoukpu8m.apps.googleusercontent.com",
+          "client_id": "355650705651-j9jo9tfna143ur49686oikh06blquv18.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.airposted.bitoronbd_deliveryman",
-            "certificate_hash": "a43d6d3578da828502bbae04af1754077681e4f3"
+            "package_name": "com.airposted.bohon",
+            "certificate_hash": "dcf6f5bcba07dcd145ecd92f2f566b159ffe5a4b"
+          }
+        },
+        {
+          "client_id": "355650705651-tqimt37rpvhtnb5bv1te541dg2o0st2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.airposted.bohon",
+            "certificate_hash": "df670ec486bcf3e52dd289977f652e818fb848a8"
           }
         },
         {
