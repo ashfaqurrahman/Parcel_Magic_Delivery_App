@@ -225,6 +225,7 @@ class OrderRequestFragment : Fragment(), IOnBackPressed, KodeinAware {
                         val response = viewModel.changeStatus(arguments?.getString("invoice")!!, 3, 0)
                         if (response.success) {
                             dismissDialog()
+                            timer.cancel()
                             requireActivity().supportFragmentManager.popBackStack(
                                 ParcelRequestFragment::class.java.name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                             communicatorFragmentInterface!!.addContentFragment(
