@@ -37,6 +37,7 @@ class CurrentOrderListRecyclerViewAdapter(
                 holder.binding.imgDelivered.alpha = 0.3F
                 holder.binding.tvDelivered.alpha = 0.3F
 
+                holder.binding.personName.text = "Sender Name"
                 holder.binding.name.text = dataModel.pic_name
                 holder.binding.calling.setOnClickListener { viewDetailsListener.onCallClick(dataModel.pic_phone) }
             }
@@ -48,6 +49,7 @@ class CurrentOrderListRecyclerViewAdapter(
                 holder.binding.imgDelivered.alpha = 0.3F
                 holder.binding.tvDelivered.alpha = 0.3F
 
+                holder.binding.personName.text = "Receiver Name"
                 holder.binding.name.text = dataModel.recp_name
                 holder.binding.calling.setOnClickListener { viewDetailsListener.onCallClick(dataModel.recp_phone) }
             }

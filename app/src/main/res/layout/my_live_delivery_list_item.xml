@@ -111,12 +111,13 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/person_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_regular"
                 android:lineSpacingExtra="48sp"
-                android:text="Sender Name"
+                tools:text="Sender Name"
                 android:textColor="#b5b7dd"
                 android:textSize="13sp"
                 android:textStyle="normal" />
