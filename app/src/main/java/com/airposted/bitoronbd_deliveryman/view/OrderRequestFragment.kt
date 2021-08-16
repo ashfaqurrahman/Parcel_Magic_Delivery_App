@@ -1,10 +1,13 @@
 package com.airposted.bitoronbd_deliveryman.view
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -35,7 +38,15 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import android.os.CountDownTimer
 import android.util.Log
+import android.util.MalformedJsonException
+import android.view.Window
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.FragmentManager
+import com.airposted.bitoronbd_deliveryman.view.main.common.CommunicatorFragmentInterface
+import com.airposted.bitoronbd_deliveryman.view.main.live_parcel.MyLiveDeliveryFragment
+import com.airposted.bitoronbd_deliveryman.view.main.parcel_request.ParcelRequestFragment
+import com.google.gson.JsonSyntaxException
 
 
 class OrderRequestFragment : Fragment(), IOnBackPressed, KodeinAware {
@@ -46,6 +57,7 @@ class OrderRequestFragment : Fragment(), IOnBackPressed, KodeinAware {
     lateinit var googleMap: GoogleMap
     private lateinit var binding: FragmentOrderRequestBinding
     private lateinit var timer: CountDownTimer
+    private var communicatorFragmentInterface: CommunicatorFragmentInterface? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +76,7 @@ class OrderRequestFragment : Fragment(), IOnBackPressed, KodeinAware {
     }
 
     private fun bindUI() {
+        communicatorFragmentInterface = context as CommunicatorFragmentInterface
         setProgressDialog(requireActivity())
         var type = ""
         when(arguments?.getInt("type")){
@@ -186,6 +199,64 @@ class OrderRequestFragment : Fragment(), IOnBackPressed, KodeinAware {
         binding.back.setOnClickListener {
             timer.cancel()
             requireActivity().onBackPressed()
+        }
+
+        binding.accept.setOnClickListener {
+            val dialogs = Dialog(requireActivity())
+            dialogs.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogs.setContentView(R.layout.order_accept_dialog)
+            dialogs.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogs.window?.setLayout(
+                ViewGroup.LayoutParams.WRAP_CONTENT,  //w
+                ViewGroup.LayoutParams.MATCH_PARENT //h
+            )
+
+            val cancel = dialogs.findViewById<TextView>(R.id.cancel)
+            val ok = dialogs.findViewById<TextView>(R.id.ok)
+            cancel.setOnClickListener {
+                dialogs.dismiss()
+            }
+
+            ok.setOnClickListener {
+                dialogs.dismiss()
+                setProgressDialog(requireActivity())
+                lifecycleScope.launch {
+                    try {
+                        val response = viewModel.changeStatus(arguments?.getString("invoice")!!, 3, 0)
+                        if (response.success) {
+                            dismissDialog()
+                            requireActivity().supportFragmentManager.popBackStack(
+                                ParcelRequestFragment::class.java.name, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                            communicatorFragmentInterface!!.addContentFragment(
+                                MyLiveDeliveryFragment(), true)
+                        }
+                        else {
+                            binding.rootLayout.snackbar(response.msg)
+                            dismissDialog()
+                        }
+                    } catch (e: JsonSyntaxException) {
+                        dismissDialog()
+                        binding.rootLayout.snackbar(e.message!!)
+                        e.printStackTrace()
+                    } catch (e: MalformedJsonException) {
+                        dismissDialog()
+                        binding.rootLayout.snackbar(e.message!!)
+                        e.printStackTrace()
+                    } catch (e: com.airposted.bitoronbd_deliveryman.utils.ApiException) {
+                        dismissDialog()
+                        binding.rootLayout.snackbar(e.message!!)
+                        e.printStackTrace()
+                    } catch (e: NoInternetException) {
+                        dismissDialog()
+                        binding.rootLayout.snackbar(e.message!!)
+                        e.printStackTrace()
+                    }
+
+                }
+            }
+
+            dialogs.setCancelable(true)
+            dialogs.show()
         }
 
         vibrate()

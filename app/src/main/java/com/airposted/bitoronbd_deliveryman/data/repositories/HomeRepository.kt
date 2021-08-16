@@ -54,6 +54,7 @@ class HomeRepository(
     var databaseReference: DatabaseReference? = null
     val orders = MutableLiveData<ArrayList<LiveOrders>>()
     val order = MutableLiveData<ArrayList<LiveOrders>>()
+    val deleteOrder = MutableLiveData<LiveOrders>()
 
     init {
         mLocationManager = appContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -99,6 +100,7 @@ class HomeRepository(
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
                 val product = snapshot.getValue(LiveOrders::class.java)
+                deleteOrder.postValue(product!!)
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {

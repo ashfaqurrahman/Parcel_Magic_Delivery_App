@@ -27,6 +27,7 @@ class HomeViewModel(
     val image = repository.userImage
     val orders = repository.orders
     val order = repository.order
+    val deleteOrder = repository.deleteOrder
 
     suspend fun getDirections(
         url: String

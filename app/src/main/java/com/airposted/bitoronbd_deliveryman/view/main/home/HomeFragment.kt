@@ -61,8 +61,7 @@ import com.airposted.bitoronbd_deliveryman.view.main.MainActivity
 import com.airposted.bitoronbd_deliveryman.view.OrderRequestFragment
 import com.google.firebase.database.*
 import android.widget.CompoundButton
-
-
+import com.airposted.bitoronbd_deliveryman.model.LiveOrders
 
 
 class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware,
@@ -257,11 +256,13 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             searchArea()
         }
 
+        var orderListArray = ArrayList<LiveOrders>()
         binding.onlineOffline.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 binding.onlineOffline.text = "You're Online"
                 viewModel.orders.observe(viewLifecycleOwner, {
-                    binding.counter.text = it.size.toString()
+                    orderListArray = it
+                    binding.counter.text = orderListArray.size.toString()
                     binding.pendingOrders.visibility = View.VISIBLE
                 })
 
@@ -291,9 +292,15 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     }
                     status = 1
                 })
+
+                viewModel.deleteOrder.observe(viewLifecycleOwner, {
+                    orderListArray.remove(it)
+                    binding.counter.text = orderListArray.size.toString()
+                })
             } else {
                 viewModel.orders.removeObservers(viewLifecycleOwner)
                 viewModel.order.removeObservers(viewLifecycleOwner)
+                viewModel.deleteOrder.removeObservers(viewLifecycleOwner)
                 binding.onlineOffline.text = "You're Offline"
                 binding.pendingOrders.visibility = View.GONE
             }
