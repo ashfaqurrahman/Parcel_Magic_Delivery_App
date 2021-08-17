@@ -34,69 +34,69 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/parcel_type_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:drawablePadding="10dp"
+                    android:src="@drawable/ic_envelope_icon" />
+
+                <TextView
+                    android:id="@+id/parcel_name"
+                    android:layout_toEndOf="@+id/parcel_type_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="8sp"
                     android:text="@{orderList.order_item_name}"
                     android:textColor="#1a1662"
                     android:textSize="15sp"
-                    android:textStyle="normal"
-                    app:drawableStartCompat="@drawable/ic_car" />
+                    android:textStyle="normal" />
 
                 <TextView
+                    android:layout_below="@+id/parcel_name"
+                    android:layout_toEndOf="@+id/parcel_type_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:textIsSelectable="true"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:lineSpacingExtra="10sp"
-                    android:text="@{`Quantity: 0` + orderList.item_qty}"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@{orderList.item_qty + ` ` + orderList.order_item_name + `, ` + orderList.delivery_charge + `Tk`}"
                     android:textColor="#1a1662"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="normal" />
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:layout_marginTop="20dp"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:paddingStart="11dp"
-                android:paddingEnd="11dp"
-                android:background="@drawable/button_bg">
+                android:orientation="horizontal">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/from_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textStyle="normal"
-                    android:textSize="13sp"
-                    android:textColor="#b5b7dd"
-                    android:lineSpacingExtra="48sp"
-                    android:text="Delivery Time :  "
-                    />
+                    android:layout_alignTop="@+id/from"
+                    android:src="@drawable/ic_location_icon_solid" />
 
                 <TextView
-                    android:id="@+id/delivery_time"
+                    android:id="@+id/from"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_below="@+id/delivery_details"
+                    android:layout_toEndOf="@+id/from_icon"
                     android:fontFamily="@font/poppins_semi_bold"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
                     android:textColor="#1a1662"
-                    android:lineSpacingExtra="48sp"
-                    android:text="@{orderList.delivery_date}"
-                    />
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:text="@{orderList.recp_address}" />
 
-            </RelativeLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -109,12 +109,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/poppins_semi_bold"
-                    android:textStyle="normal"
-                    android:textSize="14sp"
-                    android:textColor="#3b5998"
                     android:lineSpacingExtra="47sp"
                     android:text="View Order"
-                    />
+                    android:textColor="@color/orange"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
 
             </RelativeLayout>
 

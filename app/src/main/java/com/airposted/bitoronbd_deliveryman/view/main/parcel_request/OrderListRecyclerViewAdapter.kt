@@ -27,7 +27,19 @@ class OrderListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataModel = orderListModelData[position]
         holder.bind(dataModel)
+        when (dataModel.item_type) {
+            1 -> {
+                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_envelope_icon)
+            }
+            2 -> {
+                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_box_icon)
+            }
+            3 -> {
+                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_box_icon)
+            }
+        }
         holder.binding.viewOrder.setOnClickListener { listener.onItemClick(dataModel) }
+
     }
 
     override fun getItemCount(): Int {

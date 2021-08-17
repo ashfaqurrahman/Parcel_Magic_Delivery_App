@@ -252,19 +252,18 @@
 
                         <TextView
                             android:id="@+id/from"
-                            android:layout_marginTop="15dp"
-                            android:layout_below="@+id/delivery_details"
-                            android:layout_toEndOf="@+id/from_icon"
-                            android:layout_marginStart="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_below="@+id/delivery_details"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_toEndOf="@+id/from_icon"
                             android:fontFamily="@font/poppins_semi_bold"
-                            android:textStyle="normal"
-                            android:textSize="14sp"
-                            android:textColor="#1a1662"
                             android:lineSpacingExtra="13sp"
-                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213"
-                            />
+                            android:textColor="#1a1662"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            tools:text="House # 43, Road# 1, Block #I, Banani, Dhaka-1213" />
 
                         <TextView
                             android:id="@+id/to"
