@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="preferredOrderList"
-            type="com.airposted.bitoronbd_deliveryman.model.PreferredAreaOrderListModelData" />
+            name="liveOrders"
+            type="com.airposted.bitoronbd_deliveryman.model.LiveOrders" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -48,10 +48,10 @@
                     android:layout_toEndOf="@+id/parcel_type_icon"
                     android:fontFamily="@font/poppins_bold"
                     android:lineSpacingExtra="8sp"
-                    tools:text="Order Type"
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    android:text="Order Type" />
 
                 <TextView
                     android:layout_below="@+id/order_type"
@@ -61,7 +61,7 @@
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/poppins_medium"
                     android:lineSpacingExtra="8sp"
-                    android:text="@{preferredOrderList.item_qty + ` ` + preferredOrderList.order_item_name + `, ` + preferredOrderList.delivery_charge + `Tk`}"
+                    android:text="@{liveOrders.qty}"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="normal" />
@@ -93,7 +93,7 @@
                     android:textColor="#1a1662"
                     android:textSize="14sp"
                     android:textStyle="normal"
-                    android:text="@{preferredOrderList.recp_address}" />
+                    android:text="@{liveOrders.receiver_address}" />
 
 
             </LinearLayout>

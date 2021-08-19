@@ -37,6 +37,7 @@ class RegisterFragment : Fragment(), KodeinAware {
     private var gender: String? = null
     private var flag: Int? = null
     private var idType: String? = null
+    private var driverType: Int? = null
     private var mCropImageUri: Uri? = null
     private var mCropIDUri: Uri? = null
     override fun onCreateView(
@@ -80,6 +81,11 @@ class RegisterFragment : Fragment(), KodeinAware {
             binding.id.visibility = View.VISIBLE
         }
 
+        binding.driverType.setOnSpinnerItemSelectedListener<String> { oldIndex, oldItem, newIndex, newText ->
+            driverType = newIndex + 1
+            binding.id.visibility = View.VISIBLE
+        }
+
         binding.signUp.setOnClickListener {
             hideKeyboard(requireActivity())
             val name = binding.name.text.toString()
@@ -102,13 +108,14 @@ class RegisterFragment : Fragment(), KodeinAware {
                 val response = viewModel.sendOTP(
                     requireArguments().getString("phone")!!
                 )
-                if (response.success!!) {
+                if (response.success) {
                     val fragment = OTPFragment()
                     val bundle = Bundle()
                     bundle.putString("otp", response.data?.token)
                     bundle.putString("imageUri", mCropImageUri?.path)
                     bundle.putString("idUri", mCropIDUri?.path)
                     bundle.putString("idType", idType)
+                    bundle.putInt("driverType", driverType!!)
                     bundle.putString("phone", requireArguments().getString("phone"))
                     bundle.putString("name", binding.name.text.toString())
                     bundle.putString("address", binding.address.text.toString())
@@ -127,7 +134,7 @@ class RegisterFragment : Fragment(), KodeinAware {
                     fragment.arguments = bundle
                     communicatorFragmentInterface?.addContentFragment(fragment, true)
                 } else {
-                    binding.main.snackbar(response.msg!!)
+                    binding.main.snackbar(response.msg)
                 }
                 dismissDialog()
             } catch (e: JsonSyntaxException) {

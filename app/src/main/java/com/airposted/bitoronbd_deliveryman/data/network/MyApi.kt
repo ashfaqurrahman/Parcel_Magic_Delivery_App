@@ -35,6 +35,7 @@ interface MyApi {
     suspend fun userSignUpWithNid(
         @Part("username") name: RequestBody,
         @Part("phone") phone: RequestBody,
+        @Part("driver_type") driverType: Int,
         @Part nidFile: MultipartBody.Part,
         @Part("nid") nid: RequestBody,
         @Part("dob") dob: RequestBody,
@@ -49,6 +50,7 @@ interface MyApi {
     suspend fun userSignUpWithDriveLicense(
         @Part("username") name: RequestBody,
         @Part("phone") phone: RequestBody,
+        @Part("driver_type") driverType: Int,
         @Part licenceFile: MultipartBody.Part,
         @Part("drive_lisence") drivingLicence: RequestBody,
         @Part("dob") dob: RequestBody,
@@ -83,12 +85,11 @@ interface MyApi {
     ) : Response<RequestModel>
 
     @FormUrlEncoded
-    @POST("delivery/single-search-order-list")
+    @POST("delivery/search-order-list")
     suspend fun getOrderList(
         @Header("Authorization") header: String,
         @Field("to") to: Int,
-        @Field("driver_latitude") latitude: String,
-        @Field("driver_longitude") longitude: String
+        @Field("from") from: Int
     ) : Response<OrderListModel>
 
     @FormUrlEncoded
@@ -96,8 +97,7 @@ interface MyApi {
     suspend fun getOrderListByArea(
         @Header("Authorization") header: String,
         @Field("to") to: Int,
-        @Field("driver_latitude") latitude: String,
-        @Field("driver_longitude") longitude: String
+        @Field("from") from: Int
     ) : Response<OrderListModel>
 
     @FormUrlEncoded

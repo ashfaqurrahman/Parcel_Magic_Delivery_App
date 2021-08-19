@@ -207,6 +207,7 @@ class OTPFragment : Fragment(), KodeinAware {
                             MediaType.parse("text/plain"),
                             requireArguments().getString("phone")!!
                         )
+                        val driverType = requireArguments().getInt("driverType")
                         val dob = RequestBody.create(
                             MediaType.parse("text/plain"),
                             requireArguments().getString("dob")!!
@@ -223,6 +224,7 @@ class OTPFragment : Fragment(), KodeinAware {
                             val signUpResponse = viewModel.userSignUpWithNid(
                                 name,
                                 phone,
+                                driverType,
                                 idPart,
                                 idPhotoName,
                                 dob,
@@ -244,6 +246,7 @@ class OTPFragment : Fragment(), KodeinAware {
                             val signUpResponse = viewModel.userSignUpWithDriveLicense(
                                 name,
                                 phone,
+                                driverType,
                                 idPart,
                                 idPhotoName,
                                 dob,

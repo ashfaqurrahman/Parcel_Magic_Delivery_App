@@ -27,6 +27,31 @@ class AllOrderListRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataModel = allOrders[position]
         holder.bind(dataModel)
+
+        when (dataModel.personal_order_type) {
+            1 -> {
+                holder.binding.orderType.text = "Regular Delivery"
+            }
+            2 -> {
+                holder.binding.orderType.text = "Express Delivery"
+            }
+            else -> {
+                holder.binding.orderType.text = "null"
+            }
+        }
+
+        when (dataModel.item_type) {
+            1 -> {
+                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_envelope_icon)
+            }
+            2 -> {
+                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_box_icon)
+            }
+            3 -> {
+                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_box_icon)
+            }
+        }
+
         holder.binding.viewOrder.setOnClickListener { allOrdersListener.onItemClick(dataModel) }
     }
 

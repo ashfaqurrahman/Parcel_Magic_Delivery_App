@@ -192,8 +192,7 @@ class HomeRepository(
             api.getOrderList(
                 PersistentUser.getInstance().getAccessToken(appContext),
                 to,
-                PreferenceProvider(appContext).getSharedPreferences("latitude").toString(),
-                PreferenceProvider(appContext).getSharedPreferences("longitude").toString()
+                PreferenceProvider(appContext).getSharedPreferences("area_id")!!.toInt()
             )
         }
     }
@@ -203,8 +202,7 @@ class HomeRepository(
             api.getOrderListByArea(
                 PersistentUser.getInstance().getAccessToken(appContext),
                 to,
-                PreferenceProvider(appContext).getSharedPreferences("latitude")!!,
-                PreferenceProvider(appContext).getSharedPreferences("longitude")!!
+                PreferenceProvider(appContext).getSharedPreferences("area_id")!!.toInt()
             )
         }
     }

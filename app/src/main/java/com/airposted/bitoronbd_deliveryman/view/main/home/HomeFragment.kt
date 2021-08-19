@@ -62,6 +62,7 @@ import com.airposted.bitoronbd_deliveryman.view.OrderRequestFragment
 import com.google.firebase.database.*
 import android.widget.CompoundButton
 import com.airposted.bitoronbd_deliveryman.model.LiveOrders
+import com.airposted.bitoronbd_deliveryman.view.main.pending_order.PendingOrderFragment
 
 
 class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener, KodeinAware,
@@ -237,6 +238,10 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             ).placeholder(R.mipmap.ic_launcher).error(
                 R.drawable.sample_pro_pic
             ).into(pic)
+        }
+
+        binding.pendingOrders.setOnClickListener {
+            communicatorFragmentInterface!!.addContentFragment(PendingOrderFragment(), true)
         }
 
         binding.menu.setOnClickListener {

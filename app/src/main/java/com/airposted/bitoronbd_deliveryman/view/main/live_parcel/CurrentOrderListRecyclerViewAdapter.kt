@@ -36,8 +36,8 @@ class CurrentOrderListRecyclerViewAdapter(
             2 -> {
                 holder.binding.orderType.text = "Express Delivery"
             }
-            3 -> {
-                holder.binding.orderType.text = "TohfaBD"
+            else -> {
+                holder.binding.orderType.text = "null"
             }
         }
 

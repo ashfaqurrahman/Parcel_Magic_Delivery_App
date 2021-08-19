@@ -23,6 +23,12 @@
     <string name="account_information">Account Information</string>
     <string name="resend_code">Resend Code</string>
 
+    <string-array name="driver_type">
+        <item>Per Time</item>
+        <item>Full Time</item>
+        <item>Traveler</item>
+    </string-array>
+
     <string-array name="id">
         <item>National ID</item>
         <item>Driving Lic.</item>
@@ -96,4 +102,5 @@
     <string name="small_size1">8\"x8\"x8\"</string>
     <string name="all_orders">All Orders</string>
     <string name="tap_to_accept">Tap to Accept</string>
+    <string name="pending_order">Pending Order</string>
 </resources>

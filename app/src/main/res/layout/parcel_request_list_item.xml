@@ -48,10 +48,10 @@
                     android:layout_toEndOf="@+id/parcel_type_icon"
                     android:fontFamily="@font/poppins_bold"
                     android:lineSpacingExtra="8sp"
-                    tools:text="Order Type"
                     android:textColor="@color/black"
                     android:textSize="15sp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    tools:text="Order Type" />
 
                 <TextView
                     android:layout_below="@+id/order_type"

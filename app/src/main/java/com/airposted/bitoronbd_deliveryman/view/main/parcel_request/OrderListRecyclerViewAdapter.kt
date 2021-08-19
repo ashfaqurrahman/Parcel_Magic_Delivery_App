@@ -35,6 +35,9 @@ class OrderListRecyclerViewAdapter(
             2 -> {
                 holder.binding.orderType.text = "Express Delivery"
             }
+            else -> {
+                holder.binding.orderType.text = "null"
+            }
         }
 
         when (dataModel.item_type) {

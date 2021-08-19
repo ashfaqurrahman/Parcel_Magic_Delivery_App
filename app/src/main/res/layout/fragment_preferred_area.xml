@@ -16,127 +16,141 @@
         <include layout="@layout/custom_toolbar"
             android:id="@+id/toolbar"/>
 
-        <com.google.android.material.card.MaterialCardView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            app:cardCornerRadius="12dp"
-            app:cardBackgroundColor="@color/white">
+            android:scrollbars="none">
 
-            <TextView
-                android:id="@+id/add_area_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:paddingTop="18sp"
-                android:paddingBottom="15dp"
-                android:fontFamily="@font/poppins_medium"
-                android:textStyle="normal"
-                android:textSize="14sp"
-                android:textColor="#1a1662"
-                android:lineSpacingExtra="46sp"
-                android:text="@string/add_preferred_area"
-                app:drawableEndCompat="@drawable/ic_add" />
+                android:orientation="vertical">
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_rea_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
-
-        <LinearLayout
-            android:id="@+id/all_orders_layout"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/all_orders"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/white">
-
-                <LinearLayout
-                    android:id="@+id/item"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:src="@drawable/ic_preferred_area"/>
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardBackgroundColor="@color/white">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/add_area_btn"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_semi_bold"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingTop="18sp"
+                        android:paddingBottom="15dp"
+                        android:fontFamily="@font/poppins_medium"
                         android:textStyle="normal"
-                        android:textSize="16sp"
-                        android:textColor="#11123e"
-                        android:lineSpacingExtra="8sp"
-                        android:text="All Orders"
-                        />
+                        android:textSize="14sp"
+                        android:textColor="#1a1662"
+                        android:lineSpacingExtra="46sp"
+                        android:text="@string/add_preferred_area"
+                        app:drawableEndCompat="@drawable/ic_add" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_rea_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
+
+                <LinearLayout
+                    android:id="@+id/all_orders_layout"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/all_orders"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:cardCornerRadius="12dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textStyle="normal"
-                        android:textSize="13sp"
-                        android:textColor="#b5b7dd"
-                        android:gravity="center_horizontal"
-                        android:text="0 order in this area"
-                        />
+                        app:cardBackgroundColor="@color/white">
+
+                        <LinearLayout
+                            android:id="@+id/item"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:paddingBottom="15dp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:src="@drawable/ic_preferred_area"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/poppins_semi_bold"
+                                android:textStyle="normal"
+                                android:textSize="16sp"
+                                android:textColor="#11123e"
+                                android:lineSpacingExtra="8sp"
+                                android:text="All Orders"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textStyle="normal"
+                                android:textSize="13sp"
+                                android:textColor="#b5b7dd"
+                                android:gravity="center_horizontal"
+                                android:text="0 order in this area"
+                                />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/delete"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:rotation="90"
+                                android:src="@drawable/ic_cross_icon" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content">
+            </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:rotation="90"
-                        android:src="@drawable/ic_cross_icon" />
-
-                </RelativeLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
+        </ScrollView>
 
         <TextView
             android:id="@+id/my_no_area"
