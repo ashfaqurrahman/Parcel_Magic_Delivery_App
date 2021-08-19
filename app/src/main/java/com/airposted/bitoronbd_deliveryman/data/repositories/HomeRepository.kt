@@ -146,7 +146,8 @@ class HomeRepository(
             api.viewMyArea(
                 PersistentUser.getInstance().getAccessToken(
                     appContext
-                )
+                ),
+                PreferenceProvider(appContext).getSharedPreferences("area_id")!!.toInt()
             )
         }
     }

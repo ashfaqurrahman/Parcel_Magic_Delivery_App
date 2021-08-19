@@ -72,9 +72,11 @@ interface MyApi {
         @Field("area_id") areaId: Int
     ) : Response<RequestModel>
 
+    @FormUrlEncoded
     @POST("delivery/prefered-area-list-view")
     suspend fun viewMyArea(
-        @Header("Authorization") header: String
+        @Header("Authorization") header: String,
+        @Field("my_area_id") myAreaId: Int
     ) : Response<ViewMyAreaModel>
 
     @FormUrlEncoded
@@ -93,7 +95,7 @@ interface MyApi {
     ) : Response<OrderListModel>
 
     @FormUrlEncoded
-    @POST("delivery/single-search-order-list")
+    @POST("delivery/search-order-list")
     suspend fun getOrderListByArea(
         @Header("Authorization") header: String,
         @Field("to") to: Int,

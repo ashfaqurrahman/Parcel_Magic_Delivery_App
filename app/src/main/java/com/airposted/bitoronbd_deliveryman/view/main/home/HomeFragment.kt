@@ -103,69 +103,6 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
     private fun bindUI() {
         gpsDialog = Dialog(requireActivity())
         setProgressDialog(requireActivity())
-        lifecycleScope.launch {
-            try {
-                val response = viewModel.getAllAreaList()
-                val myAreaResponse = viewModel.viewMyArea()
-                if (myAreaResponse.data.isNotEmpty()){
-                    for (i in myAreaResponse.data.indices){
-                        FirebaseMessaging.getInstance().subscribeToTopic(myAreaResponse.data[i].area_name)
-                            .addOnCompleteListener { task ->
-
-                                /*if (!task.isSuccessful) {
-
-                                }*/
-                                //Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-                            }
-                    }
-                }
-                areaList = response.data!!
-                FirebaseInstallations.getInstance().getToken(true).addOnSuccessListener { instanceIdResult ->
-                    val token = instanceIdResult.token
-                    lifecycleScope.launch {
-                        try {
-                            val saveFcmTokenResponse = viewModel.saveFcmToken(token)
-                            if (saveFcmTokenResponse.success) {
-                                //dismissDialog()
-                            }
-                        } catch (e: JsonSyntaxException) {
-                            dismissDialog()
-                            binding.rootLayout.snackbar(e.message!!)
-                            e.printStackTrace()
-                        } catch (e: com.google.gson.stream.MalformedJsonException) {
-                            dismissDialog()
-                            binding.rootLayout.snackbar(e.message!!)
-                            e.printStackTrace()
-                        } catch (e: com.google.android.gms.common.api.ApiException) {
-                            dismissDialog()
-                            binding.rootLayout.snackbar(e.message!!)
-                            e.printStackTrace()
-                        }catch (e: ApiException) {
-                            dismissDialog()
-                            binding.rootLayout.snackbar(e.message!!)
-                            e.printStackTrace()
-                        } catch (e: NoInternetException) {
-                            dismissDialog()
-                            binding.rootLayout.snackbar(e.message!!)
-                            e.printStackTrace()
-                        }
-                    }
-                }
-            } catch (e: com.google.gson.stream.MalformedJsonException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            } catch (e: ApiException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            } catch (e: NoInternetException) {
-                dismissDialog()
-                binding.rootLayout.snackbar(e.message!!)
-                e.printStackTrace()
-            }
-
-        }
 
         googleApiClient = getAPIClientInstance()
         googleApiClient.connect()
@@ -238,6 +175,70 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             ).placeholder(R.mipmap.ic_launcher).error(
                 R.drawable.sample_pro_pic
             ).into(pic)
+        }
+
+        lifecycleScope.launch {
+            try {
+                val response = viewModel.getAllAreaList()
+                val myAreaResponse = viewModel.viewMyArea()
+                if (myAreaResponse.data.isNotEmpty()){
+                    for (i in myAreaResponse.data.indices){
+                        FirebaseMessaging.getInstance().subscribeToTopic(myAreaResponse.data[i].area_name)
+                            .addOnCompleteListener { task ->
+
+                                /*if (!task.isSuccessful) {
+
+                                }*/
+                                //Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+                areaList = response.data!!
+                FirebaseInstallations.getInstance().getToken(true).addOnSuccessListener { instanceIdResult ->
+                    val token = instanceIdResult.token
+                    lifecycleScope.launch {
+                        try {
+                            val saveFcmTokenResponse = viewModel.saveFcmToken(token)
+                            if (saveFcmTokenResponse.success) {
+                                //dismissDialog()
+                            }
+                        } catch (e: JsonSyntaxException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: com.google.gson.stream.MalformedJsonException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: com.google.android.gms.common.api.ApiException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        }catch (e: ApiException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        } catch (e: NoInternetException) {
+                            dismissDialog()
+                            binding.rootLayout.snackbar(e.message!!)
+                            e.printStackTrace()
+                        }
+                    }
+                }
+            } catch (e: com.google.gson.stream.MalformedJsonException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: ApiException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            } catch (e: NoInternetException) {
+                dismissDialog()
+                binding.rootLayout.snackbar(e.message!!)
+                e.printStackTrace()
+            }
+
         }
 
         val orderListArray = ArrayList<LiveOrders>()

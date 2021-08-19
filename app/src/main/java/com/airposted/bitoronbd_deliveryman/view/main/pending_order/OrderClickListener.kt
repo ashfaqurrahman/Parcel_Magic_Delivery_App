@@ -1,7 +1,7 @@
 package com.airposted.bitoronbd_deliveryman.view.main.pending_order
 
-import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
+import com.airposted.bitoronbd_deliveryman.model.LiveOrders
 
-interface OrderClickListener {
-    fun onItemClick(order: OrderListModelData)
+interface PendingOrderClickListener {
+    fun onItemClick(liveOrders: LiveOrders)
 }

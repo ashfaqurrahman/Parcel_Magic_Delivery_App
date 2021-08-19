@@ -6,14 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airposted.bitoronbd_deliveryman.BR
 import com.airposted.bitoronbd_deliveryman.R
-import com.airposted.bitoronbd_deliveryman.databinding.ParcelRequestListItemBinding
 import com.airposted.bitoronbd_deliveryman.databinding.PendingOrderListItemBinding
 import com.airposted.bitoronbd_deliveryman.model.LiveOrders
-import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
 
 class PendingOrderRecyclerViewAdapter(
     private val liveOrders: ArrayList<LiveOrders>,
-//    private val listener: OrderClickListener
+    private val listener: PendingOrderClickListener
 ) : RecyclerView.Adapter<PendingOrderRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,6 +27,8 @@ class PendingOrderRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataModel = liveOrders[position]
         holder.bind(dataModel)
+
+        holder.binding.accept.setOnClickListener { listener.onItemClick(dataModel) }
 
         var type = ""
         when(dataModel.type){

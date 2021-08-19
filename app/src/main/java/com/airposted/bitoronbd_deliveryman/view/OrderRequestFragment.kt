@@ -63,7 +63,6 @@ class OrderRequestFragment : Fragment(), IOnBackPressed, KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentOrderRequestBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
 

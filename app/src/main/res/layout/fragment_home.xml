@@ -22,203 +22,201 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ScrollView
+                <LinearLayout
+                    android:id="@+id/top_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="none">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/menu"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="46dp"
-                                android:paddingTop="5dp"
-                                android:paddingEnd="5dp"
-                                android:paddingBottom="5dp"
-                                android:src="@drawable/ic_menu" />
-
-                            <LinearLayout
-                                android:id="@+id/pending_orders"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginTop="46dp"
-                                android:background="@drawable/order_request_bg"
-                                android:paddingStart="20dp"
-                                android:paddingTop="8dp"
-                                android:paddingEnd="20dp"
-                                android:paddingBottom="8dp"
-                                android:visibility="gone">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:drawableLeft="@drawable/ic_panding_order"
-                                    android:drawablePadding="10dp"
-                                    android:fontFamily="@font/poppins_regular"
-                                    android:text="Pending Order"
-                                    android:textColor="@color/black" />
-
-                                <TextView
-                                    android:id="@+id/counter"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:background="@drawable/order_count_bg"
-                                    android:fontFamily="@font/poppins_medium"
-                                    android:gravity="center"
-                                    android:text="0"
-                                    android:textColor="@color/white" />
-
-                            </LinearLayout>
-
-                        </RelativeLayout>
-
-                        <TextView
+                        <ImageView
+                            android:id="@+id/menu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:textStyle="bold"
-                            android:textSize="28sp"
-                            android:textColor="#0f122f"
-                            android:lineSpacingExtra="6sp"
-                            android:text="@string/a_little_extra_income_along_the_journey"
-                            />
+                            android:layout_marginTop="46dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="5dp"
+                            android:paddingStart="1dp"
+                            android:paddingBottom="5dp"
+                            android:src="@drawable/ic_menu" />
+
+                        <LinearLayout
+                            android:id="@+id/pending_orders"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignBottom="@+id/menu"
+                            android:background="@drawable/order_request_bg"
+                            android:paddingStart="20dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="8dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@drawable/ic_panding_order"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Pending Order"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/counter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:background="@drawable/order_count_bg"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/white" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textStyle="bold"
+                        android:textSize="28sp"
+                        android:textColor="#0f122f"
+                        android:lineSpacingExtra="6sp"
+                        android:text="@string/a_little_extra_income_along_the_journey"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/from_icon"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_alignTop="@+id/from_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_location_icon_solid"/>
+
+                        <ImageView
+                            android:layout_width="2dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/doted_line_blue"
+                            android:layout_marginStart="21dp"
+                            android:layout_below="@+id/from_icon"
+                            android:layout_above="@id/to_icon"/>
 
                         <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:id="@+id/to_icon"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_alignBottom="@+id/to_layout">
 
                             <ImageView
-                                android:id="@+id/from_icon"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_alignTop="@+id/from_layout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_location_icon_solid"/>
-
-                            <ImageView
-                                android:layout_width="2dp"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/doted_line_blue"
-                                android:layout_marginStart="21dp"
-                                android:layout_below="@+id/from_icon"
-                                android:layout_above="@id/to_icon"/>
-
-                            <RelativeLayout
-                                android:id="@+id/to_icon"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginBottom="20dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:layout_alignBottom="@+id/to_layout">
-
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:src="@drawable/circle_with_border"/>
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/from_layout"
-                                android:layout_toEndOf="@+id/from_icon"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginEnd="15dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginBottom="5dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="10dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/button_bg">
-
-                                <EditText
-                                    android:id="@+id/from"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@null"
-                                    android:editable="false"
-                                    android:focusable="false"
-                                    android:hint="Loading...."
-                                    android:padding="10dp"
-                                    android:textSize="16sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/to_layout"
-                                android:layout_below="@+id/from_layout"
-                                android:layout_toEndOf="@+id/to_icon"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginEnd="15dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginBottom="5dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="10dp"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/button_bg">
-
-                                <EditText
-                                    android:id="@+id/to"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:focusable="false"
-                                    android:background="@null"
-                                    android:hint="Destination"
-                                    android:editable="false"
-                                    android:textSize="16sp"
-                                    android:padding="10dp"/>
-
-                            </RelativeLayout>
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:src="@drawable/circle_with_border"/>
 
                         </RelativeLayout>
 
-                        <TextView
-                            android:id="@+id/get_order_request"
+                        <RelativeLayout
+                            android:id="@+id/from_layout"
+                            android:layout_toEndOf="@+id/from_icon"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_bg">
+
+                            <EditText
+                                android:id="@+id/from"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:editable="false"
+                                android:focusable="false"
+                                android:hint="Loading...."
+                                android:padding="10dp"
+                                android:textSize="16sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/to_layout"
+                            android:layout_below="@+id/from_layout"
+                            android:layout_toEndOf="@+id/to_icon"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
                             android:layout_marginTop="20dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:textAlignment="center"
-                            android:padding="18dp"
-                            android:text="@string/get_order_request"
-                            android:textColor="#ffffff"
-                            android:textSize="15sp"
-                            android:background="@drawable/after_button_bg"
-                            android:gravity="center_horizontal" />
+                            android:layout_marginBottom="5dp"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_bg">
 
-                    </LinearLayout>
+                            <EditText
+                                android:id="@+id/to"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:background="@null"
+                                android:hint="Destination"
+                                android:editable="false"
+                                android:textSize="16sp"
+                                android:padding="10dp"/>
 
-                </ScrollView>
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/get_order_request"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textAlignment="center"
+                        android:padding="18dp"
+                        android:text="@string/get_order_request"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:background="@drawable/after_button_bg"
+                        android:gravity="center_horizontal" />
+
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/top_layout"
+                    android:layout_marginTop="50dp"
+                    android:layout_above="@+id/online_offline_layout"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_home_bg" />
 
                 <RelativeLayout
+                    android:id="@+id/online_offline_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

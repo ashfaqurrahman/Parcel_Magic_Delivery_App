@@ -51,7 +51,7 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
         communicatorFragmentInterface = context as CommunicatorFragmentInterface
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
-            binding.deliveryType.dismiss()
+//            binding.deliveryType.dismiss()
         }
         binding.toolbar.toolbarTitle.text = "My Live Delivery"
 
@@ -81,24 +81,24 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
 
         }
 
-        binding.deliveryType.setOnSpinnerItemSelectedListener <String> { oldIndex, oldItem, newIndex, newItem ->
-            setProgressDialog(requireActivity())
-            val newOrderList: ArrayList<OrderListModelData> = ArrayList()
-            for (i in orderList.indices) {
-                if (orderList[i].order_type == newIndex) {
-                    newOrderList.add(orderList[i])
-                }
-            }
-            if (newIndex == 0) {
-                showOrderList(orderList)
-            }
-            if (newIndex == 1) {
-                showOrderList(newOrderList)
-            }
-            if (newIndex == 2) {
-                showOrderList(newOrderList)
-            }
-        }
+//        binding.deliveryType.setOnSpinnerItemSelectedListener <String> { oldIndex, oldItem, newIndex, newItem ->
+//            setProgressDialog(requireActivity())
+//            val newOrderList: ArrayList<OrderListModelData> = ArrayList()
+//            for (i in orderList.indices) {
+//                if (orderList[i].order_type == newIndex) {
+//                    newOrderList.add(orderList[i])
+//                }
+//            }
+//            if (newIndex == 0) {
+//                showOrderList(orderList)
+//            }
+//            if (newIndex == 1) {
+//                showOrderList(newOrderList)
+//            }
+//            if (newIndex == 2) {
+//                showOrderList(newOrderList)
+//            }
+//        }
     }
 
     private fun showOrderList(list: List<OrderListModelData>) {
@@ -147,7 +147,7 @@ class MyLiveDeliveryFragment : Fragment(), KodeinAware, CurrentOrderClickListene
     }
 
     override fun onBackPressed(): Boolean {
-        binding.deliveryType.dismiss()
+//        binding.deliveryType.dismiss()
         return false
     }
 
