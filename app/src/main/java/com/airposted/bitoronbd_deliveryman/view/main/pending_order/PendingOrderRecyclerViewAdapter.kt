@@ -12,7 +12,7 @@ import com.airposted.bitoronbd_deliveryman.model.LiveOrders
 import com.airposted.bitoronbd_deliveryman.model.OrderListModelData
 
 class PendingOrderRecyclerViewAdapter(
-    private val liveOrders: List<LiveOrders>,
+    private val liveOrders: ArrayList<LiveOrders>,
 //    private val listener: OrderClickListener
 ) : RecyclerView.Adapter<PendingOrderRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
@@ -30,31 +30,14 @@ class PendingOrderRecyclerViewAdapter(
         val dataModel = liveOrders[position]
         holder.bind(dataModel)
 
-//        when (dataModel.personal_order_type) {
-//            1 -> {
-//                holder.binding.orderType.text = "Regular Delivery"
-//            }
-//            2 -> {
-//                holder.binding.orderType.text = "Express Delivery"
-//            }
-//            else -> {
-//                holder.binding.orderType.text = "null"
-//            }
-//        }
-//
-//        when (dataModel.item_type) {
-//            1 -> {
-//                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_envelope_icon)
-//            }
-//            2 -> {
-//                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_box_icon)
-//            }
-//            3 -> {
-//                holder.binding.parcelTypeIcon.setImageResource(R.drawable.ic_box_icon)
-//            }
-//        }
-
-//        holder.binding.viewOrder.setOnClickListener { listener.onItemClick(dataModel) }
+        var type = ""
+        when(dataModel.type){
+            1 -> type = "Envelop"
+            2 -> type = "Small Box"
+            3 -> type = "Large Box"
+        }
+        holder.binding.orderType.text = dataModel.qty.toString() + " " + type + ", " +
+                dataModel.earning.toString() + "Tk"
 
     }
 

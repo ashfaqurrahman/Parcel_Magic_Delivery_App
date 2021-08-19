@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airposted.bitoronbd_deliveryman.R
+import com.airposted.bitoronbd_deliveryman.data.network.preferences.PreferenceProvider
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentParcelRequestBinding
 import com.airposted.bitoronbd_deliveryman.databinding.FragmentPendingOrderBinding
 import com.airposted.bitoronbd_deliveryman.model.LiveOrders
@@ -22,7 +23,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class PendingOrderFragment : Fragment(), KodeinAware, IOnBackPressed {
+class PendingOrderFragment(val orderListArray: ArrayList<LiveOrders>) : Fragment(), KodeinAware, IOnBackPressed {
 
     override val kodein by kodein()
     private val factory: HomeViewModelFactory by instance()
@@ -49,14 +50,10 @@ class PendingOrderFragment : Fragment(), KodeinAware, IOnBackPressed {
         binding.toolbar.backImage.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        var orderListArray = ArrayList<LiveOrders>()
-        viewModel.orders.observe(viewLifecycleOwner, {
-            orderListArray = it
-            val myRecyclerViewAdapter = PendingOrderRecyclerViewAdapter(orderListArray)
-            binding.parcelRequestList.layoutManager = GridLayoutManager(requireActivity(), 1)
-            binding.parcelRequestList.itemAnimator = DefaultItemAnimator()
-            binding.parcelRequestList.adapter = myRecyclerViewAdapter
-        })
+        val myRecyclerViewAdapter = PendingOrderRecyclerViewAdapter(orderListArray)
+        binding.parcelRequestList.layoutManager = GridLayoutManager(requireActivity(), 1)
+        binding.parcelRequestList.itemAnimator = DefaultItemAnimator()
+        binding.parcelRequestList.adapter = myRecyclerViewAdapter
     }
 
     override fun onBackPressed(): Boolean {

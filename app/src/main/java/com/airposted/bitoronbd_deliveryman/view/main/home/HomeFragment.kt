@@ -240,8 +240,12 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             ).into(pic)
         }
 
+        val orderListArray = ArrayList<LiveOrders>()
+
         binding.pendingOrders.setOnClickListener {
-            communicatorFragmentInterface!!.addContentFragment(PendingOrderFragment(), true)
+            if (orderListArray.size > 0) {
+                communicatorFragmentInterface!!.addContentFragment(PendingOrderFragment(orderListArray), true)
+            }
         }
 
         binding.menu.setOnClickListener {
@@ -261,12 +265,15 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             searchArea()
         }
 
-        var orderListArray = ArrayList<LiveOrders>()
         binding.onlineOffline.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 binding.onlineOffline.text = "You're Online"
                 viewModel.orders.observe(viewLifecycleOwner, {
-                    orderListArray = it
+                    for (i in 0 until it.size) {
+                        if (it[i].sender_area == PreferenceProvider(requireActivity()).getSharedPreferences("area_id")?.toInt()) {
+                            orderListArray.add(it[i])
+                        }
+                    }
                     binding.counter.text = orderListArray.size.toString()
                     binding.pendingOrders.visibility = View.VISIBLE
                 })
@@ -299,7 +306,9 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                 })
 
                 viewModel.deleteOrder.observe(viewLifecycleOwner, {
-                    orderListArray.remove(it)
+                    if (it.sender_area == PreferenceProvider(requireActivity()).getSharedPreferences("area_id")?.toInt()) {
+                        orderListArray.remove(it)
+                    }
                     binding.counter.text = orderListArray.size.toString()
                 })
             } else {
