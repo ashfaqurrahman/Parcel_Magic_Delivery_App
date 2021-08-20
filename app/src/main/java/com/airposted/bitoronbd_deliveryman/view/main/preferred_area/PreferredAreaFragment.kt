@@ -280,7 +280,7 @@ class PreferredAreaFragment : Fragment(), KodeinAware, AreaClickListener, MyArea
     }
 
     private fun showMyArea(myAreaResponse: ViewMyAreaModel) {
-        if (myAreaResponse.data.isNotEmpty()) {
+        if (myAreaResponse.data.isNullOrEmpty()) {
             binding.myReaRecycler.visibility = View.VISIBLE
             binding.allOrdersLayout.visibility = View.VISIBLE
             binding.myNoArea.visibility = View.GONE

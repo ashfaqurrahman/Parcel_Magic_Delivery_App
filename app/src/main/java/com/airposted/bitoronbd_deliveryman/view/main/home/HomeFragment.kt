@@ -127,11 +127,14 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
                     lifecycleScope.launch {
                         try {
                             val resources = viewModel.getMyCurrentArea()
-                            if (resources.success) {
+                            if (resources.data != null) {
                                 binding.from.setText(resources.data.area_name)
                                 PreferenceProvider(requireActivity()).saveSharedPreferences("area_id", resources.data.id.toString())
                                 from = resources.data.area_name
                                 dismissDialog()
+                            } else {
+                                dismissDialog()
+                                binding.rootLayout.snackbar(resources.msg)
                             }
                         } catch (e: JsonSyntaxException) {
                             dismissDialog()
@@ -181,7 +184,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             try {
                 val response = viewModel.getAllAreaList()
                 val myAreaResponse = viewModel.viewMyArea()
-                if (myAreaResponse.data.isNotEmpty()){
+                if (!myAreaResponse.data.isNullOrEmpty()){
                     for (i in myAreaResponse.data.indices){
                         FirebaseMessaging.getInstance().subscribeToTopic(myAreaResponse.data[i].area_name)
                             .addOnCompleteListener { task ->
