@@ -184,7 +184,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
             try {
                 val response = viewModel.getAllAreaList()
                 val myAreaResponse = viewModel.viewMyArea()
-                if (!myAreaResponse.data.isNullOrEmpty()){
+                if (myAreaResponse.data.isNotEmpty()){
                     for (i in myAreaResponse.data.indices){
                         FirebaseMessaging.getInstance().subscribeToTopic(myAreaResponse.data[i].area_name)
                             .addOnCompleteListener { task ->
